@@ -1,19 +1,19 @@
 import { Client } from "@xmtp/xmtp-js"
-import Bot, { BotHandler } from "./Bot.js"
-import { BotConfig } from "./config.js"
+import Bot, { BotHandler } from "./bot.js"
+import { newAppConfig, newBotConfig } from "./config.js"
 import { Wallet } from "ethers"
 import { randomBytes } from "crypto"
-import { AppDataSource } from "./dataSource.js"
+import { buildDataSource } from "./dataSource.js"
 import { InboundMessage } from "./models/Message.js"
 import { Conversation } from "./models/Conversation.js"
-import GrpcApiClient from "./GrpcApiClient.js"
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
 
 describe("Bot", () => {
   let keys: Uint8Array
-  let dataSource: typeof AppDataSource
+  let dataSource: ReturnType<typeof buildDataSource>
 
   beforeAll(async () => {
-    dataSource = await AppDataSource.initialize()
+    dataSource = await buildDataSource(newAppConfig({})).initialize()
   })
 
   beforeEach(async () => {
@@ -24,13 +24,16 @@ describe("Bot", () => {
     })
   })
 
-  const getConfig = (handler?: BotHandler): BotConfig => {
-    return {
-      name: randomBytes(32).toString("hex"),
-      xmtpKeys: keys,
-      xmtpEnv: "dev",
-      handler: handler || (() => Promise.resolve()),
-    }
+  const getConfig = (handler?: BotHandler) => {
+    const botHandler = handler || (() => Promise.resolve())
+    return newBotConfig(
+      randomBytes(32).toString("hex"),
+      {
+        xmtpKeys: keys,
+        xmtpEnv: "dev",
+      },
+      botHandler,
+    )
   }
 
   it("can create", async () => {

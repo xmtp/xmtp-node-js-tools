@@ -1,20 +1,27 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { InboundMessage, Reply } from "./models/Message.js"
-import { Bot } from "./models/Bot.js"
-import { Conversation } from "./models/Conversation.js"
 import { KeyValue } from "./models/KeyValue.js"
+import { Conversation } from "./models/Conversation.js"
+import { Bot } from "./models/Bot.js"
+import { RequiredAppConfig } from "./config.js"
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "localhost",
-  port: 6543,
-  username: "postgres",
-  password: "xmtp",
-  database: "postgres",
-  synchronize: true,
-  logging: false,
-  entities: [InboundMessage, Bot, Conversation, Reply, KeyValue],
-  migrations: [],
-  subscribers: [],
-})
+export function buildDataSource({ db }: RequiredAppConfig) {
+  return new DataSource({
+    type: "postgres",
+    host: db.postgresHost,
+    port: db.postgresPort,
+    username: db.postgresUser,
+    password: db.postgresPassword,
+    database: db.postgresDb,
+    synchronize: false,
+    logging: false,
+    entities: [Bot, Conversation, InboundMessage, Reply, KeyValue],
+    // Jest has a problem with running the migrations, so we just skip them in tests
+    // Run ./dev/up to ensure database migrations have been run
+    migrations: process.env.TS_JEST ? [] : ["**/migrations/*.ts"],
+    subscribers: [],
+  })
+}
+
+export type AppDataSource = ReturnType<typeof buildDataSource>

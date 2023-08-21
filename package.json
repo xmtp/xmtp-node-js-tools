@@ -2,8 +2,10 @@
   "name": "@xmtp/bot-tools",
   "version": "1.0.0",
   "description": "A collection of tools for running high quality bots in Node.js",
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,9 @@
   },
   "homepage": "https://github.com/xmtp/bot-tools-js#readme",
   "workspaces": [
-    "packages/bot-kit-pro"
+    "packages/bot-kit-pro",
+    "packages/grpc-api-client",
+    "packages/bot-examples"
   ],
   "devDependencies": {
     "@types/jest": "^29.5.0",

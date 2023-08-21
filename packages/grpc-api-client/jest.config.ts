@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  preset: "ts-jest/presets/js-with-babel",
+  preset: "ts-jest",
   testMatch: ["<rootDir>/**/*.test.ts"],
   testEnvironment: "node",
   testTimeout: 15000,

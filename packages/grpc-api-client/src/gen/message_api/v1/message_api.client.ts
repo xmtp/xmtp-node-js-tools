@@ -15,7 +15,7 @@ import type {
 } from "./message_api.js"
 import type { ServerStreamingCall } from "@protobuf-ts/runtime-rpc"
 import { stackIntercept } from "@protobuf-ts/runtime-rpc"
-import type { PublishResponse, PublishRequest } from "./message_api"
+import type { PublishResponse, PublishRequest } from "./message_api.js"
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc"
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc"
 /**

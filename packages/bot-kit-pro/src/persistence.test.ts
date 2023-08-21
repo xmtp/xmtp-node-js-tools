@@ -1,4 +1,5 @@
-import { AppDataSource } from "./dataSource"
+import { newAppConfig } from "./config"
+import { buildDataSource } from "./dataSource"
 import { PostgresPersistence } from "./persistence"
 import { randomBytes } from "crypto"
 
@@ -6,7 +7,9 @@ describe("persistence", () => {
   let persistence: PostgresPersistence
 
   beforeAll(async () => {
-    persistence = new PostgresPersistence(await AppDataSource.initialize())
+    persistence = new PostgresPersistence(
+      await buildDataSource(newAppConfig({})).initialize(),
+    )
   })
 
   it("allows setting and retrieving values", async () => {

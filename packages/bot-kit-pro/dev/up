@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+if ! which docker &>/dev/null; then
+    echo "Docker required to run dev/up. Install it and run this again."
+    exit 1
+fi
+
+if ! which docker-compose &>/dev/null; then
+    echo "Docker Compose required to run dev/up. Install it and run this again."
+    exit 1
+fi
+
+docker-compose up -d
+npm run migrations:run

@@ -15,5 +15,5 @@ module.exports = {
     "prettier/prettier": "error",
   },
   plugins: ["@typescript-eslint", "prettier"],
-  ignorePatterns: ["dist", "node_modules", "packages/bot-kit-pro/src/gen"],
+  ignorePatterns: ["dist", "node_modules", "packages/grpc-api-client/src/gen"],
 }

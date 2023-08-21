@@ -7,9 +7,9 @@ import {
   findOrCreateConversation,
 } from "./models/Conversation.js"
 import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
-import { InboundMessage, Reply } from "./models/Message.js"
-import HandlerContext from "./HandlerContext.js"
-import GrpcApiClient from "./GrpcApiClient.js"
+import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
+import HandlerContext from "./context.js"
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { BotConfig } from "./config.js"
 import { createLogger } from "./logger.js"
 import { Json } from "./types.js"
@@ -20,25 +20,28 @@ export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
 export default class Bot {
   name: string
   client: Client
-  db: typeof AppDataSource
+  db: AppDataSource
   botRecord: BotDB
   handler: BotHandler
   stream?: AsyncGenerator<DecodedMessage>
   logger: pino.Logger
+  config: Required<BotConfig>
 
   constructor(
     name: string,
     client: Client,
-    db: typeof AppDataSource,
+    db: AppDataSource,
     botRecord: BotDB,
-    handler: BotHandler,
+    config: Required<BotConfig>,
   ) {
     this.name = name
     this.client = client
     this.db = db
     this.botRecord = botRecord
-    this.handler = handler
+    this.handler = config.handler
+    this.config = config
     this.logger = createLogger(
+      // Always use JSON logging when NODE_ENV is production
       process.env.NODE_ENV === "production",
       "info",
       this.botRecord.id,
@@ -49,11 +52,9 @@ export default class Bot {
   }
 
   static async create(
-    configInput: BotConfig,
-    datasource: typeof AppDataSource,
+    config: Required<BotConfig>,
+    datasource: AppDataSource,
   ): Promise<Bot> {
-    const config = applyDefaults(configInput)
-
     const client = await Client.create(null, {
       env: config.xmtpEnv,
       privateKeyOverride: config.xmtpKeys,
@@ -67,7 +68,7 @@ export default class Bot {
       throw new Error("Bot not found")
     }
 
-    return new Bot(config.name, client, datasource, botRecord, config.handler)
+    return new Bot(config.name, client, datasource, botRecord, config)
   }
 
   private getRepository<T extends ObjectLiteral>(entity: EntityTarget<T>) {
@@ -95,7 +96,6 @@ export default class Bot {
       })
       .orIgnore()
       .execute()
-    this.logger.info({ dbMessage, dbConvo }, `Saved message ${message.id}`)
 
     return {
       dbConvoId: dbConvo.id,
@@ -110,7 +110,7 @@ export default class Bot {
         .getRepository(InboundMessage)
         .createQueryBuilder("msg")
         .setLock("pessimistic_write")
-        .where("msg.processed = FALSE")
+        .where("msg.status = :status", { status: MessageStatus.Unprocessed })
         .andWhere("msg.numRetries < :maxRetries", { maxRetries: 3 })
         .andWhere("msg.botId = :id", { id: this.botRecord.id })
         .orderBy("msg.timestamp", "ASC")
@@ -145,6 +145,11 @@ export default class Bot {
         message.contents,
         this.client,
       )
+      if (this.isExpired(xmtpMessage)) {
+        await entityManager.update(InboundMessage, message.id, {
+          status: MessageStatus.Expired,
+        })
+      }
 
       const ctx = new HandlerContext(xmtpMessage, dbConvo.state, bot.state)
       try {
@@ -183,7 +188,7 @@ export default class Bot {
         await entityManager.insert(Reply, dbReply)
       }
       await entityManager.update(InboundMessage, message.id, {
-        processed: true,
+        status: MessageStatus.Success,
       })
     })
   }
@@ -254,12 +259,8 @@ export default class Bot {
       this.stream = undefined
     }
   }
-}
 
-function applyDefaults(config: BotConfig): Required<BotConfig> {
-  return {
-    xmtpEnv: "production",
-    messageExpiryMs: 1000 * 60 * 30, // 30 minutes
-    ...config,
+  private isExpired(message: DecodedMessage) {
+    return message.sent.getTime() + this.config.messageExpiryMs < Date.now()
   }
 }

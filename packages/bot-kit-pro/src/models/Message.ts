@@ -12,6 +12,13 @@ import { Bot } from "./Bot.js"
 import { Conversation } from "./Conversation.js"
 import { DecodedMessage } from "@xmtp/xmtp-js"
 
+export enum MessageStatus {
+  Unprocessed = "unprocessed",
+  Success = "success",
+  Expired = "expired",
+  Failed = "failed",
+}
+
 @Entity()
 @Index(["bot.id", "messageId"], { unique: true })
 export class InboundMessage {
@@ -24,8 +31,8 @@ export class InboundMessage {
   @Column({ type: "bytea", nullable: false })
   contents: Buffer
 
-  @Column({ default: false })
-  processed: boolean
+  @Column({ default: "unprocessed" })
+  status: MessageStatus
 
   @Column({ type: "timestamptz" })
   timestamp: Date

@@ -9,3 +9,19 @@ export function hexToBytes(s: string): Uint8Array {
   }
   return bytes
 }
+
+export function getEnv(key: string): string | undefined {
+  return process.env[key]
+}
+
+export function requireEnv(key: string): string {
+  const value = getEnv(key)
+  if (!value) {
+    throw new Error(`Missing environment variable ${key}`)
+  }
+  return value
+}
+
+export function getEnvOrDefault(key: string, defaultVal: string): string {
+  return getEnv(key) || defaultVal
+}

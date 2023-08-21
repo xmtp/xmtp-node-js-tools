@@ -24,7 +24,7 @@ export class Conversation {
   topic: string
 
   @ManyToOne(() => Bot, (bot) => bot.conversations)
-  bot: Bot
+  bot: Relation<Bot>
 
   @Column({ type: "json", default: {} })
   state: Json

@@ -4,7 +4,7 @@ import { KeyValue } from "./models/KeyValue.js"
 
 export class PostgresPersistence {
   repo: Repository<KeyValue>
-  constructor(db: typeof AppDataSource) {
+  constructor(db: AppDataSource) {
     this.repo = db.getRepository(KeyValue)
   }
 
