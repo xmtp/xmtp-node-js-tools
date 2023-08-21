@@ -39,7 +39,7 @@ export function applyBotDefaults(config: BotConfig): Required<BotConfig> {
 }
 
 export type AppConfig = {
-  db?: {
+  db: {
     postgresHost: string
     postgresPort: number
     postgresUser: string
@@ -48,11 +48,15 @@ export type AppConfig = {
   }
 }
 
+export type PartialAppConfig = {
+  db?: Partial<AppConfig["db"]>
+}
+
 export type RequiredAppConfig = {
   db: Required<AppConfig["db"]>
 }
 
-export function newAppConfig(cfg: Partial<AppConfig>): RequiredAppConfig {
+export function newAppConfig(cfg: PartialAppConfig): RequiredAppConfig {
   return {
     db: {
       postgresHost: getEnvOrDefault(
