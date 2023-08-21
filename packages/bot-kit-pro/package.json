@@ -1,0 +1,44 @@
+{
+  "name": "@xmtp/bot-kit-pro",
+  "version": "1.0.0",
+  "description": "A database-backed bot framework for running high reliability XMTP bots",
+  "main": "dist/src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "migration:generate": "npx typeorm-ts-node-esm migration:generate ./src/migrations/init -d ./src/dataSource.migrations.ts",
+    "migration:run": "npx typeorm-ts-node-esm migration:run -d src/dataSource.migrations.ts",
+    "prepublishOnly": "npm run build",
+    "test": "jest ./src"
+  },
+  "dependencies": {
+    "@xmtp/grpc-api-client": "*",
+    "@xmtp/proto": "^3.26.0",
+    "ethers": "^6.7.1",
+    "long": "^5.2.3",
+    "pg": "^8.11.1",
+    "pino": "^8.15.0",
+    "pino-pretty": "^10.2.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xmtp/bot-tools-js.git"
+  },
+  "keywords": [
+    "xmtp",
+    "bots",
+    "messaging",
+    "web3"
+  ],
+  "author": "XMTP Labs <eng@xmtp.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xmtp/bot-tools-js/issues"
+  },
+  "homepage": "https://github.com/xmtp/bot-tools-js#readme"
+}
