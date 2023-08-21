@@ -39,7 +39,7 @@ export function applyBotDefaults(config: BotConfig): Required<BotConfig> {
 }
 
 export type AppConfig = {
-  db: {
+  db?: {
     postgresHost: string
     postgresPort: number
     postgresUser: string

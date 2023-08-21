@@ -1,13 +1,13 @@
 import "reflect-metadata"
 import Bot from "./bot.js"
-import { BotConfig, RequiredAppConfig, newAppConfig } from "./config.js"
+import { AppConfig, BotConfig, newAppConfig } from "./config.js"
 import { buildDataSource } from "./dataSource.js"
 
 export default async function (
   botConfigs: Required<BotConfig>[],
-  appConfig?: RequiredAppConfig,
+  appConfig: AppConfig = {},
 ) {
-  const appDataSource = buildDataSource(newAppConfig(appConfig || {}))
+  const appDataSource = buildDataSource(newAppConfig(appConfig))
   const datasource = await appDataSource.initialize()
   await datasource.runMigrations()
 
