@@ -6,6 +6,10 @@ type ChatMessage = {
   content: string
 }
 
+type ConversationState = {
+  messages?: ChatMessage[]
+}
+
 const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_API_KEY,
 })
@@ -38,8 +42,4 @@ export default async function chatGptBot(
     // Add the latest bot reply to the conversation history
     ctx.conversationState.messages.push(reply as ChatMessage)
   }
-}
-
-type ConversationState = {
-  messages?: ChatMessage[]
 }
