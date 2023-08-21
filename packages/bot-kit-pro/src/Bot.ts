@@ -239,8 +239,8 @@ export default class Bot {
     this.logger.info(
       `Starting bot ${this.botRecord.id} with address ${this.client.address}`,
     )
-    await this.initialize()
     this.stream = await this.client.conversations.streamAllMessages()
+    await this.initialize()
     for await (const message of this.stream) {
       if (message.senderAddress === this.client.address) {
         continue
