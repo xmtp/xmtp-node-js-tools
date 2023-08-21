@@ -149,6 +149,7 @@ export default class Bot {
         await entityManager.update(InboundMessage, message.id, {
           status: MessageStatus.Expired,
         })
+        return
       }
 
       const ctx = new HandlerContext(xmtpMessage, dbConvo.state, bot.state)
