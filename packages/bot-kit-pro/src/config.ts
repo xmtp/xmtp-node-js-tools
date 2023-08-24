@@ -1,4 +1,4 @@
-import type { BotHandler } from "./bot.js"
+import type { BotHandler } from "./foo.js"
 import { getEnvOrDefault } from "./utils.js"
 
 const DEFAULT_XMTP_ENV = "dev"

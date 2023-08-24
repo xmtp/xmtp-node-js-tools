@@ -5,7 +5,10 @@
   "private": "true",
   "scripts": {
     "lint": "eslint .",
-    "build": "npm run build -w packages/grpc-api-client && npm run build -w packages/bot-kit-pro && npm run build -w packages/bot-examples",
+    "build": "npm run build:grpc && npm run build:botkit && npm run build:examples",
+    "build:grpc": "npm run build -w packages/grpc-api-client",
+    "build:botkit": "npm run build -w packages/bot-kit-pro",
+    "build:examples": "npm run build -w packages/bot-examples",
     "test": "npm run test --workspaces"
   },
   "repository": {

@@ -1,5 +1,5 @@
 import { Client } from "@xmtp/xmtp-js"
-import Bot, { BotHandler } from "./bot.js"
+import Bot, { BotHandler } from "./foo.js"
 import { newAppConfig, newBotConfig } from "./config.js"
 import { Wallet } from "ethers"
 import { randomBytes } from "crypto"
