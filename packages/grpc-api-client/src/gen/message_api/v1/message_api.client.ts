@@ -4,18 +4,18 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc"
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc"
 import { MessageApi } from "./message_api.js"
-import type {
-  BatchQueryResponse,
-  BatchQueryRequest,
-  QueryResponse,
-  QueryRequest,
-  SubscribeAllRequest,
-  Envelope,
-  SubscribeRequest,
-} from "./message_api.js"
+import type { BatchQueryResponse } from "./message_api.js"
+import type { BatchQueryRequest } from "./message_api.js"
+import type { QueryResponse } from "./message_api.js"
+import type { QueryRequest } from "./message_api.js"
+import type { SubscribeAllRequest } from "./message_api.js"
+import type { DuplexStreamingCall } from "@protobuf-ts/runtime-rpc"
+import type { Envelope } from "./message_api.js"
+import type { SubscribeRequest } from "./message_api.js"
 import type { ServerStreamingCall } from "@protobuf-ts/runtime-rpc"
 import { stackIntercept } from "@protobuf-ts/runtime-rpc"
-import type { PublishResponse, PublishRequest } from "./message_api.js"
+import type { PublishResponse } from "./message_api.js"
+import type { PublishRequest } from "./message_api.js"
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc"
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc"
 /**
@@ -42,6 +42,16 @@ export interface IMessageApiClient {
     input: SubscribeRequest,
     options?: RpcOptions,
   ): ServerStreamingCall<SubscribeRequest, Envelope>
+  /**
+   * Subscribe to a stream of new envelopes and your subscription using
+   * bidirectional streaming
+   * protolint:disable:next RPC_REQUEST_STANDARD_NAME
+   *
+   * @generated from protobuf rpc: Subscribe2(stream xmtp.message_api.v1.SubscribeRequest) returns (stream xmtp.message_api.v1.Envelope);
+   */
+  subscribe2(
+    options?: RpcOptions,
+  ): DuplexStreamingCall<SubscribeRequest, Envelope>
   /**
    * Subscribe to a stream of all messages
    *
@@ -89,8 +99,8 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
     input: PublishRequest,
     options?: RpcOptions,
   ): UnaryCall<PublishRequest, PublishResponse> {
-    const method = this.methods[0]
-    const opt = this._transport.mergeOptions(options)
+    const method = this.methods[0],
+      opt = this._transport.mergeOptions(options)
     return stackIntercept<PublishRequest, PublishResponse>(
       "unary",
       this._transport,
@@ -99,7 +109,6 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
       input,
     )
   }
-
   /**
    * Subscribe to a stream of new envelopes matching a predicate
    *
@@ -109,8 +118,8 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
     input: SubscribeRequest,
     options?: RpcOptions,
   ): ServerStreamingCall<SubscribeRequest, Envelope> {
-    const method = this.methods[1]
-    const opt = this._transport.mergeOptions(options)
+    const method = this.methods[1],
+      opt = this._transport.mergeOptions(options)
     return stackIntercept<SubscribeRequest, Envelope>(
       "serverStreaming",
       this._transport,
@@ -119,7 +128,25 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
       input,
     )
   }
-
+  /**
+   * Subscribe to a stream of new envelopes and your subscription using
+   * bidirectional streaming
+   * protolint:disable:next RPC_REQUEST_STANDARD_NAME
+   *
+   * @generated from protobuf rpc: Subscribe2(stream xmtp.message_api.v1.SubscribeRequest) returns (stream xmtp.message_api.v1.Envelope);
+   */
+  subscribe2(
+    options?: RpcOptions,
+  ): DuplexStreamingCall<SubscribeRequest, Envelope> {
+    const method = this.methods[2],
+      opt = this._transport.mergeOptions(options)
+    return stackIntercept<SubscribeRequest, Envelope>(
+      "duplex",
+      this._transport,
+      method,
+      opt,
+    )
+  }
   /**
    * Subscribe to a stream of all messages
    *
@@ -129,8 +156,8 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
     input: SubscribeAllRequest,
     options?: RpcOptions,
   ): ServerStreamingCall<SubscribeAllRequest, Envelope> {
-    const method = this.methods[2]
-    const opt = this._transport.mergeOptions(options)
+    const method = this.methods[3],
+      opt = this._transport.mergeOptions(options)
     return stackIntercept<SubscribeAllRequest, Envelope>(
       "serverStreaming",
       this._transport,
@@ -139,7 +166,6 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
       input,
     )
   }
-
   /**
    * Query the store for messages
    *
@@ -149,8 +175,8 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
     input: QueryRequest,
     options?: RpcOptions,
   ): UnaryCall<QueryRequest, QueryResponse> {
-    const method = this.methods[3]
-    const opt = this._transport.mergeOptions(options)
+    const method = this.methods[4],
+      opt = this._transport.mergeOptions(options)
     return stackIntercept<QueryRequest, QueryResponse>(
       "unary",
       this._transport,
@@ -159,7 +185,6 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
       input,
     )
   }
-
   /**
    * BatchQuery containing a set of queries to be processed
    *
@@ -169,8 +194,8 @@ export class MessageApiClient implements IMessageApiClient, ServiceInfo {
     input: BatchQueryRequest,
     options?: RpcOptions,
   ): UnaryCall<BatchQueryRequest, BatchQueryResponse> {
-    const method = this.methods[4]
-    const opt = this._transport.mergeOptions(options)
+    const method = this.methods[5],
+      opt = this._transport.mergeOptions(options)
     return stackIntercept<BatchQueryRequest, BatchQueryResponse>(
       "unary",
       this._transport,

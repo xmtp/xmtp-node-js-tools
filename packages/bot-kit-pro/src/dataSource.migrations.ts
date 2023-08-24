@@ -11,7 +11,7 @@ import { getEnvOrDefault } from "./utils.js"
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: getEnvOrDefault("POSTGRES_HOST", "localhost"),
-  port: parseInt(getEnvOrDefault("POSTGRES_PORT", "6543")),
+  port: parseInt(getEnvOrDefault("POSTGRES_PORT", "4321")),
   username: getEnvOrDefault("POSTGRES_USER", "postgres"),
   password: getEnvOrDefault("POSTGRES_PASSWORD", "xmtp"),
   database: getEnvOrDefault("POSTGRES_DB", "postgres"),

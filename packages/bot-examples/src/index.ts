@@ -4,6 +4,7 @@ import waitlist from "./waitlist.js"
 import { Wallet } from "ethers"
 import { PrivateKeyBundleV1 } from "@xmtp/xmtp-js"
 import chatgpt from "./chatgpt.js"
+import bodega from "./bodega.js"
 
 const defaultConfig: Partial<BotConfig> = {
   xmtpEnv: "dev",
@@ -35,8 +36,16 @@ const start = async () => {
       },
       chatgpt,
     ),
+    newBotConfig(
+      "bodega",
+      {
+        xmtpKeys: await randomKeys(),
+        ...defaultConfig,
+      },
+      bodega,
+    ),
   ]
-
+  console.log(bots)
   await run(bots)
 }
 

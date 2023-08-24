@@ -2,20 +2,16 @@
 // @generated from protobuf file "message_api/v1/message_api.proto" (package "xmtp.message_api.v1", syntax proto3)
 // tslint:disable
 import { ServiceType } from "@protobuf-ts/runtime-rpc"
-import type {
-  BinaryWriteOptions,
-  IBinaryWriter,
-  BinaryReadOptions,
-  IBinaryReader,
-  PartialMessage,
-} from "@protobuf-ts/runtime"
-import {
-  WireType,
-  UnknownFieldHandler,
-  reflectionMergePartial,
-  MESSAGE_TYPE,
-  MessageType,
-} from "@protobuf-ts/runtime"
+import type { BinaryWriteOptions } from "@protobuf-ts/runtime"
+import type { IBinaryWriter } from "@protobuf-ts/runtime"
+import { WireType } from "@protobuf-ts/runtime"
+import type { BinaryReadOptions } from "@protobuf-ts/runtime"
+import type { IBinaryReader } from "@protobuf-ts/runtime"
+import { UnknownFieldHandler } from "@protobuf-ts/runtime"
+import type { PartialMessage } from "@protobuf-ts/runtime"
+import { reflectionMergePartial } from "@protobuf-ts/runtime"
+import { MESSAGE_TYPE } from "@protobuf-ts/runtime"
+import { MessageType } from "@protobuf-ts/runtime"
 /**
  * This is based off of the go-waku Index type, but with the
  * receiverTime and pubsubTopic removed for simplicity.
@@ -220,17 +216,16 @@ export enum SortDirection {
 class IndexCursor$Type extends MessageType<IndexCursor> {
   constructor() {
     super("xmtp.message_api.v1.IndexCursor", [
-      { no: 1, name: "digest", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+      { no: 1, name: "digest", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
       {
         no: 2,
         name: "sender_time_ns",
         kind: "scalar",
-        T: 4 /* ScalarType.UINT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 4 /*ScalarType.UINT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
     ])
   }
-
   create(value?: PartialMessage<IndexCursor>): IndexCursor {
     const message = { digest: new Uint8Array(0), senderTimeNs: 0n }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -241,17 +236,16 @@ class IndexCursor$Type extends MessageType<IndexCursor> {
       reflectionMergePartial<IndexCursor>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: IndexCursor,
   ): IndexCursor {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* bytes digest */ 1:
           message.digest = reader.bytes()
@@ -260,12 +254,12 @@ class IndexCursor$Type extends MessageType<IndexCursor> {
           message.senderTimeNs = reader.uint64().toBigInt()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -278,7 +272,6 @@ class IndexCursor$Type extends MessageType<IndexCursor> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: IndexCursor,
     writer: IBinaryWriter,
@@ -290,7 +283,7 @@ class IndexCursor$Type extends MessageType<IndexCursor> {
     /* uint64 sender_time_ns = 2; */
     if (message.senderTimeNs !== 0n)
       writer.tag(2, WireType.Varint).uint64(message.senderTimeNs)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -317,7 +310,6 @@ class Cursor$Type extends MessageType<Cursor> {
       },
     ])
   }
-
   create(value?: PartialMessage<Cursor>): Cursor {
     const message = { cursor: { oneofKind: undefined } }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -328,17 +320,16 @@ class Cursor$Type extends MessageType<Cursor> {
       reflectionMergePartial<Cursor>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: Cursor,
   ): Cursor {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* xmtp.message_api.v1.IndexCursor index */ 1:
           message.cursor = {
@@ -352,12 +343,12 @@ class Cursor$Type extends MessageType<Cursor> {
           }
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -370,7 +361,6 @@ class Cursor$Type extends MessageType<Cursor> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: Cursor,
     writer: IBinaryWriter,
@@ -383,7 +373,7 @@ class Cursor$Type extends MessageType<Cursor> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -401,7 +391,7 @@ export const Cursor = new Cursor$Type()
 class PagingInfo$Type extends MessageType<PagingInfo> {
   constructor() {
     super("xmtp.message_api.v1.PagingInfo", [
-      { no: 1, name: "limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+      { no: 1, name: "limit", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
       { no: 2, name: "cursor", kind: "message", T: () => Cursor },
       {
         no: 3,
@@ -415,7 +405,6 @@ class PagingInfo$Type extends MessageType<PagingInfo> {
       },
     ])
   }
-
   create(value?: PartialMessage<PagingInfo>): PagingInfo {
     const message = { limit: 0, direction: 0 }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -426,17 +415,16 @@ class PagingInfo$Type extends MessageType<PagingInfo> {
       reflectionMergePartial<PagingInfo>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: PagingInfo,
   ): PagingInfo {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* uint32 limit */ 1:
           message.limit = reader.uint32()
@@ -453,12 +441,12 @@ class PagingInfo$Type extends MessageType<PagingInfo> {
           message.direction = reader.int32()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -471,7 +459,6 @@ class PagingInfo$Type extends MessageType<PagingInfo> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: PagingInfo,
     writer: IBinaryWriter,
@@ -490,7 +477,7 @@ class PagingInfo$Type extends MessageType<PagingInfo> {
     /* xmtp.message_api.v1.SortDirection direction = 3; */
     if (message.direction !== 0)
       writer.tag(3, WireType.Varint).int32(message.direction)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -512,19 +499,18 @@ class Envelope$Type extends MessageType<Envelope> {
         no: 1,
         name: "content_topic",
         kind: "scalar",
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "timestamp_ns",
         kind: "scalar",
-        T: 4 /* ScalarType.UINT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 4 /*ScalarType.UINT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
-      { no: 3, name: "message", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+      { no: 3, name: "message", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
     ])
   }
-
   create(value?: PartialMessage<Envelope>): Envelope {
     const message = {
       contentTopic: "",
@@ -539,17 +525,16 @@ class Envelope$Type extends MessageType<Envelope> {
       reflectionMergePartial<Envelope>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: Envelope,
   ): Envelope {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* string content_topic */ 1:
           message.contentTopic = reader.string()
@@ -561,12 +546,12 @@ class Envelope$Type extends MessageType<Envelope> {
           message.message = reader.bytes()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -579,7 +564,6 @@ class Envelope$Type extends MessageType<Envelope> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: Envelope,
     writer: IBinaryWriter,
@@ -594,7 +578,7 @@ class Envelope$Type extends MessageType<Envelope> {
     /* bytes message = 3; */
     if (message.message.length)
       writer.tag(3, WireType.LengthDelimited).bytes(message.message)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -616,12 +600,11 @@ class PublishRequest$Type extends MessageType<PublishRequest> {
         no: 1,
         name: "envelopes",
         kind: "message",
-        repeat: 1 /* RepeatType.PACKED */,
+        repeat: 1 /*RepeatType.PACKED*/,
         T: () => Envelope,
       },
     ])
   }
-
   create(value?: PartialMessage<PublishRequest>): PublishRequest {
     const message = { envelopes: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -632,17 +615,16 @@ class PublishRequest$Type extends MessageType<PublishRequest> {
       reflectionMergePartial<PublishRequest>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: PublishRequest,
   ): PublishRequest {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated xmtp.message_api.v1.Envelope envelopes */ 1:
           message.envelopes.push(
@@ -650,12 +632,12 @@ class PublishRequest$Type extends MessageType<PublishRequest> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -668,7 +650,6 @@ class PublishRequest$Type extends MessageType<PublishRequest> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: PublishRequest,
     writer: IBinaryWriter,
@@ -681,7 +662,7 @@ class PublishRequest$Type extends MessageType<PublishRequest> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -700,7 +681,6 @@ class PublishResponse$Type extends MessageType<PublishResponse> {
   constructor() {
     super("xmtp.message_api.v1.PublishResponse", [])
   }
-
   create(value?: PartialMessage<PublishResponse>): PublishResponse {
     const message = {}
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -711,7 +691,6 @@ class PublishResponse$Type extends MessageType<PublishResponse> {
       reflectionMergePartial<PublishResponse>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
@@ -720,13 +699,12 @@ class PublishResponse$Type extends MessageType<PublishResponse> {
   ): PublishResponse {
     return target ?? this.create()
   }
-
   internalBinaryWrite(
     message: PublishResponse,
     writer: IBinaryWriter,
     options: BinaryWriteOptions,
   ): IBinaryWriter {
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -748,12 +726,11 @@ class SubscribeRequest$Type extends MessageType<SubscribeRequest> {
         no: 1,
         name: "content_topics",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(value?: PartialMessage<SubscribeRequest>): SubscribeRequest {
     const message = { contentTopics: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -764,28 +741,27 @@ class SubscribeRequest$Type extends MessageType<SubscribeRequest> {
       reflectionMergePartial<SubscribeRequest>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: SubscribeRequest,
   ): SubscribeRequest {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated string content_topics */ 1:
           message.contentTopics.push(reader.string())
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -798,7 +774,6 @@ class SubscribeRequest$Type extends MessageType<SubscribeRequest> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: SubscribeRequest,
     writer: IBinaryWriter,
@@ -807,7 +782,7 @@ class SubscribeRequest$Type extends MessageType<SubscribeRequest> {
     /* repeated string content_topics = 1; */
     for (let i = 0; i < message.contentTopics.length; i++)
       writer.tag(1, WireType.LengthDelimited).string(message.contentTopics[i])
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -826,7 +801,6 @@ class SubscribeAllRequest$Type extends MessageType<SubscribeAllRequest> {
   constructor() {
     super("xmtp.message_api.v1.SubscribeAllRequest", [])
   }
-
   create(value?: PartialMessage<SubscribeAllRequest>): SubscribeAllRequest {
     const message = {}
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -837,7 +811,6 @@ class SubscribeAllRequest$Type extends MessageType<SubscribeAllRequest> {
       reflectionMergePartial<SubscribeAllRequest>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
@@ -846,13 +819,12 @@ class SubscribeAllRequest$Type extends MessageType<SubscribeAllRequest> {
   ): SubscribeAllRequest {
     return target ?? this.create()
   }
-
   internalBinaryWrite(
     message: SubscribeAllRequest,
     writer: IBinaryWriter,
     options: BinaryWriteOptions,
   ): IBinaryWriter {
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -874,27 +846,26 @@ class QueryRequest$Type extends MessageType<QueryRequest> {
         no: 1,
         name: "content_topics",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "start_time_ns",
         kind: "scalar",
-        T: 4 /* ScalarType.UINT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 4 /*ScalarType.UINT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
       {
         no: 3,
         name: "end_time_ns",
         kind: "scalar",
-        T: 4 /* ScalarType.UINT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 4 /*ScalarType.UINT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
       { no: 4, name: "paging_info", kind: "message", T: () => PagingInfo },
     ])
   }
-
   create(value?: PartialMessage<QueryRequest>): QueryRequest {
     const message = { contentTopics: [], startTimeNs: 0n, endTimeNs: 0n }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -905,17 +876,16 @@ class QueryRequest$Type extends MessageType<QueryRequest> {
       reflectionMergePartial<QueryRequest>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: QueryRequest,
   ): QueryRequest {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated string content_topics */ 1:
           message.contentTopics.push(reader.string())
@@ -935,12 +905,12 @@ class QueryRequest$Type extends MessageType<QueryRequest> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -953,7 +923,6 @@ class QueryRequest$Type extends MessageType<QueryRequest> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: QueryRequest,
     writer: IBinaryWriter,
@@ -975,7 +944,7 @@ class QueryRequest$Type extends MessageType<QueryRequest> {
         writer.tag(4, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -997,13 +966,12 @@ class QueryResponse$Type extends MessageType<QueryResponse> {
         no: 1,
         name: "envelopes",
         kind: "message",
-        repeat: 1 /* RepeatType.PACKED */,
+        repeat: 1 /*RepeatType.PACKED*/,
         T: () => Envelope,
       },
       { no: 2, name: "paging_info", kind: "message", T: () => PagingInfo },
     ])
   }
-
   create(value?: PartialMessage<QueryResponse>): QueryResponse {
     const message = { envelopes: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -1014,17 +982,16 @@ class QueryResponse$Type extends MessageType<QueryResponse> {
       reflectionMergePartial<QueryResponse>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: QueryResponse,
   ): QueryResponse {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated xmtp.message_api.v1.Envelope envelopes */ 1:
           message.envelopes.push(
@@ -1040,12 +1007,12 @@ class QueryResponse$Type extends MessageType<QueryResponse> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -1058,7 +1025,6 @@ class QueryResponse$Type extends MessageType<QueryResponse> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: QueryResponse,
     writer: IBinaryWriter,
@@ -1078,7 +1044,7 @@ class QueryResponse$Type extends MessageType<QueryResponse> {
         writer.tag(2, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -1100,12 +1066,11 @@ class BatchQueryRequest$Type extends MessageType<BatchQueryRequest> {
         no: 1,
         name: "requests",
         kind: "message",
-        repeat: 1 /* RepeatType.PACKED */,
+        repeat: 1 /*RepeatType.PACKED*/,
         T: () => QueryRequest,
       },
     ])
   }
-
   create(value?: PartialMessage<BatchQueryRequest>): BatchQueryRequest {
     const message = { requests: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -1116,17 +1081,16 @@ class BatchQueryRequest$Type extends MessageType<BatchQueryRequest> {
       reflectionMergePartial<BatchQueryRequest>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: BatchQueryRequest,
   ): BatchQueryRequest {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated xmtp.message_api.v1.QueryRequest requests */ 1:
           message.requests.push(
@@ -1134,12 +1098,12 @@ class BatchQueryRequest$Type extends MessageType<BatchQueryRequest> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -1152,7 +1116,6 @@ class BatchQueryRequest$Type extends MessageType<BatchQueryRequest> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: BatchQueryRequest,
     writer: IBinaryWriter,
@@ -1165,7 +1128,7 @@ class BatchQueryRequest$Type extends MessageType<BatchQueryRequest> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -1187,12 +1150,11 @@ class BatchQueryResponse$Type extends MessageType<BatchQueryResponse> {
         no: 1,
         name: "responses",
         kind: "message",
-        repeat: 1 /* RepeatType.PACKED */,
+        repeat: 1 /*RepeatType.PACKED*/,
         T: () => QueryResponse,
       },
     ])
   }
-
   create(value?: PartialMessage<BatchQueryResponse>): BatchQueryResponse {
     const message = { responses: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -1203,17 +1165,16 @@ class BatchQueryResponse$Type extends MessageType<BatchQueryResponse> {
       reflectionMergePartial<BatchQueryResponse>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: BatchQueryResponse,
   ): BatchQueryResponse {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated xmtp.message_api.v1.QueryResponse responses */ 1:
           message.responses.push(
@@ -1221,12 +1182,12 @@ class BatchQueryResponse$Type extends MessageType<BatchQueryResponse> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -1239,7 +1200,6 @@ class BatchQueryResponse$Type extends MessageType<BatchQueryResponse> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: BatchQueryResponse,
     writer: IBinaryWriter,
@@ -1252,7 +1212,7 @@ class BatchQueryResponse$Type extends MessageType<BatchQueryResponse> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -1282,6 +1242,14 @@ export const MessageApi = new ServiceType("xmtp.message_api.v1.MessageApi", [
     options: {
       "google.api.http": { post: "/message/v1/subscribe", body: "*" },
     },
+    I: SubscribeRequest,
+    O: Envelope,
+  },
+  {
+    name: "Subscribe2",
+    serverStreaming: true,
+    clientStreaming: true,
+    options: {},
     I: SubscribeRequest,
     O: Envelope,
   },

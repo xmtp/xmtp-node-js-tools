@@ -43,16 +43,14 @@
 //
 import type { BinaryWriteOptions } from "@protobuf-ts/runtime"
 import type { IBinaryWriter } from "@protobuf-ts/runtime"
-import {
-  WireType,
-  UnknownFieldHandler,
-  reflectionMergePartial,
-  MESSAGE_TYPE,
-  MessageType,
-} from "@protobuf-ts/runtime"
+import { WireType } from "@protobuf-ts/runtime"
 import type { BinaryReadOptions } from "@protobuf-ts/runtime"
 import type { IBinaryReader } from "@protobuf-ts/runtime"
+import { UnknownFieldHandler } from "@protobuf-ts/runtime"
 import type { PartialMessage } from "@protobuf-ts/runtime"
+import { reflectionMergePartial } from "@protobuf-ts/runtime"
+import { MESSAGE_TYPE } from "@protobuf-ts/runtime"
+import { MessageType } from "@protobuf-ts/runtime"
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
  * files it parses.
@@ -1627,12 +1625,11 @@ class FileDescriptorSet$Type extends MessageType<FileDescriptorSet> {
         no: 1,
         name: "file",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => FileDescriptorProto,
       },
     ])
   }
-
   create(value?: PartialMessage<FileDescriptorSet>): FileDescriptorSet {
     const message = { file: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -1643,17 +1640,16 @@ class FileDescriptorSet$Type extends MessageType<FileDescriptorSet> {
       reflectionMergePartial<FileDescriptorSet>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: FileDescriptorSet,
   ): FileDescriptorSet {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.FileDescriptorProto file */ 1:
           message.file.push(
@@ -1665,12 +1661,12 @@ class FileDescriptorSet$Type extends MessageType<FileDescriptorSet> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -1683,7 +1679,6 @@ class FileDescriptorSet$Type extends MessageType<FileDescriptorSet> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: FileDescriptorSet,
     writer: IBinaryWriter,
@@ -1696,7 +1691,7 @@ class FileDescriptorSet$Type extends MessageType<FileDescriptorSet> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -1719,62 +1714,62 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "package",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 3,
         name: "dependency",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 10,
         name: "public_dependency",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 5 /* ScalarType.INT32 */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 11,
         name: "weak_dependency",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 5 /* ScalarType.INT32 */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 4,
         name: "message_type",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => DescriptorProto,
       },
       {
         no: 5,
         name: "enum_type",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => EnumDescriptorProto,
       },
       {
         no: 6,
         name: "service",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => ServiceDescriptorProto,
       },
       {
         no: 7,
         name: "extension",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => FieldDescriptorProto,
       },
       { no: 8, name: "options", kind: "message", T: () => FileOptions },
@@ -1789,18 +1784,17 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
         name: "syntax",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 13,
         name: "edition",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(value?: PartialMessage<FileDescriptorProto>): FileDescriptorProto {
     const message = {
       dependency: [],
@@ -1819,17 +1813,16 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
       reflectionMergePartial<FileDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: FileDescriptorProto,
   ): FileDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -1911,12 +1904,12 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
           message.edition = reader.string()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -1929,7 +1922,6 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: FileDescriptorProto,
     writer: IBinaryWriter,
@@ -1998,7 +1990,7 @@ class FileDescriptorProto$Type extends MessageType<FileDescriptorProto> {
     /* optional string edition = 13; */
     if (message.edition !== undefined)
       writer.tag(13, WireType.LengthDelimited).string(message.edition)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2021,48 +2013,48 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "field",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => FieldDescriptorProto,
       },
       {
         no: 6,
         name: "extension",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => FieldDescriptorProto,
       },
       {
         no: 3,
         name: "nested_type",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => DescriptorProto,
       },
       {
         no: 4,
         name: "enum_type",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => EnumDescriptorProto,
       },
       {
         no: 5,
         name: "extension_range",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => DescriptorProto_ExtensionRange,
       },
       {
         no: 8,
         name: "oneof_decl",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => OneofDescriptorProto,
       },
       { no: 7, name: "options", kind: "message", T: () => MessageOptions },
@@ -2070,19 +2062,18 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
         no: 9,
         name: "reserved_range",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => DescriptorProto_ReservedRange,
       },
       {
         no: 10,
         name: "reserved_name",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(value?: PartialMessage<DescriptorProto>): DescriptorProto {
     const message = {
       field: [],
@@ -2102,17 +2093,16 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
       reflectionMergePartial<DescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: DescriptorProto,
   ): DescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -2192,12 +2182,12 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
           message.reservedName.push(reader.string())
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2210,7 +2200,6 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: DescriptorProto,
     writer: IBinaryWriter,
@@ -2278,7 +2267,7 @@ class DescriptorProto$Type extends MessageType<DescriptorProto> {
     /* repeated string reserved_name = 10; */
     for (let i = 0; i < message.reservedName.length; i++)
       writer.tag(10, WireType.LengthDelimited).string(message.reservedName[i])
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2301,14 +2290,14 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
         name: "start",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 2,
         name: "end",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 3,
@@ -2318,7 +2307,6 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
       },
     ])
   }
-
   create(
     value?: PartialMessage<DescriptorProto_ExtensionRange>,
   ): DescriptorProto_ExtensionRange {
@@ -2335,17 +2323,16 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
       )
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: DescriptorProto_ExtensionRange,
   ): DescriptorProto_ExtensionRange {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional int32 start */ 1:
           message.start = reader.int32()
@@ -2362,12 +2349,12 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2380,7 +2367,6 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
     }
     return message
   }
-
   internalBinaryWrite(
     message: DescriptorProto_ExtensionRange,
     writer: IBinaryWriter,
@@ -2399,7 +2385,7 @@ class DescriptorProto_ExtensionRange$Type extends MessageType<DescriptorProto_Ex
         writer.tag(3, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2423,18 +2409,17 @@ class DescriptorProto_ReservedRange$Type extends MessageType<DescriptorProto_Res
         name: "start",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 2,
         name: "end",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
     ])
   }
-
   create(
     value?: PartialMessage<DescriptorProto_ReservedRange>,
   ): DescriptorProto_ReservedRange {
@@ -2451,17 +2436,16 @@ class DescriptorProto_ReservedRange$Type extends MessageType<DescriptorProto_Res
       )
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: DescriptorProto_ReservedRange,
   ): DescriptorProto_ReservedRange {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional int32 start */ 1:
           message.start = reader.int32()
@@ -2470,12 +2454,12 @@ class DescriptorProto_ReservedRange$Type extends MessageType<DescriptorProto_Res
           message.end = reader.int32()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2488,7 +2472,6 @@ class DescriptorProto_ReservedRange$Type extends MessageType<DescriptorProto_Res
     }
     return message
   }
-
   internalBinaryWrite(
     message: DescriptorProto_ReservedRange,
     writer: IBinaryWriter,
@@ -2500,7 +2483,7 @@ class DescriptorProto_ReservedRange$Type extends MessageType<DescriptorProto_Res
     /* optional int32 end = 2; */
     if (message.end !== undefined)
       writer.tag(2, WireType.Varint).int32(message.end)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2523,12 +2506,11 @@ class ExtensionRangeOptions$Type extends MessageType<ExtensionRangeOptions> {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<ExtensionRangeOptions>): ExtensionRangeOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -2539,17 +2521,16 @@ class ExtensionRangeOptions$Type extends MessageType<ExtensionRangeOptions> {
       reflectionMergePartial<ExtensionRangeOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: ExtensionRangeOptions,
   ): ExtensionRangeOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.UninterpretedOption uninterpreted_option */ 999:
           message.uninterpretedOption.push(
@@ -2561,12 +2542,12 @@ class ExtensionRangeOptions$Type extends MessageType<ExtensionRangeOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2579,7 +2560,6 @@ class ExtensionRangeOptions$Type extends MessageType<ExtensionRangeOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: ExtensionRangeOptions,
     writer: IBinaryWriter,
@@ -2592,7 +2572,7 @@ class ExtensionRangeOptions$Type extends MessageType<ExtensionRangeOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2615,14 +2595,14 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 3,
         name: "number",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 4,
@@ -2651,35 +2631,35 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
         name: "type_name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "extendee",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 7,
         name: "default_value",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 9,
         name: "oneof_index",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 10,
         name: "json_name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       { no: 8, name: "options", kind: "message", T: () => FieldOptions },
       {
@@ -2687,11 +2667,10 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
         name: "proto3_optional",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
     ])
   }
-
   create(value?: PartialMessage<FieldDescriptorProto>): FieldDescriptorProto {
     const message = {}
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -2702,17 +2681,16 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
       reflectionMergePartial<FieldDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: FieldDescriptorProto,
   ): FieldDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -2753,12 +2731,12 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
           message.proto3Optional = reader.bool()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2771,7 +2749,6 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: FieldDescriptorProto,
     writer: IBinaryWriter,
@@ -2814,7 +2791,7 @@ class FieldDescriptorProto$Type extends MessageType<FieldDescriptorProto> {
     /* optional bool proto3_optional = 17; */
     if (message.proto3Optional !== undefined)
       writer.tag(17, WireType.Varint).bool(message.proto3Optional)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2837,12 +2814,11 @@ class OneofDescriptorProto$Type extends MessageType<OneofDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       { no: 2, name: "options", kind: "message", T: () => OneofOptions },
     ])
   }
-
   create(value?: PartialMessage<OneofDescriptorProto>): OneofDescriptorProto {
     const message = {}
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -2853,17 +2829,16 @@ class OneofDescriptorProto$Type extends MessageType<OneofDescriptorProto> {
       reflectionMergePartial<OneofDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: OneofDescriptorProto,
   ): OneofDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -2877,12 +2852,12 @@ class OneofDescriptorProto$Type extends MessageType<OneofDescriptorProto> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -2895,7 +2870,6 @@ class OneofDescriptorProto$Type extends MessageType<OneofDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: OneofDescriptorProto,
     writer: IBinaryWriter,
@@ -2911,7 +2885,7 @@ class OneofDescriptorProto$Type extends MessageType<OneofDescriptorProto> {
         writer.tag(2, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -2934,13 +2908,13 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "value",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => EnumValueDescriptorProto,
       },
       { no: 3, name: "options", kind: "message", T: () => EnumOptions },
@@ -2948,19 +2922,18 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
         no: 4,
         name: "reserved_range",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => EnumDescriptorProto_EnumReservedRange,
       },
       {
         no: 5,
         name: "reserved_name",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(value?: PartialMessage<EnumDescriptorProto>): EnumDescriptorProto {
     const message = { value: [], reservedRange: [], reservedName: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -2971,17 +2944,16 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
       reflectionMergePartial<EnumDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: EnumDescriptorProto,
   ): EnumDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -3016,12 +2988,12 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
           message.reservedName.push(reader.string())
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3034,7 +3006,6 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: EnumDescriptorProto,
     writer: IBinaryWriter,
@@ -3067,7 +3038,7 @@ class EnumDescriptorProto$Type extends MessageType<EnumDescriptorProto> {
     /* repeated string reserved_name = 5; */
     for (let i = 0; i < message.reservedName.length; i++)
       writer.tag(5, WireType.LengthDelimited).string(message.reservedName[i])
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3090,18 +3061,17 @@ class EnumDescriptorProto_EnumReservedRange$Type extends MessageType<EnumDescrip
         name: "start",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 2,
         name: "end",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
     ])
   }
-
   create(
     value?: PartialMessage<EnumDescriptorProto_EnumReservedRange>,
   ): EnumDescriptorProto_EnumReservedRange {
@@ -3118,17 +3088,16 @@ class EnumDescriptorProto_EnumReservedRange$Type extends MessageType<EnumDescrip
       )
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: EnumDescriptorProto_EnumReservedRange,
   ): EnumDescriptorProto_EnumReservedRange {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional int32 start */ 1:
           message.start = reader.int32()
@@ -3137,12 +3106,12 @@ class EnumDescriptorProto_EnumReservedRange$Type extends MessageType<EnumDescrip
           message.end = reader.int32()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3155,7 +3124,6 @@ class EnumDescriptorProto_EnumReservedRange$Type extends MessageType<EnumDescrip
     }
     return message
   }
-
   internalBinaryWrite(
     message: EnumDescriptorProto_EnumReservedRange,
     writer: IBinaryWriter,
@@ -3167,7 +3135,7 @@ class EnumDescriptorProto_EnumReservedRange$Type extends MessageType<EnumDescrip
     /* optional int32 end = 2; */
     if (message.end !== undefined)
       writer.tag(2, WireType.Varint).int32(message.end)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3191,19 +3159,18 @@ class EnumValueDescriptorProto$Type extends MessageType<EnumValueDescriptorProto
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "number",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       { no: 3, name: "options", kind: "message", T: () => EnumValueOptions },
     ])
   }
-
   create(
     value?: PartialMessage<EnumValueDescriptorProto>,
   ): EnumValueDescriptorProto {
@@ -3216,17 +3183,16 @@ class EnumValueDescriptorProto$Type extends MessageType<EnumValueDescriptorProto
       reflectionMergePartial<EnumValueDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: EnumValueDescriptorProto,
   ): EnumValueDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -3243,12 +3209,12 @@ class EnumValueDescriptorProto$Type extends MessageType<EnumValueDescriptorProto
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3261,7 +3227,6 @@ class EnumValueDescriptorProto$Type extends MessageType<EnumValueDescriptorProto
     }
     return message
   }
-
   internalBinaryWrite(
     message: EnumValueDescriptorProto,
     writer: IBinaryWriter,
@@ -3280,7 +3245,7 @@ class EnumValueDescriptorProto$Type extends MessageType<EnumValueDescriptorProto
         writer.tag(3, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3303,19 +3268,18 @@ class ServiceDescriptorProto$Type extends MessageType<ServiceDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "method",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => MethodDescriptorProto,
       },
       { no: 3, name: "options", kind: "message", T: () => ServiceOptions },
     ])
   }
-
   create(
     value?: PartialMessage<ServiceDescriptorProto>,
   ): ServiceDescriptorProto {
@@ -3328,17 +3292,16 @@ class ServiceDescriptorProto$Type extends MessageType<ServiceDescriptorProto> {
       reflectionMergePartial<ServiceDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: ServiceDescriptorProto,
   ): ServiceDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -3361,12 +3324,12 @@ class ServiceDescriptorProto$Type extends MessageType<ServiceDescriptorProto> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3379,7 +3342,6 @@ class ServiceDescriptorProto$Type extends MessageType<ServiceDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: ServiceDescriptorProto,
     writer: IBinaryWriter,
@@ -3402,7 +3364,7 @@ class ServiceDescriptorProto$Type extends MessageType<ServiceDescriptorProto> {
         writer.tag(3, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3425,21 +3387,21 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
         name: "name",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 2,
         name: "input_type",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 3,
         name: "output_type",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       { no: 4, name: "options", kind: "message", T: () => MethodOptions },
       {
@@ -3447,18 +3409,17 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
         name: "client_streaming",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 6,
         name: "server_streaming",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
     ])
   }
-
   create(value?: PartialMessage<MethodDescriptorProto>): MethodDescriptorProto {
     const message = {}
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -3469,17 +3430,16 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
       reflectionMergePartial<MethodDescriptorProto>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: MethodDescriptorProto,
   ): MethodDescriptorProto {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string name */ 1:
           message.name = reader.string()
@@ -3505,12 +3465,12 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
           message.serverStreaming = reader.bool()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3523,7 +3483,6 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: MethodDescriptorProto,
     writer: IBinaryWriter,
@@ -3551,7 +3510,7 @@ class MethodDescriptorProto$Type extends MessageType<MethodDescriptorProto> {
     /* optional bool server_streaming = 6; */
     if (message.serverStreaming !== undefined)
       writer.tag(6, WireType.Varint).bool(message.serverStreaming)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3574,35 +3533,35 @@ class FileOptions$Type extends MessageType<FileOptions> {
         name: "java_package",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 8,
         name: "java_outer_classname",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 10,
         name: "java_multiple_files",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 20,
         name: "java_generate_equals_and_hash",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 27,
         name: "java_string_check_utf8",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 9,
@@ -3619,109 +3578,108 @@ class FileOptions$Type extends MessageType<FileOptions> {
         name: "go_package",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 16,
         name: "cc_generic_services",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 17,
         name: "java_generic_services",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 18,
         name: "py_generic_services",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 42,
         name: "php_generic_services",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 23,
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 31,
         name: "cc_enable_arenas",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 36,
         name: "objc_class_prefix",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 37,
         name: "csharp_namespace",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 39,
         name: "swift_prefix",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 40,
         name: "php_class_prefix",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 41,
         name: "php_namespace",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 44,
         name: "php_metadata_namespace",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 45,
         name: "ruby_package",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<FileOptions>): FileOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -3732,17 +3690,16 @@ class FileOptions$Type extends MessageType<FileOptions> {
       reflectionMergePartial<FileOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: FileOptions,
   ): FileOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional string java_package */ 1:
           message.javaPackage = reader.string()
@@ -3753,7 +3710,7 @@ class FileOptions$Type extends MessageType<FileOptions> {
         case /* optional bool java_multiple_files */ 10:
           message.javaMultipleFiles = reader.bool()
           break
-        case /* optional bool java_generate_equals_and_hash = 20 [deprecated = true]; */ 20:
+        case /* optional bool java_generate_equals_and_hash = 20 [deprecated = true];*/ 20:
           message.javaGenerateEqualsAndHash = reader.bool()
           break
         case /* optional bool java_string_check_utf8 */ 27:
@@ -3814,12 +3771,12 @@ class FileOptions$Type extends MessageType<FileOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -3832,7 +3789,6 @@ class FileOptions$Type extends MessageType<FileOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: FileOptions,
     writer: IBinaryWriter,
@@ -3907,7 +3863,7 @@ class FileOptions$Type extends MessageType<FileOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -3930,46 +3886,45 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
         name: "message_set_wire_format",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 2,
         name: "no_standard_descriptor_accessor",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 3,
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 7,
         name: "map_entry",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 11,
         name: "deprecated_legacy_json_field_conflicts",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<MessageOptions>): MessageOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -3980,17 +3935,16 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
       reflectionMergePartial<MessageOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: MessageOptions,
   ): MessageOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional bool message_set_wire_format */ 1:
           message.messageSetWireFormat = reader.bool()
@@ -4004,7 +3958,7 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
         case /* optional bool map_entry */ 7:
           message.mapEntry = reader.bool()
           break
-        case /* optional bool deprecated_legacy_json_field_conflicts = 11 [deprecated = true]; */ 11:
+        case /* optional bool deprecated_legacy_json_field_conflicts = 11 [deprecated = true];*/ 11:
           message.deprecatedLegacyJsonFieldConflicts = reader.bool()
           break
         case /* repeated google.protobuf.UninterpretedOption uninterpreted_option */ 999:
@@ -4017,12 +3971,12 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4035,7 +3989,6 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: MessageOptions,
     writer: IBinaryWriter,
@@ -4065,7 +4018,7 @@ class MessageOptions$Type extends MessageType<MessageOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4095,7 +4048,7 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
         name: "packed",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 6,
@@ -4109,35 +4062,35 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
         name: "lazy",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 15,
         name: "unverified_lazy",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 3,
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 10,
         name: "weak",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 16,
         name: "debug_redact",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 17,
@@ -4163,12 +4116,11 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<FieldOptions>): FieldOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4179,17 +4131,16 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
       reflectionMergePartial<FieldOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: FieldOptions,
   ): FieldOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional google.protobuf.FieldOptions.CType ctype */ 1:
           message.ctype = reader.int32()
@@ -4231,12 +4182,12 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4249,7 +4200,6 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: FieldOptions,
     writer: IBinaryWriter,
@@ -4292,7 +4242,7 @@ class FieldOptions$Type extends MessageType<FieldOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4314,12 +4264,11 @@ class OneofOptions$Type extends MessageType<OneofOptions> {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<OneofOptions>): OneofOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4330,17 +4279,16 @@ class OneofOptions$Type extends MessageType<OneofOptions> {
       reflectionMergePartial<OneofOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: OneofOptions,
   ): OneofOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.UninterpretedOption uninterpreted_option */ 999:
           message.uninterpretedOption.push(
@@ -4352,12 +4300,12 @@ class OneofOptions$Type extends MessageType<OneofOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4370,7 +4318,6 @@ class OneofOptions$Type extends MessageType<OneofOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: OneofOptions,
     writer: IBinaryWriter,
@@ -4383,7 +4330,7 @@ class OneofOptions$Type extends MessageType<OneofOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4406,32 +4353,31 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
         name: "allow_alias",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 3,
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 6,
         name: "deprecated_legacy_json_field_conflicts",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<EnumOptions>): EnumOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4442,17 +4388,16 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
       reflectionMergePartial<EnumOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: EnumOptions,
   ): EnumOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional bool allow_alias */ 2:
           message.allowAlias = reader.bool()
@@ -4460,7 +4405,7 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
         case /* optional bool deprecated */ 3:
           message.deprecated = reader.bool()
           break
-        case /* optional bool deprecated_legacy_json_field_conflicts = 6 [deprecated = true]; */ 6:
+        case /* optional bool deprecated_legacy_json_field_conflicts = 6 [deprecated = true];*/ 6:
           message.deprecatedLegacyJsonFieldConflicts = reader.bool()
           break
         case /* repeated google.protobuf.UninterpretedOption uninterpreted_option */ 999:
@@ -4473,12 +4418,12 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4491,7 +4436,6 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: EnumOptions,
     writer: IBinaryWriter,
@@ -4515,7 +4459,7 @@ class EnumOptions$Type extends MessageType<EnumOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4538,18 +4482,17 @@ class EnumValueOptions$Type extends MessageType<EnumValueOptions> {
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<EnumValueOptions>): EnumValueOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4560,17 +4503,16 @@ class EnumValueOptions$Type extends MessageType<EnumValueOptions> {
       reflectionMergePartial<EnumValueOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: EnumValueOptions,
   ): EnumValueOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional bool deprecated */ 1:
           message.deprecated = reader.bool()
@@ -4585,12 +4527,12 @@ class EnumValueOptions$Type extends MessageType<EnumValueOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4603,7 +4545,6 @@ class EnumValueOptions$Type extends MessageType<EnumValueOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: EnumValueOptions,
     writer: IBinaryWriter,
@@ -4619,7 +4560,7 @@ class EnumValueOptions$Type extends MessageType<EnumValueOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4642,18 +4583,17 @@ class ServiceOptions$Type extends MessageType<ServiceOptions> {
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<ServiceOptions>): ServiceOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4664,17 +4604,16 @@ class ServiceOptions$Type extends MessageType<ServiceOptions> {
       reflectionMergePartial<ServiceOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: ServiceOptions,
   ): ServiceOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional bool deprecated */ 33:
           message.deprecated = reader.bool()
@@ -4689,12 +4628,12 @@ class ServiceOptions$Type extends MessageType<ServiceOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4707,7 +4646,6 @@ class ServiceOptions$Type extends MessageType<ServiceOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: ServiceOptions,
     writer: IBinaryWriter,
@@ -4723,7 +4661,7 @@ class ServiceOptions$Type extends MessageType<ServiceOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4746,7 +4684,7 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
         name: "deprecated",
         kind: "scalar",
         opt: true,
-        T: 8 /* ScalarType.BOOL */,
+        T: 8 /*ScalarType.BOOL*/,
       },
       {
         no: 34,
@@ -4762,12 +4700,11 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
         no: 999,
         name: "uninterpreted_option",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption,
       },
     ])
   }
-
   create(value?: PartialMessage<MethodOptions>): MethodOptions {
     const message = { uninterpretedOption: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4778,17 +4715,16 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
       reflectionMergePartial<MethodOptions>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: MethodOptions,
   ): MethodOptions {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* optional bool deprecated */ 33:
           message.deprecated = reader.bool()
@@ -4806,12 +4742,12 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4824,7 +4760,6 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: MethodOptions,
     writer: IBinaryWriter,
@@ -4843,7 +4778,7 @@ class MethodOptions$Type extends MessageType<MethodOptions> {
         writer.tag(999, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -4865,7 +4800,7 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
         no: 2,
         name: "name",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => UninterpretedOption_NamePart,
       },
       {
@@ -4873,48 +4808,47 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
         name: "identifier_value",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 4,
         name: "positive_int_value",
         kind: "scalar",
         opt: true,
-        T: 4 /* ScalarType.UINT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 4 /*ScalarType.UINT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
       {
         no: 5,
         name: "negative_int_value",
         kind: "scalar",
         opt: true,
-        T: 3 /* ScalarType.INT64 */,
-        L: 0 /* LongType.BIGINT */,
+        T: 3 /*ScalarType.INT64*/,
+        L: 0 /*LongType.BIGINT*/,
       },
       {
         no: 6,
         name: "double_value",
         kind: "scalar",
         opt: true,
-        T: 1 /* ScalarType.DOUBLE */,
+        T: 1 /*ScalarType.DOUBLE*/,
       },
       {
         no: 7,
         name: "string_value",
         kind: "scalar",
         opt: true,
-        T: 12 /* ScalarType.BYTES */,
+        T: 12 /*ScalarType.BYTES*/,
       },
       {
         no: 8,
         name: "aggregate_value",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(value?: PartialMessage<UninterpretedOption>): UninterpretedOption {
     const message = { name: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -4925,17 +4859,16 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
       reflectionMergePartial<UninterpretedOption>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: UninterpretedOption,
   ): UninterpretedOption {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.UninterpretedOption.NamePart name */ 2:
           message.name.push(
@@ -4965,12 +4898,12 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
           message.aggregateValue = reader.string()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -4983,7 +4916,6 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: UninterpretedOption,
     writer: IBinaryWriter,
@@ -5014,7 +4946,7 @@ class UninterpretedOption$Type extends MessageType<UninterpretedOption> {
     /* optional string aggregate_value = 8; */
     if (message.aggregateValue !== undefined)
       writer.tag(8, WireType.LengthDelimited).string(message.aggregateValue)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -5032,21 +4964,10 @@ export const UninterpretedOption = new UninterpretedOption$Type()
 class UninterpretedOption_NamePart$Type extends MessageType<UninterpretedOption_NamePart> {
   constructor() {
     super("google.protobuf.UninterpretedOption.NamePart", [
-      {
-        no: 1,
-        name: "name_part",
-        kind: "scalar",
-        T: 9 /* ScalarType.STRING */,
-      },
-      {
-        no: 2,
-        name: "is_extension",
-        kind: "scalar",
-        T: 8 /* ScalarType.BOOL */,
-      },
+      { no: 1, name: "name_part", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+      { no: 2, name: "is_extension", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
     ])
   }
-
   create(
     value?: PartialMessage<UninterpretedOption_NamePart>,
   ): UninterpretedOption_NamePart {
@@ -5059,17 +4980,16 @@ class UninterpretedOption_NamePart$Type extends MessageType<UninterpretedOption_
       reflectionMergePartial<UninterpretedOption_NamePart>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: UninterpretedOption_NamePart,
   ): UninterpretedOption_NamePart {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* string name_part */ 1:
           message.namePart = reader.string()
@@ -5078,12 +4998,12 @@ class UninterpretedOption_NamePart$Type extends MessageType<UninterpretedOption_
           message.isExtension = reader.bool()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -5096,7 +5016,6 @@ class UninterpretedOption_NamePart$Type extends MessageType<UninterpretedOption_
     }
     return message
   }
-
   internalBinaryWrite(
     message: UninterpretedOption_NamePart,
     writer: IBinaryWriter,
@@ -5108,7 +5027,7 @@ class UninterpretedOption_NamePart$Type extends MessageType<UninterpretedOption_
     /* bool is_extension = 2; */
     if (message.isExtension !== false)
       writer.tag(2, WireType.Varint).bool(message.isExtension)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -5131,12 +5050,11 @@ class SourceCodeInfo$Type extends MessageType<SourceCodeInfo> {
         no: 1,
         name: "location",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => SourceCodeInfo_Location,
       },
     ])
   }
-
   create(value?: PartialMessage<SourceCodeInfo>): SourceCodeInfo {
     const message = { location: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -5147,17 +5065,16 @@ class SourceCodeInfo$Type extends MessageType<SourceCodeInfo> {
       reflectionMergePartial<SourceCodeInfo>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: SourceCodeInfo,
   ): SourceCodeInfo {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.SourceCodeInfo.Location location */ 1:
           message.location.push(
@@ -5169,12 +5086,12 @@ class SourceCodeInfo$Type extends MessageType<SourceCodeInfo> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -5187,7 +5104,6 @@ class SourceCodeInfo$Type extends MessageType<SourceCodeInfo> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: SourceCodeInfo,
     writer: IBinaryWriter,
@@ -5200,7 +5116,7 @@ class SourceCodeInfo$Type extends MessageType<SourceCodeInfo> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -5222,40 +5138,39 @@ class SourceCodeInfo_Location$Type extends MessageType<SourceCodeInfo_Location> 
         no: 1,
         name: "path",
         kind: "scalar",
-        repeat: 1 /* RepeatType.PACKED */,
-        T: 5 /* ScalarType.INT32 */,
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 2,
         name: "span",
         kind: "scalar",
-        repeat: 1 /* RepeatType.PACKED */,
-        T: 5 /* ScalarType.INT32 */,
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 3,
         name: "leading_comments",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 4,
         name: "trailing_comments",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 6,
         name: "leading_detached_comments",
         kind: "scalar",
-        repeat: 2 /* RepeatType.UNPACKED */,
-        T: 9 /* ScalarType.STRING */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
+        T: 9 /*ScalarType.STRING*/,
       },
     ])
   }
-
   create(
     value?: PartialMessage<SourceCodeInfo_Location>,
   ): SourceCodeInfo_Location {
@@ -5268,25 +5183,24 @@ class SourceCodeInfo_Location$Type extends MessageType<SourceCodeInfo_Location> 
       reflectionMergePartial<SourceCodeInfo_Location>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: SourceCodeInfo_Location,
   ): SourceCodeInfo_Location {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
-        case /* repeated int32 path = 1 [packed = true]; */ 1:
+        case /* repeated int32 path = 1 [packed = true];*/ 1:
           if (wireType === WireType.LengthDelimited)
             for (let e = reader.int32() + reader.pos; reader.pos < e; )
               message.path.push(reader.int32())
           else message.path.push(reader.int32())
           break
-        case /* repeated int32 span = 2 [packed = true]; */ 2:
+        case /* repeated int32 span = 2 [packed = true];*/ 2:
           if (wireType === WireType.LengthDelimited)
             for (let e = reader.int32() + reader.pos; reader.pos < e; )
               message.span.push(reader.int32())
@@ -5302,12 +5216,12 @@ class SourceCodeInfo_Location$Type extends MessageType<SourceCodeInfo_Location> 
           message.leadingDetachedComments.push(reader.string())
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -5320,7 +5234,6 @@ class SourceCodeInfo_Location$Type extends MessageType<SourceCodeInfo_Location> 
     }
     return message
   }
-
   internalBinaryWrite(
     message: SourceCodeInfo_Location,
     writer: IBinaryWriter,
@@ -5351,7 +5264,7 @@ class SourceCodeInfo_Location$Type extends MessageType<SourceCodeInfo_Location> 
       writer
         .tag(6, WireType.LengthDelimited)
         .string(message.leadingDetachedComments[i])
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -5373,12 +5286,11 @@ class GeneratedCodeInfo$Type extends MessageType<GeneratedCodeInfo> {
         no: 1,
         name: "annotation",
         kind: "message",
-        repeat: 2 /* RepeatType.UNPACKED */,
+        repeat: 2 /*RepeatType.UNPACKED*/,
         T: () => GeneratedCodeInfo_Annotation,
       },
     ])
   }
-
   create(value?: PartialMessage<GeneratedCodeInfo>): GeneratedCodeInfo {
     const message = { annotation: [] }
     globalThis.Object.defineProperty(message, MESSAGE_TYPE, {
@@ -5389,17 +5301,16 @@ class GeneratedCodeInfo$Type extends MessageType<GeneratedCodeInfo> {
       reflectionMergePartial<GeneratedCodeInfo>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: GeneratedCodeInfo,
   ): GeneratedCodeInfo {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
         case /* repeated google.protobuf.GeneratedCodeInfo.Annotation annotation */ 1:
           message.annotation.push(
@@ -5411,12 +5322,12 @@ class GeneratedCodeInfo$Type extends MessageType<GeneratedCodeInfo> {
           )
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -5429,7 +5340,6 @@ class GeneratedCodeInfo$Type extends MessageType<GeneratedCodeInfo> {
     }
     return message
   }
-
   internalBinaryWrite(
     message: GeneratedCodeInfo,
     writer: IBinaryWriter,
@@ -5442,7 +5352,7 @@ class GeneratedCodeInfo$Type extends MessageType<GeneratedCodeInfo> {
         writer.tag(1, WireType.LengthDelimited).fork(),
         options,
       ).join()
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,
@@ -5464,29 +5374,29 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
         no: 1,
         name: "path",
         kind: "scalar",
-        repeat: 1 /* RepeatType.PACKED */,
-        T: 5 /* ScalarType.INT32 */,
+        repeat: 1 /*RepeatType.PACKED*/,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 2,
         name: "source_file",
         kind: "scalar",
         opt: true,
-        T: 9 /* ScalarType.STRING */,
+        T: 9 /*ScalarType.STRING*/,
       },
       {
         no: 3,
         name: "begin",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 4,
         name: "end",
         kind: "scalar",
         opt: true,
-        T: 5 /* ScalarType.INT32 */,
+        T: 5 /*ScalarType.INT32*/,
       },
       {
         no: 5,
@@ -5500,7 +5410,6 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
       },
     ])
   }
-
   create(
     value?: PartialMessage<GeneratedCodeInfo_Annotation>,
   ): GeneratedCodeInfo_Annotation {
@@ -5513,19 +5422,18 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
       reflectionMergePartial<GeneratedCodeInfo_Annotation>(this, message, value)
     return message
   }
-
   internalBinaryRead(
     reader: IBinaryReader,
     length: number,
     options: BinaryReadOptions,
     target?: GeneratedCodeInfo_Annotation,
   ): GeneratedCodeInfo_Annotation {
-    const message = target ?? this.create()
-    const end = reader.pos + length
+    let message = target ?? this.create(),
+      end = reader.pos + length
     while (reader.pos < end) {
-      const [fieldNo, wireType] = reader.tag()
+      let [fieldNo, wireType] = reader.tag()
       switch (fieldNo) {
-        case /* repeated int32 path = 1 [packed = true]; */ 1:
+        case /* repeated int32 path = 1 [packed = true];*/ 1:
           if (wireType === WireType.LengthDelimited)
             for (let e = reader.int32() + reader.pos; reader.pos < e; )
               message.path.push(reader.int32())
@@ -5544,12 +5452,12 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
           message.semantic = reader.int32()
           break
         default:
-          const u = options.readUnknownField
+          let u = options.readUnknownField
           if (u === "throw")
             throw new globalThis.Error(
               `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`,
             )
-          const d = reader.skip(wireType)
+          let d = reader.skip(wireType)
           if (u !== false)
             (u === true ? UnknownFieldHandler.onRead : u)(
               this.typeName,
@@ -5562,7 +5470,6 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
     }
     return message
   }
-
   internalBinaryWrite(
     message: GeneratedCodeInfo_Annotation,
     writer: IBinaryWriter,
@@ -5587,7 +5494,7 @@ class GeneratedCodeInfo_Annotation$Type extends MessageType<GeneratedCodeInfo_An
     /* optional google.protobuf.GeneratedCodeInfo.Annotation.Semantic semantic = 5; */
     if (message.semantic !== undefined)
       writer.tag(5, WireType.Varint).int32(message.semantic)
-    const u = options.writeUnknownFields
+    let u = options.writeUnknownFields
     if (u !== false)
       (u == true ? UnknownFieldHandler.onWrite : u)(
         this.typeName,

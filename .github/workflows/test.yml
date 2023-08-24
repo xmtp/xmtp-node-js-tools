@@ -1,0 +1,19 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - run: npm run up -w packages/bot-kit-pro
+      - run: npm run migration:run -w packages/bot-kit-pro
+      - run: npm run test --workspaces
