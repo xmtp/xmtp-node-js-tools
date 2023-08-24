@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import Bot from "./foo.js"
+import Bot from "./bot.js"
 import { PartialAppConfig, BotConfig, newAppConfig } from "./config.js"
 import { buildDataSource } from "./dataSource.js"
 
