@@ -66,7 +66,7 @@ export function newAppConfig(cfg: PartialAppConfig): RequiredAppConfig {
       postgresPort: parseInt(
         getEnvOrDefault(
           "POSTGRES_PORT",
-          cfg.db?.postgresPort ? String(cfg.db?.postgresPort) : "6543",
+          cfg.db?.postgresPort ? String(cfg.db?.postgresPort) : "4321",
         ),
       ),
       postgresUser: getEnvOrDefault(

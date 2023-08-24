@@ -4,7 +4,11 @@
   "description": "A collection of tools for running high quality bots in Node.js",
   "private": "true",
   "scripts": {
-    "build": "npm run build --workspaces",
+    "lint": "eslint .",
+    "build": "npm run build:grpc && npm run build:botkit && npm run build:examples",
+    "build:grpc": "npm run build -w packages/grpc-api-client",
+    "build:botkit": "npm run build -w packages/bot-kit-pro",
+    "build:examples": "npm run build -w packages/bot-examples",
     "test": "npm run test --workspaces"
   },
   "repository": {

@@ -6,13 +6,15 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "dev": "node dist/index.js",
+    "predev": "npm run build",
     "start": "node dist/index.js",
-    "prestart": "npm run build",
-    "test": "jest"
+    "test": "echo no tests yet"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@xmtp/bot-kit-pro": "file:../bot-kit-pro",
     "openai": "^4.0.1"
   }
 }

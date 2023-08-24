@@ -8,12 +8,14 @@
     "build": "tsc",
     "migration:generate": "npx typeorm-ts-node-esm migration:generate ./src/migrations/init -d ./src/dataSource.migrations.ts",
     "migration:run": "npx typeorm-ts-node-esm migration:run -d src/dataSource.migrations.ts",
+    "up": "./dev/up",
     "prepublishOnly": "npm run build",
     "test": "jest ./src"
   },
   "dependencies": {
-    "@xmtp/grpc-api-client": "*",
-    "@xmtp/proto": "^3.26.0",
+    "@xmtp/grpc-api-client": "file:../grpc-api-client",
+    "@xmtp/proto": "^3.27.0",
+    "@xmtp/xmtp-js": "^11.0.0-beta.2",
     "ethers": "^6.7.1",
     "long": "^5.2.3",
     "pg": "^8.11.1",

@@ -1,6 +1,6 @@
 import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
 import { GrpcTransport } from "@protobuf-ts/grpc-transport"
-import { messageApi, fetcher } from "@xmtp/proto"
+import { messageApi } from "@xmtp/proto"
 import { credentials } from "@grpc/grpc-js"
 import {
   BatchQueryRequest,
@@ -9,9 +9,11 @@ import {
   Envelope,
   PagingInfo,
   PublishRequest,
+  PublishResponse,
   QueryRequest,
   QueryResponse,
   SortDirection,
+  SubscribeRequest,
 } from "./gen/message_api/v1/message_api.js"
 import {
   PublishParams,
@@ -21,27 +23,32 @@ import {
   QueryStreamOptions,
   Query,
   SubscribeCallback,
-  UnsubscribeFn,
-  IApiClient,
+  ApiClient,
   Authenticator,
   AuthCache,
+  retry,
   NetworkOptions,
+  SubscriptionManager,
 } from "@xmtp/xmtp-js"
-import { RpcError } from "@protobuf-ts/runtime-rpc"
-const { b64Encode } = fetcher
+import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
 
 const API_URLS: { [k: string]: string } = {
   dev: "dev.xmtp.network:5556",
   production: "production.xmtp.network:5556",
-  local: "localhost:5557",
+  local: "localhost:5556",
 }
 
-export default class GrpcApiClient implements IApiClient {
+const SLEEP_TIME = 1000
+const MAX_RETRIES = 4
+
+export default class GrpcApiClient implements ApiClient {
   grpcClient: MessageApiClient
   private authCache?: AuthCache
   private appVersion?: string
+  apiUrl: string
 
   constructor(apiUrl: string, isSecure: boolean, appVersion?: string) {
+    this.apiUrl = apiUrl
     this.appVersion = appVersion
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
@@ -59,28 +66,54 @@ export default class GrpcApiClient implements IApiClient {
       throw new Error("Could not find API URL from options")
     }
     const isSecure = !apiUrl.includes("localhost")
-    return new GrpcApiClient(apiUrl, isSecure)
+    return new GrpcApiClient(apiUrl, isSecure, options.appVersion)
   }
 
-  private async _publish(req: PublishRequest) {
+  private async _publish(
+    req: PublishRequest,
+    attemptNumber = 0,
+  ): Promise<PublishResponse> {
     const token = await this.getToken()
-    return this.grpcClient
-      .publish(req, {
-        meta: { /* ...this.metadata(), */ authorization: `Bearer ${token}` },
-      })
-      .then((res) => res.response)
+    try {
+      return (
+        await retry(
+          this.grpcClient.publish.bind(this.grpcClient),
+          [
+            req,
+            {
+              meta: { ...this.metadata(), authorization: `Bearer ${token}` },
+            },
+          ],
+          MAX_RETRIES,
+          SLEEP_TIME,
+          isNotAuthError,
+        )
+      ).response
+    } catch (e) {
+      if (isNotAuthError(e as Error) || attemptNumber >= 1) {
+        throw e
+      }
+      await this.authCache?.refresh()
+      return this._publish(req, attemptNumber + 1)
+    }
   }
 
   private _query(req: QueryRequest): Promise<QueryResponse> {
-    return this.grpcClient
-      .query(req /* { meta: this.metadata() } */)
-      .then((res) => res.response)
+    return retry(
+      this.grpcClient.query.bind(this.grpcClient),
+      [req, { meta: this.metadata() }],
+      MAX_RETRIES,
+      SLEEP_TIME,
+    ).then((res) => res.response)
   }
 
   private _batchQuery(req: BatchQueryRequest): Promise<BatchQueryResponse> {
-    return this.grpcClient
-      .batchQuery(req, { meta: this.metadata() })
-      .then((res) => res.response)
+    return retry(
+      this.grpcClient.batchQuery.bind(this.grpcClient),
+      [req, { meta: this.metadata() }],
+      MAX_RETRIES,
+      SLEEP_TIME,
+    ).then((res) => res.response)
   }
 
   async query(
@@ -173,24 +206,25 @@ export default class GrpcApiClient implements IApiClient {
   subscribe(
     params: SubscribeParams,
     callback: SubscribeCallback,
-  ): UnsubscribeFn {
+  ): SubscriptionManager {
     const { contentTopics } = params
     const req = {
       contentTopics,
     }
     const abortController = new AbortController()
+    let stream: DuplexStreamingCall<SubscribeRequest, Envelope>
     const doSubscribe = async () => {
       while (true) {
         try {
-          const stream = this.grpcClient.subscribe(req, {
+          stream = this.grpcClient.subscribe2({
             timeout: 1000 * 60 * 60 * 24,
             abort: abortController.signal,
           })
+          await stream.requests.send(req)
           stream.responses.onMessage((msg) => callback(toHttpEnvelope(msg)))
           await stream
         } catch (e) {
           if (isAbortError(e as RpcError)) {
-            console.log("Stream aborted")
             return
           }
           console.error("stream error", e)
@@ -200,8 +234,17 @@ export default class GrpcApiClient implements IApiClient {
 
     doSubscribe()
 
-    return async () => {
-      abortController.abort()
+    return {
+      unsubscribe: async () => {
+        abortController.abort()
+        await stream.requests.complete()
+      },
+      updateContentTopics: async (topics: string[]) => {
+        if (topics.length && !abortController.signal.aborted && stream) {
+          console.log("updating content topics", topics)
+          await stream.requests.send({ contentTopics: topics })
+        }
+      },
     }
   }
 
@@ -292,11 +335,7 @@ function toNanos(timestamp: Date) {
 function toHttpEnvelope(env: Envelope): messageApi.Envelope {
   return {
     contentTopic: env.contentTopic,
-    message: b64Encode(
-      env.message,
-      0,
-      env.message.length,
-    ) as unknown as Uint8Array,
+    message: Uint8Array.from(env.message),
     timestampNs: toNanoString(env.timestampNs),
   }
 }
@@ -321,4 +360,18 @@ function isAbortError(err?: RpcError): boolean {
     return true
   }
   return false
+}
+
+function isAuthError(err?: Error): boolean {
+  if (!(err instanceof RpcError)) {
+    return false
+  }
+  if (err?.code === "UNAUTHENTICATED") {
+    return true
+  }
+  return false
+}
+
+function isNotAuthError(err?: Error): boolean {
+  return !isAuthError(err)
 }

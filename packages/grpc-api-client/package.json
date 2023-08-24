@@ -8,12 +8,13 @@
     "@protobuf-ts/grpc-transport": "^2.9.1",
     "@protobuf-ts/runtime": "^2.9.1",
     "@protobuf-ts/runtime-rpc": "^2.9.1",
-    "@xmtp/proto": "^3.26.0"
+    "@xmtp/proto": "^3.26.0",
+    "@xmtp/xmtp-js": "^11.0.0-beta.2"
   },
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "gen:proto": "buf generate buf.build/xmtp/proto",
+    "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1",
     "test": "jest ."
   },
   "author": "XMTP Labs <eng@xmtp.com>",
