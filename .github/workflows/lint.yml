@@ -1,12 +1,12 @@
-name: Test
+name: Lint
 on:
   push:
     branches:
       - main
   pull_request:
 jobs:
-  test:
-    name: Test
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +15,4 @@ jobs:
           node-version-file: ".nvmrc"
       - run: npm ci
       - run: npm run build
-      - run: npm run up -w packages/bot-kit-pro
-      - run: npm run migration:run -w packages/bot-kit-pro
-      - run: npm run test
+      - run: npm run lint

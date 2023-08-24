@@ -45,7 +45,6 @@ const start = async () => {
       bodega,
     ),
   ]
-  console.log(bots)
   await run(bots)
 }
 
