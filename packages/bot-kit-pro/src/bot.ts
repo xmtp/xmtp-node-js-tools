@@ -10,10 +10,11 @@ import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
 import HandlerContext from "./context.js"
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
-import { BotConfig } from "./config.js"
+import { CompletedBotConfig } from "./config.js"
 import { createLogger } from "./logger.js"
 import { Json } from "./types.js"
 import { PostgresPersistence } from "./persistence.js"
+import { randomKeys } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
 
@@ -25,14 +26,14 @@ export default class Bot {
   handler: BotHandler
   stream?: AsyncGenerator<DecodedMessage>
   logger: pino.Logger
-  config: Required<BotConfig>
+  config: CompletedBotConfig
 
   constructor(
     name: string,
     client: Client,
     db: AppDataSource,
     botRecord: BotDB,
-    config: Required<BotConfig>,
+    config: CompletedBotConfig,
   ) {
     this.name = name
     this.client = client
@@ -52,13 +53,17 @@ export default class Bot {
   }
 
   static async create(
-    config: Required<BotConfig>,
+    config: CompletedBotConfig,
     datasource: AppDataSource,
   ): Promise<Bot> {
+    const basePersistence = new PostgresPersistence(datasource)
+    const xmtpKeys =
+      config.xmtpKeys ||
+      (await getOrCreateXmtpKeys(config.name, config.xmtpEnv, basePersistence))
     const client = await Client.create(null, {
       env: config.xmtpEnv,
-      privateKeyOverride: config.xmtpKeys,
-      basePersistence: new PostgresPersistence(datasource),
+      privateKeyOverride: xmtpKeys,
+      basePersistence,
       disablePersistenceEncryption: true,
       apiClientFactory: GrpcApiClient.fromOptions,
     })
@@ -264,4 +269,19 @@ export default class Bot {
   private isExpired(message: DecodedMessage) {
     return message.sent.getTime() + this.config.messageExpiryMs < Date.now()
   }
+}
+
+export async function getOrCreateXmtpKeys(
+  name: string,
+  env: string,
+  persistence: PostgresPersistence,
+): Promise<Uint8Array> {
+  const key = `xmtp-keys/${env}/${name}`
+  const existing = await persistence.getItem(key)
+  if (existing) {
+    return existing
+  }
+  const newKeys = await randomKeys()
+  await persistence.setItem(key, newKeys)
+  return newKeys
 }

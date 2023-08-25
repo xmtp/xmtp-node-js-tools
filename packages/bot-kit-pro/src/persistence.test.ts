@@ -2,6 +2,7 @@ import { newAppConfig } from "./config"
 import { buildDataSource } from "./dataSource"
 import { PostgresPersistence } from "./persistence"
 import { randomBytes } from "crypto"
+import { randomKeys } from "./utils"
 
 describe("persistence", () => {
   let persistence: PostgresPersistence
@@ -14,7 +15,7 @@ describe("persistence", () => {
 
   it("allows setting and retrieving values", async () => {
     const key = randomBytes(32).toString("hex")
-    const value = Buffer.from(new TextEncoder().encode("bar"))
+    const value = new TextEncoder().encode("bar")
 
     await persistence.setItem(key, value)
     expect(await persistence.getItem(key)).toEqual(value)
@@ -28,13 +29,25 @@ describe("persistence", () => {
 
   it("allows overwriting values", async () => {
     const key = randomBytes(32).toString("hex")
-    const firstValue = Buffer.from(new TextEncoder().encode("foo"))
-    const secondValue = Buffer.from(new TextEncoder().encode("bar"))
+    const firstValue = new TextEncoder().encode("foo")
+    const secondValue = new TextEncoder().encode("bar")
 
     await persistence.setItem(key, firstValue)
     expect(await persistence.getItem(key)).toEqual(firstValue)
 
     await persistence.setItem(key, secondValue)
     expect(await persistence.getItem(key)).toEqual(secondValue)
+  })
+
+  it("round trips Uint8Array values", async () => {
+    const persistenceKey = randomBytes(32).toString("hex")
+    const keys = await randomKeys()
+    await persistence.setItem(persistenceKey, keys)
+
+    const returnedValue = await persistence.getItem(persistenceKey)
+    if (!returnedValue) {
+      throw new Error("could not retrieve from persistence")
+    }
+    expect([...returnedValue]).toEqual([...keys])
   })
 })

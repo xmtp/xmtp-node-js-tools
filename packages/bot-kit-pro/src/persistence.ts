@@ -13,8 +13,8 @@ export class PostgresPersistence {
     if (!value) {
       return null
     }
-
-    return value.value
+    const buffer = value.value
+    return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength)
   }
 
   async setItem(key: string, value: Uint8Array): Promise<void> {
