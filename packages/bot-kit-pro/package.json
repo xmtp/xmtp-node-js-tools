@@ -24,6 +24,9 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.17"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "files": [
     "dist"
   ],

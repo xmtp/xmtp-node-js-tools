@@ -5,16 +5,24 @@ module.exports = {
     "standard",
     "prettier",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "eslint-config-prettier",
   ],
   parserOptions: {
     sourceType: "module",
     warnOnUnsupportedTypeScriptVersion: false,
+    modules: true,
+    ecmaVersion: 2020,
+  },
+  env: {
+    "jest/globals": true,
+    es6: true,
+    node: true,
   },
   rules: {
     "prettier/prettier": "error",
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", "jest", "promise"],
   ignorePatterns: [
     "dist",
     "node_modules",

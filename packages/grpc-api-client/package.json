@@ -4,6 +4,9 @@
   "description": "A GRPC-backed API client for Node.js applications",
   "main": "dist/src/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@protobuf-ts/grpc-transport": "^2.9.1",
     "@protobuf-ts/runtime": "^2.9.1",

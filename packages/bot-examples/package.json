@@ -4,6 +4,9 @@
   "description": "Example bots using the @xmtp/bot-kit-pro package",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "node dist/index.js",
