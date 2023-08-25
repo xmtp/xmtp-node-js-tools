@@ -1,10 +1,10 @@
 import { run, BotConfig, newBotConfig } from "@xmtp/bot-kit-pro"
 import echo from "./echo.js"
 import waitlist from "./waitlist.js"
-import { Wallet } from "ethers"
-import { PrivateKeyBundleV1 } from "@xmtp/xmtp-js"
 import chatgpt from "./chatgpt.js"
 import bodega from "./bodega.js"
+import trivia from "./trivia.js"
+import { getKeys } from "./utils.js"
 
 const defaultConfig: Partial<BotConfig> = {
   xmtpEnv: "dev",
@@ -15,7 +15,7 @@ const start = async () => {
     newBotConfig(
       "echo",
       {
-        xmtpKeys: await randomKeys(),
+        xmtpKeys: await getKeys("echo"),
         ...defaultConfig,
       },
       echo,
@@ -23,7 +23,7 @@ const start = async () => {
     newBotConfig(
       "waitlist",
       {
-        xmtpKeys: await randomKeys(),
+        xmtpKeys: await getKeys("waitlist"),
         ...defaultConfig,
       },
       waitlist,
@@ -31,7 +31,7 @@ const start = async () => {
     newBotConfig(
       "chatgpt",
       {
-        xmtpKeys: await randomKeys(),
+        xmtpKeys: await getKeys("chatgpt"),
         ...defaultConfig,
       },
       chatgpt,
@@ -39,19 +39,21 @@ const start = async () => {
     newBotConfig(
       "bodega",
       {
-        xmtpKeys: await randomKeys(),
+        xmtpKeys: await getKeys("bodega"),
         ...defaultConfig,
       },
       bodega,
     ),
+    newBotConfig(
+      "trivia",
+      {
+        xmtpKeys: await getKeys("trivia"),
+        ...defaultConfig,
+      },
+      trivia,
+    ),
   ]
   await run(bots)
-}
-
-async function randomKeys() {
-  const wallet = Wallet.createRandom()
-  const bundle = await PrivateKeyBundleV1.generate(wallet)
-  return bundle.encode()
 }
 
 start()
