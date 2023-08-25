@@ -12,7 +12,7 @@ export type BotConfig = {
   messageExpiryMs?: number
 }
 
-export type CompletedBotConfig = Required<Omit<BotConfig, "xmtpKeys">> & {
+export type BotCreateConfig = Required<Omit<BotConfig, "xmtpKeys">> & {
   xmtpKeys?: Uint8Array
 }
 
@@ -20,7 +20,7 @@ export function newBotConfig(
   name: string,
   cfg: Omit<BotConfig, "handler" | "name">,
   handler: BotHandler,
-): CompletedBotConfig {
+): BotCreateConfig {
   if (!name) {
     throw new Error("Missing bot name")
   }
@@ -31,7 +31,7 @@ export function newBotConfig(
   })
 }
 
-export function applyBotDefaults(config: BotConfig): CompletedBotConfig {
+export function applyBotDefaults(config: BotConfig): BotCreateConfig {
   return {
     xmtpEnv: DEFAULT_XMTP_ENV,
     messageExpiryMs: DEFAULT_MESSAGE_EXPIRY_MS,

@@ -10,7 +10,7 @@ import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
 import HandlerContext from "./context.js"
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
-import { CompletedBotConfig } from "./config.js"
+import { BotConfig, BotCreateConfig } from "./config.js"
 import { createLogger } from "./logger.js"
 import { Json } from "./types.js"
 import { PostgresPersistence } from "./persistence.js"
@@ -26,14 +26,14 @@ export default class Bot {
   handler: BotHandler
   stream?: AsyncGenerator<DecodedMessage>
   logger: pino.Logger
-  config: CompletedBotConfig
+  config: Required<BotConfig>
 
   constructor(
     name: string,
     client: Client,
     db: AppDataSource,
     botRecord: BotDB,
-    config: CompletedBotConfig,
+    config: Required<BotConfig>,
   ) {
     this.name = name
     this.client = client
@@ -53,7 +53,7 @@ export default class Bot {
   }
 
   static async create(
-    config: CompletedBotConfig,
+    config: BotCreateConfig,
     datasource: AppDataSource,
   ): Promise<Bot> {
     const basePersistence = new PostgresPersistence(datasource)
@@ -73,7 +73,10 @@ export default class Bot {
       throw new Error("Bot not found")
     }
 
-    return new Bot(config.name, client, datasource, botRecord, config)
+    return new Bot(config.name, client, datasource, botRecord, {
+      ...config,
+      xmtpKeys,
+    })
   }
 
   private getRepository<T extends ObjectLiteral>(entity: EntityTarget<T>) {
