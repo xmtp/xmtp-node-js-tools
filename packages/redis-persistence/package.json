@@ -1,0 +1,42 @@
+{
+  "name": "@xmtp/redis-persistence",
+  "description": "A Redis-backed persistence layer for XMTP",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "start-redis": "docker-compose up -d",
+    "build": "tsc",
+    "test": "jest .",
+    "pretest": "yarn start-redis"
+  },
+  "dependencies": {
+    "@redis/client": "^1.5.9"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xmtp/bot-kit-pro.git"
+  },
+  "keywords": [
+    "xmtp",
+    "bots",
+    "messaging",
+    "web3"
+  ],
+  "author": "XMTP Labs <eng@xmtp.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xmtp/bot-kit-pro/issues"
+  },
+  "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
+  "packageManager": "yarn@3.6.3",
+  "devDependencies": {
+    "@xmtp/xmtp-js": "11.0.0-beta.8",
+    "jest": "^29.6.4"
+  }
+}
