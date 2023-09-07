@@ -1,6 +1,6 @@
 import { newAppConfig } from "./config"
 import { buildDataSource } from "./dataSource"
-import { PostgresPersistence } from "./persistence"
+import { FsPersistence, PostgresPersistence } from "./persistence"
 import { randomBytes } from "crypto"
 import { randomKeys } from "./utils"
 
@@ -49,5 +49,30 @@ describe("persistence", () => {
       throw new Error("could not retrieve from persistence")
     }
     expect([...returnedValue]).toEqual([...keys])
+  })
+})
+
+describe("fs persistence", () => {
+  let persistence: FsPersistence
+
+  beforeEach(async () => {
+    const folder = `/tmp/${randomBytes(32).toString("hex")}`
+    persistence = new FsPersistence(folder)
+  })
+
+  it("allows setting and retrieving values", async () => {
+    const key = "foo"
+    const value = new TextEncoder().encode("bar")
+
+    await persistence.setItem(key, value)
+    const returnedValue = await persistence.getItem(key)
+    if (!returnedValue) {
+      throw new Error("no returned value")
+    }
+    expect(returnedValue).toEqual(value)
+  })
+
+  it("returns null for missing values", async () => {
+    expect(await persistence.getItem("foo")).toBeNull()
   })
 })

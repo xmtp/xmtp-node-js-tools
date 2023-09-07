@@ -1,25 +1,30 @@
 {
   "name": "@xmtp/grpc-api-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A GRPC-backed API client for Node.js applications",
   "main": "dist/src/index.js",
   "type": "module",
   "engines": {
     "node": ">=18"
   },
+  "publishConfig": {
+    "access": "restricted"
+  },
   "dependencies": {
+    "@grpc/grpc-js": "^1.9.1",
     "@protobuf-ts/grpc-transport": "^2.9.1",
     "@protobuf-ts/runtime": "^2.9.1",
     "@protobuf-ts/runtime-rpc": "^2.9.1",
-    "@xmtp/proto": "^3.26.0",
-    "@xmtp/xmtp-js": "^11.0.0-beta.2"
+    "@xmtp/proto": "^3.28.0-beta.1",
+    "@xmtp/xmtp-js": "11.0.0-beta.8"
   },
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "yarn build",
     "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1",
     "test": "jest ."
   },
   "author": "XMTP Labs <eng@xmtp.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "yarn@3.6.3"
 }

@@ -1,5 +1,5 @@
 import pino from "pino"
-import { Client, DecodedMessage } from "@xmtp/xmtp-js"
+import { Client, DecodedMessage, Persistence } from "@xmtp/xmtp-js"
 import { EntityManager, ObjectLiteral, EntityTarget } from "typeorm"
 import { AppDataSource } from "./dataSource.js"
 import {
@@ -13,7 +13,7 @@ import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { BotConfig, BotCreateConfig } from "./config.js"
 import { createLogger } from "./logger.js"
 import { Json } from "./types.js"
-import { PostgresPersistence } from "./persistence.js"
+import { FsPersistence, PostgresPersistence } from "./persistence.js"
 import { randomKeys } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
@@ -56,7 +56,7 @@ export default class Bot {
     config: BotCreateConfig,
     datasource: AppDataSource,
   ): Promise<Bot> {
-    const basePersistence = new PostgresPersistence(datasource)
+    const basePersistence = new FsPersistence(`/tmp/${config.name}`)
     const xmtpKeys =
       config.xmtpKeys ||
       (await getOrCreateXmtpKeys(config.name, config.xmtpEnv, basePersistence))
@@ -277,7 +277,7 @@ export default class Bot {
 export async function getOrCreateXmtpKeys(
   name: string,
   env: string,
-  persistence: PostgresPersistence,
+  persistence: Persistence,
 ): Promise<Uint8Array> {
   const key = `xmtp-keys/${env}/${name}`
   const existing = await persistence.getItem(key)

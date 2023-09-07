@@ -1,7 +1,14 @@
 FROM node:18
 
-COPY . /app/
+RUN corepack enable
+
+COPY package.json .yarnrc.yml yarn.lock /app/
 WORKDIR /app
-RUN npm ci
-RUN npm run build -w packages/bot-examples
-CMD ["npm", "run", "start", "-w", "packages/bot-examples"]
+RUN yarn install --immutable
+COPY . /app/
+RUN yarn build
+
+ARG GIT_COMMIT=unknown
+LABEL git_commit=$GIT_COMMIT
+
+CMD ["yarn", "workspace", "@xmtp/bot-examples", "start"]

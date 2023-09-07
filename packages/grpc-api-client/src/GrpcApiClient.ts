@@ -29,6 +29,7 @@ import {
   retry,
   NetworkOptions,
   SubscriptionManager,
+  OnConnectionLostCallback,
 } from "@xmtp/xmtp-js"
 import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
 
@@ -206,6 +207,7 @@ export default class GrpcApiClient implements ApiClient {
   subscribe(
     params: SubscribeParams,
     callback: SubscribeCallback,
+    onConnectionLost: OnConnectionLostCallback,
   ): SubscriptionManager {
     const { contentTopics } = params
     const req = {
@@ -215,6 +217,7 @@ export default class GrpcApiClient implements ApiClient {
     let stream: DuplexStreamingCall<SubscribeRequest, Envelope>
     const doSubscribe = async () => {
       while (true) {
+        const startTime = new Date()
         try {
           stream = this.grpcClient.subscribe2({
             timeout: 1000 * 60 * 60 * 24,
@@ -227,6 +230,10 @@ export default class GrpcApiClient implements ApiClient {
           if (isAbortError(e as RpcError)) {
             return
           }
+          if (new Date().getTime() - startTime.getTime() < 1000) {
+            await sleep(1000)
+          }
+          onConnectionLost?.()
           console.error("stream error", e)
         }
       }
@@ -374,4 +381,8 @@ function isAuthError(err?: Error): boolean {
 
 function isNotAuthError(err?: Error): boolean {
   return !isAuthError(err)
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }

@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/bot-kit-pro",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A database-backed bot framework for running high reliability XMTP bots",
   "main": "dist/src/index.js",
   "type": "module",
@@ -9,11 +9,11 @@
     "migration:generate": "npx typeorm-ts-node-esm migration:generate ./src/migrations/init -d ./src/dataSource.migrations.ts",
     "migration:run": "npx typeorm-ts-node-esm migration:run -d src/dataSource.migrations.ts",
     "up": "./dev/up",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "yarn build",
     "test": "jest ./src"
   },
   "dependencies": {
-    "@xmtp/grpc-api-client": "file:../grpc-api-client",
+    "@xmtp/grpc-api-client": "workspace:*",
     "@xmtp/proto": "^3.27.0",
     "@xmtp/xmtp-js": "^11.0.0-beta.2",
     "ethers": "^6.7.1",
@@ -23,6 +23,9 @@
     "pino-pretty": "^10.2.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.17"
+  },
+  "publishConfig": {
+    "access": "restricted"
   },
   "engines": {
     "node": ">=18"
@@ -45,5 +48,6 @@
   "bugs": {
     "url": "https://github.com/xmtp/bot-tools-js/issues"
   },
-  "homepage": "https://github.com/xmtp/bot-tools-js#readme"
+  "homepage": "https://github.com/xmtp/bot-tools-js#readme",
+  "packageManager": "yarn@3.6.3"
 }
