@@ -1859,7 +1859,7 @@ __metadata:
   dependencies:
     "@xmtp/grpc-api-client": "workspace:*"
     "@xmtp/proto": ^3.27.0
-    "@xmtp/xmtp-js": ^11.0.0-beta.2
+    "@xmtp/xmtp-js": ^11.0.0-beta.8
     ethers: ^6.7.1
     long: ^5.2.3
     pg: ^8.11.1
@@ -1906,7 +1906,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/proto@npm:^3.24.0, @xmtp/proto@npm:^3.27.0":
+"@xmtp/proto@npm:^3.27.0":
   version: 3.27.0
   resolution: "@xmtp/proto@npm:3.27.0"
   dependencies:
@@ -1940,7 +1940,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/xmtp-js@npm:11.0.0-beta.8":
+"@xmtp/xmtp-js@npm:11.0.0-beta.8, @xmtp/xmtp-js@npm:^11.0.0-beta.8":
   version: 11.0.0-beta.8
   resolution: "@xmtp/xmtp-js@npm:11.0.0-beta.8"
   dependencies:
@@ -1951,20 +1951,6 @@ __metadata:
     ethers: ^5.5.3
     long: ^5.2.0
   checksum: 2b2f1c1e7cd5aa202246a57728ea40024056a63ba1bceaa07bc5a9e5ab6d7308ebadbc64baaa730a43d5160f90173651f774eb89b86ca8e23088446eadc72f8a
-  languageName: node
-  linkType: hard
-
-"@xmtp/xmtp-js@npm:^11.0.0-beta.2":
-  version: 11.0.0-beta.2
-  resolution: "@xmtp/xmtp-js@npm:11.0.0-beta.2"
-  dependencies:
-    "@noble/secp256k1": ^1.5.2
-    "@xmtp/proto": ^3.24.0
-    async-mutex: ^0.4.0
-    elliptic: ^6.5.4
-    ethers: ^5.5.3
-    long: ^5.2.0
-  checksum: 53b88c070ed093b759149bef0f926e8fca6fa77240fd5ff8aff3412efc884192134504726b2cdc3caf605ef65ae6fdf798927068da0eac3502202924f1299d41
   languageName: node
   linkType: hard
 
