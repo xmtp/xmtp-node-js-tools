@@ -1,9 +1,11 @@
 import "reflect-metadata"
+
 import { DataSource } from "typeorm"
-import { InboundMessage, Reply } from "./models/Message.js"
-import { KeyValue } from "./models/KeyValue.js"
-import { Conversation } from "./models/Conversation.js"
+
 import { Bot } from "./models/Bot.js"
+import { Conversation } from "./models/Conversation.js"
+import { KeyValue } from "./models/KeyValue.js"
+import { InboundMessage, Reply } from "./models/Message.js"
 import { getEnvOrDefault } from "./utils.js"
 
 // Only used for generating and running migrations from the CLI where there is no app config required

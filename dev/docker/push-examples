@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+set -e
+
+DOCKER_IMAGE_TAG="${DOCKER_IMAGE_TAG:-dev}"
+DOCKER_IMAGE_NAME="${DOCKER_IMAGE_NAME:-xmtp/bot-examples}"
+GIT_COMMIT="$(git rev-parse HEAD)"
+TAG="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+
+docker build \
+    --tag $TAG \
+    --build-arg="GIT_COMMIT=${GIT_COMMIT}" \
+    -f dev/docker/examples.Dockerfile \
+    -q \
+    .
+
+docker push -q $TAG

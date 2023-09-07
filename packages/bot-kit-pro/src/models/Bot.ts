@@ -1,14 +1,15 @@
 import {
+  Column,
   Entity,
   OneToMany,
-  Repository,
   PrimaryColumn,
   Relation,
-  Column,
+  Repository,
 } from "typeorm"
-import { InboundMessage, Reply } from "./Message.js"
-import { Conversation } from "./Conversation.js"
+
 import { Json } from "../types.js"
+import { Conversation } from "./Conversation.js"
+import { InboundMessage, Reply } from "./Message.js"
 
 @Entity()
 export class Bot {

@@ -1,19 +1,21 @@
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
+import { Client, DecodedMessage, Persistence } from "@xmtp/xmtp-js"
 import pino from "pino"
-import { Client, DecodedMessage } from "@xmtp/xmtp-js"
-import { EntityManager, ObjectLiteral, EntityTarget } from "typeorm"
+import { EntityManager, EntityTarget, ObjectLiteral } from "typeorm"
+
+import { BotConfig, BotCreateConfig } from "./config.js"
+import HandlerContext from "./context.js"
 import { AppDataSource } from "./dataSource.js"
+import { createLogger } from "./logger.js"
+import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import {
   Conversation,
   findOrCreateConversation,
 } from "./models/Conversation.js"
-import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
-import HandlerContext from "./context.js"
-import { GrpcApiClient } from "@xmtp/grpc-api-client"
-import { BotConfig } from "./config.js"
-import { createLogger } from "./logger.js"
-import { Json } from "./types.js"
 import { PostgresPersistence } from "./persistence.js"
+import { Json } from "./types.js"
+import { randomKeys } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
 
@@ -52,13 +54,17 @@ export default class Bot {
   }
 
   static async create(
-    config: Required<BotConfig>,
+    config: BotCreateConfig,
     datasource: AppDataSource,
   ): Promise<Bot> {
+    const basePersistence = new PostgresPersistence(datasource)
+    const xmtpKeys =
+      config.xmtpKeys ||
+      (await getOrCreateXmtpKeys(config.name, config.xmtpEnv, basePersistence))
     const client = await Client.create(null, {
       env: config.xmtpEnv,
-      privateKeyOverride: config.xmtpKeys,
-      basePersistence: new PostgresPersistence(datasource),
+      privateKeyOverride: xmtpKeys,
+      basePersistence,
       disablePersistenceEncryption: true,
       apiClientFactory: GrpcApiClient.fromOptions,
     })
@@ -68,7 +74,10 @@ export default class Bot {
       throw new Error("Bot not found")
     }
 
-    return new Bot(config.name, client, datasource, botRecord, config)
+    return new Bot(config.name, client, datasource, botRecord, {
+      ...config,
+      xmtpKeys,
+    })
   }
 
   private getRepository<T extends ObjectLiteral>(entity: EntityTarget<T>) {
@@ -264,4 +273,19 @@ export default class Bot {
   private isExpired(message: DecodedMessage) {
     return message.sent.getTime() + this.config.messageExpiryMs < Date.now()
   }
+}
+
+export async function getOrCreateXmtpKeys(
+  name: string,
+  env: string,
+  persistence: Persistence,
+): Promise<Uint8Array> {
+  const key = `xmtp-keys/${env}/${name}`
+  const existing = await persistence.getItem(key)
+  if (existing) {
+    return existing
+  }
+  const newKeys = await randomKeys()
+  await persistence.setItem(key, newKeys)
+  return newKeys
 }

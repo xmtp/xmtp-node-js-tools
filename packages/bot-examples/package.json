@@ -4,17 +4,20 @@
   "description": "Example bots using the @xmtp/bot-kit-pro package",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "node dist/index.js",
-    "predev": "npm run build",
+    "predev": "yarn build",
     "start": "node dist/index.js",
     "test": "echo no tests yet"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@xmtp/bot-kit-pro": "file:../bot-kit-pro",
+    "@xmtp/bot-kit-pro": "workspace:*",
     "openai": "^4.0.1"
   }
 }

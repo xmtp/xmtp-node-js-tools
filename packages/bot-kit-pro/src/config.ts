@@ -5,21 +5,22 @@ const DEFAULT_XMTP_ENV = "dev"
 const DEFAULT_MESSAGE_EXPIRY_MS = 1000 * 60 * 30 // 30 minutes
 
 export type BotConfig = {
-  xmtpKeys: Uint8Array
+  xmtpKeys?: Uint8Array
   name: string
   xmtpEnv?: "dev" | "production" | "local"
   handler: BotHandler
   messageExpiryMs?: number
 }
 
+export type BotCreateConfig = Required<Omit<BotConfig, "xmtpKeys">> & {
+  xmtpKeys?: Uint8Array
+}
+
 export function newBotConfig(
   name: string,
   cfg: Omit<BotConfig, "handler" | "name">,
   handler: BotHandler,
-): Required<BotConfig> {
-  if (!cfg.xmtpKeys) {
-    throw new Error("Missing XMTP keys")
-  }
+): BotCreateConfig {
   if (!name) {
     throw new Error("Missing bot name")
   }
@@ -30,7 +31,7 @@ export function newBotConfig(
   })
 }
 
-export function applyBotDefaults(config: BotConfig): Required<BotConfig> {
+export function applyBotDefaults(config: BotConfig): BotCreateConfig {
   return {
     xmtpEnv: DEFAULT_XMTP_ENV,
     messageExpiryMs: DEFAULT_MESSAGE_EXPIRY_MS,

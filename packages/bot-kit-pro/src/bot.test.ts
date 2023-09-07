@@ -1,12 +1,14 @@
-import { Client } from "@xmtp/xmtp-js"
-import Bot, { BotHandler } from "./bot.js"
-import { newAppConfig, newBotConfig } from "./config.js"
-import { Wallet } from "ethers"
-import { randomBytes } from "crypto"
-import { buildDataSource } from "./dataSource.js"
-import { InboundMessage } from "./models/Message.js"
-import { Conversation } from "./models/Conversation.js"
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
+import { Client } from "@xmtp/xmtp-js"
+import { randomBytes } from "crypto"
+import { Wallet } from "ethers"
+
+import Bot, { BotHandler, getOrCreateXmtpKeys } from "./bot.js"
+import { newAppConfig, newBotConfig } from "./config.js"
+import { buildDataSource } from "./dataSource.js"
+import { Conversation } from "./models/Conversation.js"
+import { InboundMessage } from "./models/Message.js"
+import { PostgresPersistence } from "./persistence.js"
 
 describe("Bot", () => {
   let keys: Uint8Array
@@ -92,5 +94,16 @@ describe("Bot", () => {
     })
     expect(dbConvo).toBeDefined()
     expect(dbConvo.state.foo).toEqual("bar")
+  })
+
+  it("can load keys from the DB", async () => {
+    const persistence = new PostgresPersistence(dataSource)
+    const botName = randomBytes(32).toString("hex")
+    const initialKeys = await getOrCreateXmtpKeys(botName, "dev", persistence)
+    expect(initialKeys).toBeInstanceOf(Uint8Array)
+
+    const retrievedKeys = await getOrCreateXmtpKeys(botName, "dev", persistence)
+    expect(retrievedKeys).toBeInstanceOf(Uint8Array)
+    expect([...retrievedKeys]).toEqual([...initialKeys])
   })
 })

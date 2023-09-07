@@ -1,7 +1,25 @@
-import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
-import { GrpcTransport } from "@protobuf-ts/grpc-transport"
-import { messageApi } from "@xmtp/proto"
 import { credentials } from "@grpc/grpc-js"
+import { GrpcTransport } from "@protobuf-ts/grpc-transport"
+import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
+import { messageApi } from "@xmtp/proto"
+import {
+  ApiClient,
+  AuthCache,
+  Authenticator,
+  NetworkOptions,
+  OnConnectionLostCallback,
+  PublishParams,
+  Query,
+  QueryAllOptions,
+  QueryParams,
+  QueryStreamOptions,
+  retry,
+  SubscribeCallback,
+  SubscribeParams,
+  SubscriptionManager,
+} from "@xmtp/xmtp-js"
+
+import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
 import {
   BatchQueryRequest,
   BatchQueryResponse,
@@ -15,22 +33,6 @@ import {
   SortDirection,
   SubscribeRequest,
 } from "./gen/message_api/v1/message_api.js"
-import {
-  PublishParams,
-  SubscribeParams,
-  QueryParams,
-  QueryAllOptions,
-  QueryStreamOptions,
-  Query,
-  SubscribeCallback,
-  ApiClient,
-  Authenticator,
-  AuthCache,
-  retry,
-  NetworkOptions,
-  SubscriptionManager,
-} from "@xmtp/xmtp-js"
-import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
 
 const API_URLS: { [k: string]: string } = {
   dev: "dev.xmtp.network:5556",
@@ -206,6 +208,7 @@ export default class GrpcApiClient implements ApiClient {
   subscribe(
     params: SubscribeParams,
     callback: SubscribeCallback,
+    onConnectionLost: OnConnectionLostCallback,
   ): SubscriptionManager {
     const { contentTopics } = params
     const req = {
@@ -215,6 +218,7 @@ export default class GrpcApiClient implements ApiClient {
     let stream: DuplexStreamingCall<SubscribeRequest, Envelope>
     const doSubscribe = async () => {
       while (true) {
+        const startTime = new Date()
         try {
           stream = this.grpcClient.subscribe2({
             timeout: 1000 * 60 * 60 * 24,
@@ -227,6 +231,10 @@ export default class GrpcApiClient implements ApiClient {
           if (isAbortError(e as RpcError)) {
             return
           }
+          if (new Date().getTime() - startTime.getTime() < 1000) {
+            await sleep(1000)
+          }
+          onConnectionLost?.()
           console.error("stream error", e)
         }
       }
@@ -374,4 +382,8 @@ function isAuthError(err?: Error): boolean {
 
 function isNotAuthError(err?: Error): boolean {
   return !isAuthError(err)
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }

@@ -1,4 +1,5 @@
 import { DecodedMessage, SendOptions } from "@xmtp/xmtp-js"
+
 import { Json } from "./types.js"
 
 type PreparedReply = {
@@ -12,6 +13,8 @@ export default class HandlerContext<ConversationState = Json, BotState = Json> {
   conversationState: ConversationState
   botState: BotState
   preparedReplies: PreparedReply[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reply: (content: any, options?: SendOptions) => void
 
   constructor(
     message: DecodedMessage,
@@ -22,10 +25,9 @@ export default class HandlerContext<ConversationState = Json, BotState = Json> {
     this.conversationState = conversationState
     this.botState = botState
     this.preparedReplies = []
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reply(content: any, options?: SendOptions) {
-    this.preparedReplies.push({ content, options })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.reply = (content: any, options?: SendOptions) => {
+      this.preparedReplies.push({ content, options })
+    }
   }
 }

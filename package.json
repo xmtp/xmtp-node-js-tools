@@ -2,14 +2,18 @@
   "name": "@xmtp/bot-tools",
   "version": "1.0.0",
   "description": "A collection of tools for running high quality bots in Node.js",
-  "private": "true",
+  "private": true,
   "scripts": {
     "lint": "eslint .",
-    "build": "npm run build:grpc && npm run build:botkit && npm run build:examples",
-    "build:grpc": "npm run build -w packages/grpc-api-client",
-    "build:botkit": "npm run build -w packages/bot-kit-pro",
-    "build:examples": "npm run build -w packages/bot-examples",
-    "test": "npm run test --workspaces"
+    "lint:fix": "eslint --fix .",
+    "build": "yarn build:grpc && yarn build:botkit && yarn build:examples",
+    "build:grpc": "yarn workspace @xmtp/grpc-api-client build",
+    "build:botkit": "yarn workspace @xmtp/bot-kit-pro build",
+    "build:examples": "yarn workspace @xmtp/bot-examples build",
+    "test:grpc": "yarn workspace @xmtp/grpc-api-client test",
+    "test:botkit": "yarn workspace @xmtp/bot-kit-pro test",
+    "test:examples": "yarn workspace @xmtp/bot-examples test",
+    "test": "yarn test:grpc && yarn test:botkit && yarn test:examples"
   },
   "repository": {
     "type": "git",
@@ -21,32 +25,37 @@
     "node",
     "messaging"
   ],
-  "author": "Nicholas Molnar",
+  "author": "XMTP Engineering <eng@xmtp.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xmtp/bot-tools-js/issues"
+    "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
-  "homepage": "https://github.com/xmtp/bot-tools-js#readme",
+  "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
   "workspaces": [
-    "packages/bot-kit-pro",
-    "packages/grpc-api-client",
-    "packages/bot-examples"
+    "packages/*"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.3",
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "jest": "^29.5.0",
     "prettier": "^3.0.2",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }

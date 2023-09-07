@@ -1,16 +1,17 @@
+import { DecodedMessage } from "@xmtp/xmtp-js"
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
+  Index,
   ManyToOne,
   OneToMany,
-  RelationId,
+  PrimaryGeneratedColumn,
   Relation,
-  Index,
+  RelationId,
 } from "typeorm"
+
 import { Bot } from "./Bot.js"
 import { Conversation } from "./Conversation.js"
-import { DecodedMessage } from "@xmtp/xmtp-js"
 
 export enum MessageStatus {
   Unprocessed = "unprocessed",
