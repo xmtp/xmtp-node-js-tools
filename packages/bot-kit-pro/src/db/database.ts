@@ -3,7 +3,6 @@ import { migrate } from "drizzle-orm/postgres-js/migrator"
 import postgres from "postgres"
 
 import { AppConfig } from "../config.js"
-import { DB } from "./types.js"
 
 // Convert Postgres config into a connections string
 export function buildConnectionString(dbConfig: AppConfig["db"]) {
