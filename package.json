@@ -10,7 +10,10 @@
     "build:grpc": "yarn workspace @xmtp/grpc-api-client build",
     "build:botkit": "yarn workspace @xmtp/bot-kit-pro build",
     "build:examples": "yarn workspace @xmtp/bot-examples build",
-    "test": "yarn workspaces run test"
+    "test:grpc": "yarn workspace @xmtp/grpc-api-client test",
+    "test:botkit": "yarn workspace @xmtp/bot-kit-pro test",
+    "test:examples": "yarn workspace @xmtp/bot-examples test",
+    "test": "yarn test:grpc && yarn test:botkit && yarn test:examples"
   },
   "repository": {
     "type": "git",
