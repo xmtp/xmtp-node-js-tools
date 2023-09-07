@@ -31,15 +31,15 @@ jobs:
           echo Successfully pushed $IMAGE_TO_DEPLOY
           echo "docker_image=${IMAGE_TO_DEPLOY}" >> $GITHUB_OUTPUT
 
-      - name: Deploy (dev)
-        uses: xmtp-labs/terraform-deployer@v1
-        with:
-          terraform-token: ${{ secrets.TERRAFORM_TOKEN }}
-          terraform-org: xmtp
-          terraform-workspace: dev
-          variable-name: bot_examples_image
-          variable-value: ${{ steps.push.outputs.docker_image }}
-          variable-value-required-prefix: "xmtp/bot-examples@sha256:"
+      # - name: Deploy (dev)
+      #   uses: xmtp-labs/terraform-deployer@v1
+      #   with:
+      #     terraform-token: ${{ secrets.TERRAFORM_TOKEN }}
+      #     terraform-org: xmtp
+      #     terraform-workspace: dev
+      #     variable-name: bot_examples_image
+      #     variable-value: ${{ steps.push.outputs.docker_image }}
+      #     variable-value-required-prefix: "xmtp/bot-examples@sha256:"
 
     #   - name: Deploy (production)
     #     uses: xmtp-labs/terraform-deployer@v1
