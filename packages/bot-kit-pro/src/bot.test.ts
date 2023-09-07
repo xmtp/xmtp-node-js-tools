@@ -3,6 +3,7 @@ import { Client } from "@xmtp/xmtp-js"
 import { randomBytes } from "crypto"
 import { eq } from "drizzle-orm"
 import { Wallet } from "ethers"
+import postgres from "postgres"
 
 import Bot, { BotHandler, getOrCreateXmtpKeys } from "./bot.js"
 import { newAppConfig, newBotConfig } from "./config.js"
@@ -15,11 +16,18 @@ import { PostgresPersistence } from "./persistence.js"
 describe("Bot", () => {
   let keys: Uint8Array
   let dataSource: DB
+  let dbConnection: postgres.Sql
 
   beforeAll(async () => {
     const appConfig = newAppConfig({})
     await doMigrations(appConfig.db)
-    dataSource = await buildDrizzle(appConfig.db)
+    const { db, conn } = await buildDrizzle(appConfig.db)
+    dataSource = db
+    dbConnection = conn
+  })
+
+  afterAll(async () => {
+    await dbConnection.end()
   })
 
   beforeEach(async () => {

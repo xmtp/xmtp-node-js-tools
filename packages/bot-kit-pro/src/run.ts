@@ -7,11 +7,11 @@ export default async function (
   appConfig: PartialAppConfig = {},
 ) {
   const appliedAppConfig = newAppConfig(appConfig)
-  const datasource = await buildDrizzle(appliedAppConfig.db)
+  const { db, conn } = await buildDrizzle(appliedAppConfig.db)
 
   const bots: Bot[] = []
   for (const botConfig of botConfigs) {
-    const bot = await Bot.create(botConfig, datasource)
+    const bot = await Bot.create(botConfig, db)
     bots.push(bot)
     bot.start()
   }
@@ -21,6 +21,7 @@ export default async function (
       for (const bot of bots) {
         await bot.stop()
       }
+      await conn.end()
     },
   }
 }
