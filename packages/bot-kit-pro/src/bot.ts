@@ -13,7 +13,7 @@ import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { BotConfig, BotCreateConfig } from "./config.js"
 import { createLogger } from "./logger.js"
 import { Json } from "./types.js"
-import { FsPersistence, PostgresPersistence } from "./persistence.js"
+import { PostgresPersistence } from "./persistence.js"
 import { randomKeys } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
@@ -56,7 +56,7 @@ export default class Bot {
     config: BotCreateConfig,
     datasource: AppDataSource,
   ): Promise<Bot> {
-    const basePersistence = new FsPersistence(`/tmp/${config.name}`)
+    const basePersistence = new PostgresPersistence(datasource)
     const xmtpKeys =
       config.xmtpKeys ||
       (await getOrCreateXmtpKeys(config.name, config.xmtpEnv, basePersistence))
