@@ -15,7 +15,6 @@ module.exports = {
     ecmaVersion: 2020,
   },
   env: {
-    "jest/globals": true,
     es6: true,
     node: true,
   },
@@ -27,7 +26,7 @@ module.exports = {
   plugins: [
     "@typescript-eslint",
     "prettier",
-    "jest",
+    "vitest",
     "promise",
     "simple-import-sort",
   ],

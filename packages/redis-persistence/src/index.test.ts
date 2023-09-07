@@ -1,5 +1,6 @@
 import { createClient, RedisClientType } from "@redis/client"
 import { randomBytes } from "crypto"
+import { beforeAll, beforeEach, describe, expect, it } from "vitest"
 
 import { RedisPersistence } from "."
 
@@ -12,15 +13,15 @@ describe("RedisPersistence", () => {
       url: "redis://localhost:6379",
     })
     await redis.connect()
+
+    return async () => {
+      await redis.disconnect()
+    }
   })
 
   beforeEach(() => {
     keyPrefix = randomKey()
     persistence = new RedisPersistence(redis, keyPrefix)
-  })
-
-  afterAll(async () => {
-    await redis.disconnect()
   })
 
   it("can write to a key", async () => {
