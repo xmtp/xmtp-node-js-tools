@@ -14,21 +14,24 @@ export async function buildDrizzle(dbConfig: AppConfig["db"]) {
 
   return {
     db: drizzle(queryClient),
-    conn: queryClient,
+    connection: queryClient,
   }
 }
 
 // Create a database instance, but with the max number of connections set to 1
 export async function buildMigrator(dbConfig: AppConfig["db"]) {
-  const migrationClient = postgres(buildConnectionString(dbConfig), { max: 1 })
+  const migrationClient = postgres(buildConnectionString(dbConfig), {
+    max: 1,
+    onnotice: () => {},
+  })
   return {
-    migrator: drizzle(migrationClient),
-    db: migrationClient,
+    db: drizzle(migrationClient),
+    connection: migrationClient,
   }
 }
 
 export async function doMigrations(dbConfig: AppConfig["db"]) {
-  const { migrator, db } = await buildMigrator(dbConfig)
-  await migrate(migrator, { migrationsFolder: "./src/migrations" })
-  await db.end()
+  const { connection, db } = await buildMigrator(dbConfig)
+  await migrate(db, { migrationsFolder: "./src/migrations" })
+  await connection.end()
 }

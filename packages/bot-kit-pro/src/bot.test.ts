@@ -21,9 +21,9 @@ describe("Bot", () => {
   beforeAll(async () => {
     const appConfig = newAppConfig({})
     await doMigrations(appConfig.db)
-    const { db, conn } = await buildDrizzle(appConfig.db)
+    const { db, connection } = await buildDrizzle(appConfig.db)
     dataSource = db
-    dbConnection = conn
+    dbConnection = connection
   })
 
   afterAll(async () => {

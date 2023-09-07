@@ -12,7 +12,7 @@ describe("persistence", () => {
   beforeAll(async () => {
     const appConfig = newAppConfig({})
     await doMigrations(appConfig.db)
-    const { db, conn: connection } = await buildDrizzle(appConfig.db)
+    const { db, connection } = await buildDrizzle(appConfig.db)
     dbConnection = connection
     persistence = new PostgresPersistence(db)
   })
