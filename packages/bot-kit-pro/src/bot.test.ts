@@ -1,21 +1,25 @@
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { Client } from "@xmtp/xmtp-js"
 import { randomBytes } from "crypto"
+import { eq } from "drizzle-orm"
 import { Wallet } from "ethers"
 
 import Bot, { BotHandler, getOrCreateXmtpKeys } from "./bot.js"
 import { newAppConfig, newBotConfig } from "./config.js"
-import { buildDataSource } from "./dataSource.js"
-import { Conversation } from "./models/Conversation.js"
-import { InboundMessage } from "./models/Message.js"
+import { buildDrizzle, doMigrations } from "./db/database.js"
+import { findMostRecentMessage } from "./db/operations.js"
+import { conversations, messages } from "./db/schema.js"
+import { DB } from "./db/types.js"
 import { PostgresPersistence } from "./persistence.js"
 
 describe("Bot", () => {
   let keys: Uint8Array
-  let dataSource: ReturnType<typeof buildDataSource>
+  let dataSource: DB
 
   beforeAll(async () => {
-    dataSource = await buildDataSource(newAppConfig({})).initialize()
+    const appConfig = newAppConfig({})
+    await doMigrations(appConfig.db)
+    dataSource = await buildDrizzle(appConfig.db)
   })
 
   beforeEach(async () => {
@@ -43,7 +47,7 @@ describe("Bot", () => {
 
     const bot = await Bot.create(config, dataSource)
     expect(bot).toBeDefined()
-    expect(bot.botRecord.id).toEqual(config.name)
+    expect(bot.name).toEqual(config.name)
   })
 
   it("can save a message", async () => {
@@ -57,10 +61,11 @@ describe("Bot", () => {
     )
     const message = await convo.send("hello world")
     await bot.saveMessage(message)
-    const messages = await bot.db.getRepository(InboundMessage).find({
-      where: { bot: { id: bot.botRecord.id } },
-    })
-    expect(messages).toHaveLength(1)
+    const dbMessages = await bot.db
+      .select()
+      .from(messages)
+      .where(eq(messages.botId, bot.name))
+    expect(dbMessages).toHaveLength(1)
   })
 
   it("can handle messages", async () => {
@@ -79,21 +84,25 @@ describe("Bot", () => {
     const msg = await convo.send("hello world")
     await bot.client.conversations.list()
     await bot.saveMessage(msg)
-    await bot.db.transaction(async (manager) => {
-      const dbMessage = await manager.findOneOrFail(InboundMessage, {
-        where: { messageId: msg.id },
-      })
-      await bot.processMessage(manager, dbMessage)
+    await bot.db.transaction(async (tx) => {
+      const dbMessage = await findMostRecentMessage(tx, msg.conversation.topic)
+      if (!dbMessage) {
+        throw new Error("message not found")
+      }
+      await bot.processMessage(tx, dbMessage)
     })
 
     const messages = await convo.messages()
     expect(messages).toHaveLength(2)
 
-    const dbConvo = await bot.db.getRepository(Conversation).findOneOrFail({
-      where: { topic: convo.topic },
-    })
-    expect(dbConvo).toBeDefined()
-    expect(dbConvo.state.foo).toEqual("bar")
+    const dbConvos = await bot.db
+      .select()
+      .from(conversations)
+      .where(eq(conversations.topic, convo.topic))
+      .limit(1)
+    expect(dbConvos).toHaveLength(1)
+    expect(dbConvos[0]).toBeDefined()
+    expect(dbConvos[0].state.foo).toEqual("bar")
   })
 
   it("can load keys from the DB", async () => {

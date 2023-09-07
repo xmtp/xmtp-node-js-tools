@@ -12,4 +12,3 @@ if ! which docker-compose &>/dev/null; then
 fi
 
 docker-compose up -d
-yarn migration:run

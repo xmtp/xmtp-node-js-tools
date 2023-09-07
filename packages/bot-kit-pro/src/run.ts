@@ -1,16 +1,13 @@
-import "reflect-metadata"
-
 import Bot from "./bot.js"
 import { BotCreateConfig, newAppConfig, PartialAppConfig } from "./config.js"
-import { buildDataSource } from "./dataSource.js"
+import { buildDrizzle } from "./db/database.js"
 
 export default async function (
   botConfigs: BotCreateConfig[],
   appConfig: PartialAppConfig = {},
 ) {
-  const appDataSource = buildDataSource(newAppConfig(appConfig))
-  const datasource = await appDataSource.initialize()
-  await datasource.runMigrations()
+  const appliedAppConfig = newAppConfig(appConfig)
+  const datasource = await buildDrizzle(appliedAppConfig.db)
 
   const bots: Bot[] = []
   for (const botConfig of botConfigs) {

@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto"
 
 import { newAppConfig } from "./config"
-import { buildDataSource } from "./dataSource"
+import { buildDrizzle, doMigrations } from "./db/database"
 import { FsPersistence, PostgresPersistence } from "./persistence"
 import { randomKeys } from "./utils"
 
@@ -9,9 +9,9 @@ describe("persistence", () => {
   let persistence: PostgresPersistence
 
   beforeAll(async () => {
-    persistence = new PostgresPersistence(
-      await buildDataSource(newAppConfig({})).initialize(),
-    )
+    const appConfig = newAppConfig({})
+    await doMigrations(appConfig.db)
+    persistence = new PostgresPersistence(await buildDrizzle(appConfig.db))
   })
 
   it("allows setting and retrieving values", async () => {

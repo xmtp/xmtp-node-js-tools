@@ -1,18 +1,25 @@
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { Client, DecodedMessage, Persistence } from "@xmtp/xmtp-js"
+import { PostgresJsDatabase } from "drizzle-orm/postgres-js"
 import pino from "pino"
-import { EntityManager, EntityTarget, ObjectLiteral } from "typeorm"
 
 import { BotConfig, BotCreateConfig } from "./config.js"
 import HandlerContext from "./context.js"
-import { AppDataSource } from "./dataSource.js"
-import { createLogger } from "./logger.js"
-import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import {
-  Conversation,
+  findMostRecentMessage,
+  findOrCreateBot,
   findOrCreateConversation,
-} from "./models/Conversation.js"
-import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
+  findUnprocessedMessages,
+  getAndLockBot,
+  getAndLockConversation,
+  insertMessage,
+  setBotState,
+  setConversationState,
+  setMessageNumRetries,
+  setMessageStatus,
+} from "./db/operations.js"
+import { DB, Message as DBMessage } from "./db/types.js"
+import { createLogger } from "./logger.js"
 import { PostgresPersistence } from "./persistence.js"
 import { Json } from "./types.js"
 import { randomKeys } from "./utils.js"
@@ -22,8 +29,7 @@ export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
 export default class Bot {
   name: string
   client: Client
-  db: AppDataSource
-  botRecord: BotDB
+  db: PostgresJsDatabase
   handler: BotHandler
   stream?: AsyncGenerator<DecodedMessage>
   logger: pino.Logger
@@ -32,21 +38,19 @@ export default class Bot {
   constructor(
     name: string,
     client: Client,
-    db: AppDataSource,
-    botRecord: BotDB,
+    db: PostgresJsDatabase,
     config: Required<BotConfig>,
   ) {
     this.name = name
     this.client = client
     this.db = db
-    this.botRecord = botRecord
     this.handler = config.handler
     this.config = config
     this.logger = createLogger(
       // Always use JSON logging when NODE_ENV is production
       process.env.NODE_ENV === "production",
       "info",
-      this.botRecord.id,
+      name,
       {
         walletAddress: this.client.address,
       },
@@ -55,7 +59,7 @@ export default class Bot {
 
   static async create(
     config: BotCreateConfig,
-    datasource: AppDataSource,
+    datasource: PostgresJsDatabase,
   ): Promise<Bot> {
     const basePersistence = new PostgresPersistence(datasource)
     const xmtpKeys =
@@ -68,97 +72,60 @@ export default class Bot {
       disablePersistenceEncryption: true,
       apiClientFactory: GrpcApiClient.fromOptions,
     })
-    const repo = datasource.getRepository(BotDB)
-    const botRecord = await findOrCreateBot(repo, config.name)
-    if (!botRecord) {
-      throw new Error("Bot not found")
-    }
+    await findOrCreateBot(datasource, config.name)
 
-    return new Bot(config.name, client, datasource, botRecord, {
+    return new Bot(config.name, client, datasource, {
       ...config,
       xmtpKeys,
     })
   }
 
-  private getRepository<T extends ObjectLiteral>(entity: EntityTarget<T>) {
-    return this.db.getRepository(entity)
-  }
-
   async saveMessage(message: DecodedMessage) {
     const dbConvo = await findOrCreateConversation(
-      this.getRepository(Conversation),
+      this.db,
       message.conversation.peerAddress,
       message.conversation.topic,
-      this.botRecord.id,
+      this.name,
     )
 
-    const dbMessage = await this.getRepository(InboundMessage)
-      .createQueryBuilder()
-      .insert()
-      .values({
-        messageId: message.id,
-        contents: Buffer.from(message.toBytes()),
-        bot: this.botRecord,
-        conversation: dbConvo,
-        numRetries: 0,
-        timestamp: message.sent,
-      })
-      .orIgnore()
-      .execute()
+    const dbMessage = await insertMessage(
+      this.db,
+      message,
+      this.name,
+      dbConvo.id,
+      "unprocessed",
+      null,
+    )
 
     return {
       dbConvoId: dbConvo.id,
-      dbMessageId: dbMessage.identifiers[0]?.id,
+      dbMessageId: dbMessage.id,
       xmtpMessage: message,
     }
   }
 
   async processMessages() {
-    await this.db.transaction(async (parentEntityManager) => {
-      const messages = await parentEntityManager
-        .getRepository(InboundMessage)
-        .createQueryBuilder("msg")
-        .setLock("pessimistic_write")
-        .where("msg.status = :status", { status: MessageStatus.Unprocessed })
-        .andWhere("msg.numRetries < :maxRetries", { maxRetries: 3 })
-        .andWhere("msg.botId = :id", { id: this.botRecord.id })
-        .orderBy("msg.timestamp", "ASC")
-        .getMany()
+    await this.db.transaction(async (tx) => {
+      const messages = await findUnprocessedMessages(tx, this.name, 3)
 
       for (const message of messages) {
-        await this.processMessage(parentEntityManager, message)
+        await this.processMessage(tx, message)
       }
     })
   }
 
-  async processMessage(
-    parentEntityManager: EntityManager,
-    message: InboundMessage,
-  ) {
-    await parentEntityManager.transaction(async (entityManager) => {
-      const bot = await entityManager
-        .getRepository(BotDB)
-        .createQueryBuilder("bot")
-        .setLock("pessimistic_write")
-        .where("bot.id = :id", { id: this.botRecord.id })
-        .getOneOrFail()
+  async processMessage(parentTx: DB, message: DBMessage) {
+    await parentTx.transaction(async (tx) => {
+      const bot = await getAndLockBot(tx, message.botId)
 
-      const dbConvo = await entityManager
-        .getRepository(Conversation)
-        .createQueryBuilder("convo")
-        .setLock("pessimistic_write")
-        .where("convo.id = :id", { id: message.conversationId })
-        .getOneOrFail()
+      const dbConvo = await getAndLockConversation(tx, message.conversationId)
 
       const xmtpMessage = await DecodedMessage.fromBytes(
         message.contents,
         this.client,
       )
       if (this.isExpired(xmtpMessage)) {
-        await entityManager.update(InboundMessage, message.id, {
-          status: MessageStatus.Expired,
-        })
-        return
+        return await setMessageStatus(tx, message.id, "expired")
       }
 
       const ctx = new HandlerContext(xmtpMessage, dbConvo.state, bot.state)
@@ -166,10 +133,11 @@ export default class Bot {
         await this.handler(ctx)
       } catch (err) {
         this.logger.error(err)
-        await entityManager.update(InboundMessage, message.id, {
-          numRetries: message.numRetries + 1,
-        })
-        return
+        return await setMessageNumRetries(
+          tx,
+          message.id,
+          message.numRetries + 1,
+        )
       }
 
       this.logger.info(
@@ -177,39 +145,30 @@ export default class Bot {
           ctx.conversationState,
         )}\nbot state: ${JSON.stringify(ctx.botState)}`,
       )
-      await entityManager.update(Conversation, dbConvo.id, {
-        state: ctx.conversationState,
-      })
-      await entityManager.update(BotDB, bot.id, {
-        state: ctx.botState,
-      })
+
+      await setConversationState(tx, dbConvo.id, ctx.conversationState)
+      await setBotState(tx, bot.id, ctx.botState)
 
       for (const reply of ctx.preparedReplies) {
         const sentMessage = await xmtpMessage.conversation.send(
           reply.content,
           reply.options,
         )
-        const dbReply = Reply.fromXmtpMessage(
+        await insertMessage(
+          tx,
           sentMessage,
-          message,
-          message.bot,
-          dbConvo,
+          this.name,
+          dbConvo.id,
+          "reply",
+          message.id,
         )
-        await entityManager.insert(Reply, dbReply)
       }
-      await entityManager.update(InboundMessage, message.id, {
-        status: MessageStatus.Success,
-      })
+      await setMessageStatus(tx, message.id, "processed")
     })
   }
 
   private async mostRecentMessage(topic: string): Promise<Date | null> {
-    const msg = await this.getRepository(InboundMessage)
-      .createQueryBuilder("mostRecent")
-      .innerJoin("mostRecent.conversation", "convo")
-      .where("convo.topic = :topic", { topic })
-      .orderBy("mostRecent.timestamp", "DESC")
-      .getOne()
+    const msg = await findMostRecentMessage(this.db, topic)
 
     if (!msg) {
       return null
@@ -246,7 +205,7 @@ export default class Bot {
 
   async start() {
     this.logger.info(
-      `Starting bot ${this.botRecord.id} with address ${this.client.address}`,
+      `Starting bot ${this.name} with address ${this.client.address}`,
     )
     this.stream = await this.client.conversations.streamAllMessages()
     await this.initialize()
