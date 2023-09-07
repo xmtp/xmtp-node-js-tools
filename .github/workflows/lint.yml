@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint
+      - name: Install Yarn v3
+        run: |
+          corepack enable
+          corepack prepare yarn@3.6.3 --activate
+      - run: yarn
+      - run: yarn build
+      - run: yarn lint
