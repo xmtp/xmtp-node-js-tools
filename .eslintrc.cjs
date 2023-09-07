@@ -21,8 +21,16 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
   },
-  plugins: ["@typescript-eslint", "prettier", "jest", "promise"],
+  plugins: [
+    "@typescript-eslint",
+    "prettier",
+    "jest",
+    "promise",
+    "simple-import-sort",
+  ],
   ignorePatterns: [
     "dist",
     "node_modules",

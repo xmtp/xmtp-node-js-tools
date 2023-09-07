@@ -1,7 +1,8 @@
+import { randomBytes } from "crypto"
+
 import { newAppConfig } from "./config"
 import { buildDataSource } from "./dataSource"
 import { FsPersistence, PostgresPersistence } from "./persistence"
-import { randomBytes } from "crypto"
 import { randomKeys } from "./utils"
 
 describe("persistence", () => {

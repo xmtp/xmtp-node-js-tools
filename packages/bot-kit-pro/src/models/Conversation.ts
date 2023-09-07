@@ -1,16 +1,17 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  ManyToOne,
+  Entity,
   Index,
-  Repository,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
   Relation,
+  Repository,
 } from "typeorm"
-import { InboundMessage, Reply } from "./Message.js"
-import { Bot } from "./Bot.js"
+
 import { Json } from "../types.js"
+import { Bot } from "./Bot.js"
+import { InboundMessage, Reply } from "./Message.js"
 @Entity()
 @Index(["bot.id", "topic"], { unique: true })
 export class Conversation {

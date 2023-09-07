@@ -1,4 +1,4 @@
-import { Json, HandlerContext } from "@xmtp/bot-kit-pro"
+import { HandlerContext, Json } from "@xmtp/bot-kit-pro"
 import OpenAI from "openai"
 
 type ChatMessage = {

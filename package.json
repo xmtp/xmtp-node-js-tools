@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "build": "yarn build:grpc && yarn build:botkit && yarn build:examples",
     "build:grpc": "yarn workspace @xmtp/grpc-api-client build",
     "build:botkit": "yarn workspace @xmtp/bot-kit-pro build",
@@ -46,6 +47,7 @@
     "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "jest": "^29.5.0",
     "prettier": "^3.0.2",
     "ts-jest": "^29.1.1",

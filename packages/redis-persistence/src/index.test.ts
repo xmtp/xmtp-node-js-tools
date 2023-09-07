@@ -1,5 +1,6 @@
-import { RedisClientType, createClient } from "@redis/client"
+import { createClient, RedisClientType } from "@redis/client"
 import { randomBytes } from "crypto"
+
 import { RedisPersistence } from "."
 
 describe("RedisPersistence", () => {

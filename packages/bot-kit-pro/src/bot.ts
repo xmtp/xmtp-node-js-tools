@@ -1,19 +1,20 @@
-import pino from "pino"
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { Client, DecodedMessage, Persistence } from "@xmtp/xmtp-js"
-import { EntityManager, ObjectLiteral, EntityTarget } from "typeorm"
+import pino from "pino"
+import { EntityManager, EntityTarget, ObjectLiteral } from "typeorm"
+
+import { BotConfig, BotCreateConfig } from "./config.js"
+import HandlerContext from "./context.js"
 import { AppDataSource } from "./dataSource.js"
+import { createLogger } from "./logger.js"
+import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import {
   Conversation,
   findOrCreateConversation,
 } from "./models/Conversation.js"
-import { Bot as BotDB, findOrCreateBot } from "./models/Bot.js"
 import { InboundMessage, MessageStatus, Reply } from "./models/Message.js"
-import HandlerContext from "./context.js"
-import { GrpcApiClient } from "@xmtp/grpc-api-client"
-import { BotConfig, BotCreateConfig } from "./config.js"
-import { createLogger } from "./logger.js"
-import { Json } from "./types.js"
 import { PostgresPersistence } from "./persistence.js"
+import { Json } from "./types.js"
 import { randomKeys } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>

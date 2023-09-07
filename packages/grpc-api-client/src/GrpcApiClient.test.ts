@@ -1,17 +1,18 @@
 import {
-  Client,
-  NetworkOptions,
   ApiClient,
-  LocalAuthenticator,
-  PublishParams,
-  PrivateKeyBundleV1,
-  SortDirection,
-  fromNanoString,
   Authenticator,
+  Client,
+  fromNanoString,
+  LocalAuthenticator,
+  NetworkOptions,
+  PrivateKeyBundleV1,
+  PublishParams,
+  SortDirection,
 } from "@xmtp/xmtp-js"
-import { Wallet } from "ethers"
-import GrpcApiClient from "./GrpcApiClient"
 import { randomBytes } from "crypto"
+import { Wallet } from "ethers"
+
+import GrpcApiClient from "./GrpcApiClient"
 
 const defaultOptions = (
   opts: Partial<NetworkOptions> = {},

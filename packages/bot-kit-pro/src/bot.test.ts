@@ -1,12 +1,13 @@
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
 import { Client } from "@xmtp/xmtp-js"
+import { randomBytes } from "crypto"
+import { Wallet } from "ethers"
+
 import Bot, { BotHandler, getOrCreateXmtpKeys } from "./bot.js"
 import { newAppConfig, newBotConfig } from "./config.js"
-import { Wallet } from "ethers"
-import { randomBytes } from "crypto"
 import { buildDataSource } from "./dataSource.js"
-import { InboundMessage } from "./models/Message.js"
 import { Conversation } from "./models/Conversation.js"
-import { GrpcApiClient } from "@xmtp/grpc-api-client"
+import { InboundMessage } from "./models/Message.js"
 import { PostgresPersistence } from "./persistence.js"
 
 describe("Bot", () => {

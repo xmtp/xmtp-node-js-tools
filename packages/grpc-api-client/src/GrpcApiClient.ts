@@ -1,7 +1,25 @@
-import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
-import { GrpcTransport } from "@protobuf-ts/grpc-transport"
-import { messageApi } from "@xmtp/proto"
 import { credentials } from "@grpc/grpc-js"
+import { GrpcTransport } from "@protobuf-ts/grpc-transport"
+import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
+import { messageApi } from "@xmtp/proto"
+import {
+  ApiClient,
+  AuthCache,
+  Authenticator,
+  NetworkOptions,
+  OnConnectionLostCallback,
+  PublishParams,
+  Query,
+  QueryAllOptions,
+  QueryParams,
+  QueryStreamOptions,
+  retry,
+  SubscribeCallback,
+  SubscribeParams,
+  SubscriptionManager,
+} from "@xmtp/xmtp-js"
+
+import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
 import {
   BatchQueryRequest,
   BatchQueryResponse,
@@ -15,23 +33,6 @@ import {
   SortDirection,
   SubscribeRequest,
 } from "./gen/message_api/v1/message_api.js"
-import {
-  PublishParams,
-  SubscribeParams,
-  QueryParams,
-  QueryAllOptions,
-  QueryStreamOptions,
-  Query,
-  SubscribeCallback,
-  ApiClient,
-  Authenticator,
-  AuthCache,
-  retry,
-  NetworkOptions,
-  SubscriptionManager,
-  OnConnectionLostCallback,
-} from "@xmtp/xmtp-js"
-import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
 
 const API_URLS: { [k: string]: string } = {
   dev: "dev.xmtp.network:5556",

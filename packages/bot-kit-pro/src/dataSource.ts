@@ -1,10 +1,12 @@
 import "reflect-metadata"
+
 import { DataSource } from "typeorm"
-import { InboundMessage, Reply } from "./models/Message.js"
-import { KeyValue } from "./models/KeyValue.js"
-import { Conversation } from "./models/Conversation.js"
-import { Bot } from "./models/Bot.js"
+
 import { RequiredAppConfig } from "./config.js"
+import { Bot } from "./models/Bot.js"
+import { Conversation } from "./models/Conversation.js"
+import { KeyValue } from "./models/KeyValue.js"
+import { InboundMessage, Reply } from "./models/Message.js"
 
 export function buildDataSource({ db }: RequiredAppConfig) {
   return new DataSource({

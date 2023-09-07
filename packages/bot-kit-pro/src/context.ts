@@ -1,4 +1,5 @@
 import { DecodedMessage, SendOptions } from "@xmtp/xmtp-js"
+
 import { Json } from "./types.js"
 
 type PreparedReply = {
