@@ -19,6 +19,5 @@ jobs:
           corepack prepare yarn@3.6.3 --activate
       - run: yarn
       - run: yarn build
-      - run: yarn workspace @xmtp/bot-kit-pro up
-      - run: yarn workspace @xmtp/bot-kit-pro migration:run
+      - run: yarn workspace @xmtp/bot-kit-pro run up
       - run: yarn test
