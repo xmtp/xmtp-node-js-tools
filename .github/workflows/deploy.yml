@@ -31,7 +31,7 @@ jobs:
         id: push
         run: |
           export DOCKER_IMAGE_TAG=latest
-          IMAGE_TO_DEPLOY=xmtp/bot-examples@$(dev/docker/build-examples)
+          IMAGE_TO_DEPLOY=xmtp/bot-examples@$(dev/docker/push-examples)
           echo Successfully pushed $IMAGE_TO_DEPLOY
           echo "docker_image=${IMAGE_TO_DEPLOY}" >> $GITHUB_OUTPUT
 
