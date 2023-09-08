@@ -11,6 +11,7 @@ import {
 } from "@xmtp/xmtp-js"
 import { randomBytes } from "crypto"
 import { Wallet } from "ethers"
+import { beforeEach, describe, expect, it } from "vitest"
 
 import GrpcApiClient from "./GrpcApiClient"
 

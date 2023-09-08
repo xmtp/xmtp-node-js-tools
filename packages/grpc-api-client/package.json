@@ -22,7 +22,7 @@
     "build": "tsc",
     "prepublishOnly": "yarn build",
     "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1",
-    "test": "jest ."
+    "test": "vitest run ./src"
   },
   "author": "XMTP Labs <eng@xmtp.com>",
   "license": "MIT",

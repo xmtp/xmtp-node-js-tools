@@ -1,5 +1,5 @@
 import { randomBytes } from "crypto"
-import postgres from "postgres"
+import { beforeAll, beforeEach, describe, expect, it } from "vitest"
 
 import { newAppConfig } from "./config"
 import { buildDrizzle, doMigrations } from "./db/database"
@@ -8,17 +8,15 @@ import { randomKeys } from "./utils"
 
 describe("persistence", () => {
   let persistence: PostgresPersistence
-  let dbConnection: postgres.Sql
   beforeAll(async () => {
     const appConfig = newAppConfig({})
     await doMigrations(appConfig.db)
     const { db, connection } = await buildDrizzle(appConfig.db)
-    dbConnection = connection
     persistence = new PostgresPersistence(db)
-  })
 
-  afterAll(async () => {
-    await dbConnection.end()
+    return async () => {
+      await connection.end()
+    }
   })
 
   it("allows setting and retrieving values", async () => {
