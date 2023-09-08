@@ -24,7 +24,8 @@
     "postgres": "^3.3.5"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public",
+    "provenance": true
   },
   "engines": {
     "node": ">=18"
@@ -34,7 +35,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xmtp/bot-tools-js.git"
+    "url": "git+https://github.com/xmtp/bot-kit-pro.git"
   },
   "keywords": [
     "xmtp",
@@ -45,9 +46,9 @@
   "author": "XMTP Labs <eng@xmtp.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xmtp/bot-tools-js/issues"
+    "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
-  "homepage": "https://github.com/xmtp/bot-tools-js#readme",
+  "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
   "packageManager": "yarn@3.6.3",
   "devDependencies": {
     "drizzle-kit": "^0.19.13",

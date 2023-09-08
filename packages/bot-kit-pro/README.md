@@ -3,13 +3,13 @@
 ## Requirements
 
 - A Postgres database (tested with version 13 and above)
-- A set of XMTP keys for each bot you wish to deploy
+- `yarn` package manager version 2.x or 3.x
 
 ## Running tests
 
-1. `npm i`
+1. `yarn`
 2. `./dev/up`
-3. `npm test`
+3. `yarn test`
 
 ## Usage
 
@@ -23,8 +23,6 @@ async function start() {
     "test",
     {
       xmtpEnv: "production",
-      //   This will fail if environment variable is missing
-      xmtpKeys: Buffer.from(process.env.XMTP_KEYS as string, "base64"),
     },
     async (ctx) => {
       ctx.reply("hi")
@@ -45,11 +43,7 @@ Each bot expects a configration, which can be created using `newBotConfig`.
 
 You can also optionally provide application-level configuration to specify howt he database connection is established. The following environment variables are respected for app level configuration, and take precedence over any configuration values provided in code.
 
-- `POSTGRES_HOST`
-- `POSTGRES_PORT`
-- `POSTGRES_USERNAME`
-- `POSTGRES_PASSWORD`
-- `POSTGRES_DB`
+- `POSTGRES_CONNECTION_STRING`
 
 If no application config is specified, default values are provided that correspond with the DB in the `docker-compose.yml` file.
 
