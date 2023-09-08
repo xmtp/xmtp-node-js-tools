@@ -8,7 +8,7 @@
     "node": ">=18"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.1",
@@ -26,5 +26,9 @@
   },
   "author": "XMTP Labs <eng@xmtp.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xmtp/bot-kit-pro/issues"
+  },
+  "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
   "packageManager": "yarn@3.6.3"
 }
