@@ -10,6 +10,7 @@
     "build:grpc": "yarn workspace @xmtp/grpc-api-client build",
     "build:botkit": "yarn workspace @xmtp/bot-kit-pro build",
     "build:examples": "yarn workspace @xmtp/bot-examples build",
+    "publish": "yarn build && changeset publish",
     "test:grpc": "yarn workspace @xmtp/grpc-api-client test",
     "test:botkit": "yarn workspace @xmtp/bot-kit-pro test",
     "test:examples": "yarn workspace @xmtp/bot-examples test",
