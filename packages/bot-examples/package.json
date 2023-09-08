@@ -2,7 +2,7 @@
   "name": "@xmtp/bot-examples",
   "version": "0.0.1",
   "description": "Example bots using the @xmtp/bot-kit-pro package",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "private": true,
   "type": "module",
   "engines": {
