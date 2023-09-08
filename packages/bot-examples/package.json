@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/bot-examples",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Example bots using the @xmtp/bot-kit-pro package",
   "main": "dist/index.js",
   "private": true,
