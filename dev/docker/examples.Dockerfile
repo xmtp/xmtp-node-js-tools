@@ -1,11 +1,10 @@
 FROM node:18
 
-RUN corepack enable
+RUN corepack enable && corepack prepare yarn@3.6.3 --activate
 
-COPY package.json .yarnrc.yml yarn.lock /app/
+COPY . /app/
 WORKDIR /app
 RUN yarn install --immutable
-COPY . /app/
 RUN yarn build
 
 ARG GIT_COMMIT=unknown

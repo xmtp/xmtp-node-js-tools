@@ -41,14 +41,12 @@ export function applyBotDefaults(config: BotConfig): BotCreateConfig {
   }
 }
 
+type DbConfig = {
+  postgresConnectionString: string
+}
+
 export type AppConfig = {
-  db: {
-    postgresHost: string
-    postgresPort: number
-    postgresUser: string
-    postgresPassword: string
-    postgresDb: string
-  }
+  db: DbConfig
 }
 
 export type PartialAppConfig = {
@@ -62,27 +60,10 @@ export type RequiredAppConfig = {
 export function newAppConfig(cfg: PartialAppConfig): RequiredAppConfig {
   return {
     db: {
-      postgresHost: getEnvOrDefault(
-        "POSTGRES_HOST",
-        cfg.db?.postgresHost || "localhost",
-      ),
-      postgresPort: parseInt(
-        getEnvOrDefault(
-          "POSTGRES_PORT",
-          cfg.db?.postgresPort ? String(cfg.db?.postgresPort) : "4321",
-        ),
-      ),
-      postgresUser: getEnvOrDefault(
-        "POSTGRES_USERNAME",
-        cfg.db?.postgresUser || "postgres",
-      ),
-      postgresPassword: getEnvOrDefault(
-        "POSTGRES_PASSWORD",
-        cfg.db?.postgresPassword || "xmtp",
-      ),
-      postgresDb: getEnvOrDefault(
-        "POSTGRES_DB",
-        cfg.db?.postgresDb || "postgres",
+      postgresConnectionString: getEnvOrDefault(
+        "POSTGRES_CONNECTION_STRING",
+        cfg.db?.postgresConnectionString ||
+          "postgres://postgres:xmtp@localhost:4321/postgres",
       ),
     },
   }

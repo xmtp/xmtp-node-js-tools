@@ -4,13 +4,8 @@ import postgres from "postgres"
 
 import { AppConfig } from "../config.js"
 
-// Convert Postgres config into a connections string
-export function buildConnectionString(dbConfig: AppConfig["db"]) {
-  return `postgres://${dbConfig.postgresUser}:${dbConfig.postgresPassword}@${dbConfig.postgresHost}:${dbConfig.postgresPort}/${dbConfig.postgresDb}`
-}
-
 export async function buildDrizzle(dbConfig: AppConfig["db"]) {
-  const queryClient = postgres(buildConnectionString(dbConfig))
+  const queryClient = postgres(dbConfig.postgresConnectionString)
 
   return {
     db: drizzle(queryClient),
@@ -20,7 +15,7 @@ export async function buildDrizzle(dbConfig: AppConfig["db"]) {
 
 // Create a database instance, but with the max number of connections set to 1
 export async function buildMigrator(dbConfig: AppConfig["db"]) {
-  const migrationClient = postgres(buildConnectionString(dbConfig), {
+  const migrationClient = postgres(dbConfig.postgresConnectionString, {
     max: 1,
     onnotice: () => {},
   })
