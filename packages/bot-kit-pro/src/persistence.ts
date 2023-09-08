@@ -2,36 +2,24 @@ import { existsSync, mkdirSync } from "node:fs"
 import { readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 
-import { Repository } from "typeorm"
-
-import { AppDataSource } from "./dataSource.js"
-import { KeyValue } from "./models/KeyValue.js"
+import { DB, findValue, setValue } from "./db/index.js"
 
 export class PostgresPersistence {
-  repo: Repository<KeyValue>
-  constructor(db: AppDataSource) {
-    this.repo = db.getRepository(KeyValue)
+  db: DB
+  constructor(db: DB) {
+    this.db = db
   }
 
   async getItem(key: string): Promise<Uint8Array | null> {
-    const value = await this.repo.findOneBy({ key })
+    const value = await findValue(this.db, key)
     if (!value) {
       return null
     }
-    const buffer = value.value
-    return new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength)
+    return new Uint8Array(value.buffer, value.byteOffset, value.byteLength)
   }
 
   async setItem(key: string, value: Uint8Array): Promise<void> {
-    await this.repo
-      .createQueryBuilder()
-      .insert()
-      .values({
-        key,
-        value,
-      })
-      .orUpdate(["value"], ["key"])
-      .execute()
+    await setValue(this.db, key, Buffer.from(value))
   }
 }
 

@@ -10,6 +10,7 @@ export type BotConfig = {
   xmtpEnv?: "dev" | "production" | "local"
   handler: BotHandler
   messageExpiryMs?: number
+  skipMessageRefresh?: boolean
 }
 
 export type BotCreateConfig = Required<Omit<BotConfig, "xmtpKeys">> & {
@@ -35,6 +36,7 @@ export function applyBotDefaults(config: BotConfig): BotCreateConfig {
   return {
     xmtpEnv: DEFAULT_XMTP_ENV,
     messageExpiryMs: DEFAULT_MESSAGE_EXPIRY_MS,
+    skipMessageRefresh: false,
     ...config,
   }
 }
