@@ -13,4 +13,4 @@ docker build \
     -q \
     .
 
-docker push -q $TAG
+docker push $TAG 2>&1 | grep "digest: sha256" | awk '{print $3}'
