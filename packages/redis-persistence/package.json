@@ -35,7 +35,8 @@
   },
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "packageManager": "yarn@3.6.3",
   "devDependencies": {

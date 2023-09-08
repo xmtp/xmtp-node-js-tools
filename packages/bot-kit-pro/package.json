@@ -24,7 +24,8 @@
     "postgres": "^3.3.5"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "engines": {
     "node": ">=18"

@@ -7,8 +7,12 @@
   "engines": {
     "node": ">=18"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.1",
