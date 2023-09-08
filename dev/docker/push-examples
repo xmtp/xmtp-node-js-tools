@@ -13,4 +13,4 @@ docker build \
     -q \
     .
 
-docker push -q $TAG
+docker push $TAG > /dev/null
