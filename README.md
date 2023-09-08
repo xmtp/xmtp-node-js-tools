@@ -1,6 +1,8 @@
+![https://github.com/xmtp/bot-kit-pro/actions/workflows/test.yml/badge.svg](https://github.com/xmtp/bot-kit-pro/actions/workflows/test.yml/badge.svg) ![https://github.com/xmtp/bot-kit-pro/actions/workflows/lint.yml/badge.svg](https://github.com/xmtp/bot-kit-pro/actions/workflows/lint.yml/badge.svg) ![Status](https://img.shields.io/badge/Project_status-Alpha-orange)
+
 # 🤖 Bot Kit Pro 🤖
 
-Bot Kit Pro is a production-ready framework for running bots on the XMTP network. It is designed to enable complex workflows
+Bot Kit Pro is a framework for running bots on the XMTP network designed for complex workflows that require high reliability.
 
 ## Features
 

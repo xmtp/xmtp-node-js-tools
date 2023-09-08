@@ -6,7 +6,7 @@
       "repo": "xmtp/bot-kit-pro"
     }
   ],
-  "commit": false,
+  "commit": true,
   "fixed": [],
   "linked": [],
   "access": "public",
