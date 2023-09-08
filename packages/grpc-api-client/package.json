@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/grpc-api-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A GRPC-backed API client for Node.js applications",
   "main": "dist/src/index.js",
   "type": "module",
