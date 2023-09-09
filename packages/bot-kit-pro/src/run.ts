@@ -1,12 +1,13 @@
 import Bot from "./bot.js"
 import { BotCreateConfig, newAppConfig, PartialAppConfig } from "./config.js"
-import { buildDrizzle } from "./db/database.js"
+import { buildDrizzle, doMigrations } from "./db/database.js"
 
 export default async function (
   botConfigs: BotCreateConfig[],
   appConfig: PartialAppConfig = {},
 ) {
   const appliedAppConfig = newAppConfig(appConfig)
+  await doMigrations(appliedAppConfig.db)
   const { db, connection } = await buildDrizzle(appliedAppConfig.db)
 
   const bots: Bot[] = []
