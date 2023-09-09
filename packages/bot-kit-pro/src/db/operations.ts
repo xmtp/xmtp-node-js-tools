@@ -8,7 +8,9 @@ import { DB, Message, MessageStatus } from "./types.js"
 
 // Find or create a bot
 export async function findOrCreateBot(db: DB, name: string) {
-  return db.insert(bots).values({ id: name }).onConflictDoNothing().returning()
+  await db.insert(bots).values({ id: name }).onConflictDoNothing()
+
+  return findOne(await db.select().from(bots).where(eq(bots.id, name)).limit(1))
 }
 
 // Find or create a conversation
@@ -18,12 +20,18 @@ export async function findOrCreateConversation(
   topic: string,
   botName: string,
 ) {
+  await db
+    .insert(conversations)
+    .values({ peerAddress, topic, botId: botName })
+    .onConflictDoNothing()
   return findOne(
     await db
-      .insert(conversations)
-      .values({ peerAddress, topic, botId: botName })
-      .onConflictDoNothing()
-      .returning(),
+      .select()
+      .from(conversations)
+      .where(
+        and(eq(conversations.topic, topic), eq(conversations.botId, botName)),
+      )
+      .limit(1),
   )
 }
 
@@ -77,21 +85,29 @@ export async function insertMessage(
   status: MessageStatus,
   replyToId: number | null,
 ) {
+  await db
+    .insert(messages)
+    .values({
+      messageId: xmtpMessage.id,
+      contents: Buffer.from(xmtpMessage.toBytes()),
+      contentsText: getContentText(xmtpMessage),
+      status,
+      timestamp: xmtpMessage.sent,
+      botId,
+      conversationId,
+      replyToId,
+    })
+    .onConflictDoNothing()
+    .returning()
+
   return findOne(
     await db
-      .insert(messages)
-      .values({
-        messageId: xmtpMessage.id,
-        contents: Buffer.from(xmtpMessage.toBytes()),
-        contentsText: getContentText(xmtpMessage),
-        status,
-        timestamp: xmtpMessage.sent,
-        botId,
-        conversationId,
-        replyToId,
-      })
-      .onConflictDoNothing()
-      .returning(),
+      .select()
+      .from(messages)
+      .where(
+        and(eq(messages.messageId, xmtpMessage.id), eq(messages.botId, botId)),
+      )
+      .limit(1),
   )
 }
 
@@ -178,7 +194,10 @@ export async function setValue(db: DB, key: string, value: Buffer) {
 
 function findOne<T>(results: T[]): T {
   if (results.length !== 1) {
-    throw new Error("Expected one result")
+    console.log(results.length, results)
+    throw new Error(
+      `Expected one result. Got: ${results.length}. ${JSON.stringify(results)}`,
+    )
   }
   return results[0]
 }
