@@ -83,6 +83,7 @@ export async function insertMessage(
       .values({
         messageId: xmtpMessage.id,
         contents: Buffer.from(xmtpMessage.toBytes()),
+        contentsText: getContentText(xmtpMessage),
         status,
         timestamp: xmtpMessage.sent,
         botId,
@@ -180,4 +181,22 @@ function findOne<T>(results: T[]): T {
     throw new Error("Expected one result")
   }
   return results[0]
+}
+
+function getContentText(xmtpMessage: DecodedMessage) {
+  if (typeof xmtpMessage.content === "string") {
+    return xmtpMessage.content
+  }
+  if (xmtpMessage.contentFallback) {
+    return xmtpMessage.contentFallback
+  }
+
+  if (
+    "toString" in xmtpMessage.content &&
+    typeof xmtpMessage.content.toString === "function"
+  ) {
+    return xmtpMessage.content.toString()
+  }
+
+  return ""
 }

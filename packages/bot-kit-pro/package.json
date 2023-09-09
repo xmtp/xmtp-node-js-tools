@@ -5,9 +5,9 @@
   "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && yarn copyMigrations",
     "migration:generate": "drizzle-kit generate:pg",
-    "migration:run": "",
+    "copyMigrations": "cp -Rf ./src/migrations ./dist/src/migrations",
     "up": "./dev/up",
     "prepublishOnly": "yarn build",
     "test": "vitest run ./src"
@@ -31,7 +31,8 @@
     "node": ">=18"
   },
   "files": [
-    "dist"
+    "dist",
+    "migrations"
   ],
   "repository": {
     "type": "git",

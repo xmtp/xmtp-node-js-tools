@@ -50,6 +50,7 @@ export const messages = pgTable(
     id: serial("id").primaryKey(),
     messageId: text("message_id").notNull(),
     contents: bytea("contents").notNull(),
+    contentsText: text("contents_text"),
     status: text("status", {
       enum: ["unprocessed", "processed", "expired", "error", "reply"],
     })
