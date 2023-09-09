@@ -6,11 +6,12 @@ DOCKER_IMAGE_NAME="${DOCKER_IMAGE_NAME:-xmtp/bot-examples}"
 GIT_COMMIT="$(git rev-parse HEAD)"
 TAG="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
 
-docker build \
-    --tag $TAG \
+docker buildx build \
+    --platform linux/amd64 \
+    --tag "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" \
     --build-arg="GIT_COMMIT=${GIT_COMMIT}" \
     -f dev/docker/examples.Dockerfile \
     -q \
+    --push \
     .
 
-docker push $TAG > /dev/null

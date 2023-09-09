@@ -17,19 +17,11 @@ jobs:
           username: xmtpeng
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Git Checkout
         uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: ".nvmrc"
-          cache: "yarn"
-      - name: Install Yarn v3
-        run: |
-          corepack enable
-          corepack prepare yarn@3.6.3 --activate
-      - run: yarn
-      - run: yarn build
 
       - name: Push
         id: push
