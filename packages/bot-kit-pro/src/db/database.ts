@@ -34,7 +34,6 @@ export async function doMigrations(dbConfig: AppConfig["db"]) {
     fileURLToPath(import.meta.url),
     "../../migrations",
   )
-  console.log("MIGRATIONS FOLDER", migrationsFolder)
   await migrate(db, {
     migrationsFolder,
   })
