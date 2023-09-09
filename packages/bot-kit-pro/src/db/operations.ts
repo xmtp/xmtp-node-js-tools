@@ -24,6 +24,7 @@ export async function findOrCreateConversation(
     .insert(conversations)
     .values({ peerAddress, topic, botId: botName })
     .onConflictDoNothing()
+
   return findOne(
     await db
       .select()
@@ -194,7 +195,6 @@ export async function setValue(db: DB, key: string, value: Buffer) {
 
 function findOne<T>(results: T[]): T {
   if (results.length !== 1) {
-    console.log(results.length, results)
     throw new Error(
       `Expected one result. Got: ${results.length}. ${JSON.stringify(results)}`,
     )
