@@ -2421,7 +2421,7 @@ __metadata:
   resolution: "@xmtp/bot-kit-pro@workspace:packages/bot-kit-pro"
   dependencies:
     "@xmtp/grpc-api-client": "workspace:*"
-    "@xmtp/proto": ^3.27.0
+    "@xmtp/proto": ^3.28.0-beta.1
     "@xmtp/xmtp-js": ^11.0.0-beta.8
     drizzle-kit: ^0.19.13
     drizzle-orm: ^0.28.6
@@ -2475,18 +2475,6 @@ __metadata:
     "@xmtp/xmtp-js": 11.0.0-beta.8
   languageName: unknown
   linkType: soft
-
-"@xmtp/proto@npm:^3.27.0":
-  version: 3.27.0
-  resolution: "@xmtp/proto@npm:3.27.0"
-  dependencies:
-    long: ^5.2.0
-    protobufjs: ^7.0.0
-    rxjs: ^7.8.0
-    undici: ^5.8.1
-  checksum: 99d2c2cc90de4cb1d125a88bbd9434ab3a7db6b0709687ffc7d9665a2a2acd1f7c88b05b24281f75e2a11ae36b89350f51fb466cac6c30547a3201bc229dfb1a
-  languageName: node
-  linkType: hard
 
 "@xmtp/proto@npm:^3.28.0-beta.1":
   version: 3.28.0-beta.1
