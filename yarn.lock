@@ -2412,7 +2412,7 @@ __metadata:
   resolution: "@xmtp/bot-examples@workspace:packages/bot-examples"
   dependencies:
     "@xmtp/bot-kit-pro": "workspace:*"
-    openai: ^4.0.1
+    openai: ^4.6.0
   languageName: unknown
   linkType: soft
 
@@ -7253,9 +7253,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openai@npm:^4.0.1":
-  version: 4.2.0
-  resolution: "openai@npm:4.2.0"
+"openai@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "openai@npm:4.6.0"
   dependencies:
     "@types/node": ^18.11.18
     "@types/node-fetch": ^2.6.4
@@ -7267,7 +7267,7 @@ __metadata:
     node-fetch: ^2.6.7
   bin:
     openai: bin/cli
-  checksum: c2b28e422d7ea6a38a2d98d1c9c933819386d560e473ebcf4417d0cbd80a79f05392120ae32da8b8250732b62469a08270b9b4864e9ff2965aa1af897b986867
+  checksum: 6cdb8601399092f6f70fde1d27be4a27eb2d14eab0679cbbb967a36e70883679719440e305b38f45078f68a9690f0aca56564805865f1c2e61c63dc71066c238
   languageName: node
   linkType: hard
 

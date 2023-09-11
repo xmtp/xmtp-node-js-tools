@@ -19,6 +19,6 @@
   "license": "MIT",
   "dependencies": {
     "@xmtp/bot-kit-pro": "workspace:*",
-    "openai": "^4.0.1"
+    "openai": "^4.6.0"
   }
 }
