@@ -1,6 +1,5 @@
 import { DecodedMessage } from "@xmtp/xmtp-js"
 import { and, asc, eq, lt } from "drizzle-orm"
-import { PostgresJsDatabase } from "drizzle-orm/postgres-js"
 
 import { Json } from "../types.js"
 import { bots, conversations, keyValue, messages } from "./schema.js"
@@ -13,27 +12,68 @@ export async function findOrCreateBot(db: DB, name: string) {
   return findOne(await db.select().from(bots).where(eq(bots.id, name)).limit(1))
 }
 
+export function findConversation(
+  db: DB,
+  peerAddress: string,
+  topic: string,
+  botId: string,
+) {
+  return db
+    .select({
+      id: conversations.id,
+    })
+    .from(conversations)
+    .where(
+      and(
+        eq(conversations.peerAddress, peerAddress),
+        eq(conversations.topic, topic),
+        eq(conversations.botId, botId),
+      ),
+    )
+    .limit(1)
+}
+
+export function createConversation(
+  db: DB,
+  peerAddress: string,
+  topic: string,
+  botId: string,
+) {
+  return db
+    .insert(conversations)
+    .values({
+      peerAddress,
+      topic,
+      botId,
+    })
+    .returning({
+      id: conversations.id,
+    })
+}
+
 // Find or create a conversation
 export async function findOrCreateConversation(
-  db: PostgresJsDatabase,
+  db: DB,
   peerAddress: string,
   topic: string,
   botName: string,
-) {
-  await db
-    .insert(conversations)
-    .values({ peerAddress, topic, botId: botName })
-    .onConflictDoNothing()
+): Promise<{ id: number }> {
+  return db.transaction(async (tx) => {
+    const results = await findConversation(tx, peerAddress, topic, botName)
 
-  return findOne(
-    await db
-      .select()
-      .from(conversations)
-      .where(
-        and(eq(conversations.topic, topic), eq(conversations.botId, botName)),
+    if (results.length === 0) {
+      const dbConversation = await createConversation(
+        db,
+        peerAddress,
+        topic,
+        botName,
       )
-      .limit(1),
-  )
+
+      return findOne(dbConversation)
+    }
+
+    return findOne(results)
+  })
 }
 
 // Get the bot and lock for update

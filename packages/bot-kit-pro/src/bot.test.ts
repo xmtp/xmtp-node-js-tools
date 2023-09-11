@@ -12,6 +12,7 @@ import { findMostRecentMessage } from "./db/operations.js"
 import { conversations, messages } from "./db/schema.js"
 import { DB } from "./db/types.js"
 import { PostgresPersistence } from "./persistence.js"
+import { sleep } from "./utils.js"
 
 describe("Bot", () => {
   let keys: Uint8Array
@@ -83,13 +84,15 @@ describe("Bot", () => {
     const otherClient = await Client.create(Wallet.createRandom(), {
       apiClientFactory: GrpcApiClient.fromOptions,
     })
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await sleep(100)
     const convo = await otherClient.conversations.newConversation(
       bot.client.address,
     )
     const msg = await convo.send("hello world")
+    const msg2 = await convo.send("second message")
     await bot.client.conversations.list()
     await bot.saveMessage(msg)
+    await bot.saveMessage(msg2)
     await bot.db.transaction(async (tx) => {
       const dbMessage = await findMostRecentMessage(tx, msg.conversation.topic)
       if (!dbMessage) {
@@ -99,7 +102,7 @@ describe("Bot", () => {
     })
 
     const messages = await convo.messages()
-    expect(messages).toHaveLength(2)
+    expect(messages).toHaveLength(3)
 
     const dbConvos = await bot.db
       .select()

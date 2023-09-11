@@ -1,4 +1,4 @@
-name: Deploy Nodes
+name: Deploy Examples
 on:
   push:
     branches:

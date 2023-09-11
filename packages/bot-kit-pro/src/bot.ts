@@ -22,18 +22,27 @@ import { DB, Message as DBMessage } from "./db/types.js"
 import { createLogger } from "./logger.js"
 import { PostgresPersistence } from "./persistence.js"
 import { Json } from "./types.js"
-import { randomKeys } from "./utils.js"
+import { randomKeys, sleep } from "./utils.js"
 
 export type BotHandler = (ctx: HandlerContext<Json, Json>) => Promise<void>
 
 export default class Bot {
+  // The bot name
   name: string
+  // XMTP client
   client: Client
+  // Database instance
   db: PostgresJsDatabase
+  // Handler function
   handler: BotHandler
+  // Message stream
   stream?: AsyncGenerator<DecodedMessage>
+  // Prefixed logger
   logger: pino.Logger
+  // The config used to instantiate the bot
   config: Required<BotConfig>
+  // Whether the bot is currently running
+  running = false
 
   constructor(
     name: string,
@@ -65,6 +74,7 @@ export default class Bot {
     const xmtpKeys =
       config.xmtpKeys ||
       (await getOrCreateXmtpKeys(config.name, config.xmtpEnv, basePersistence))
+
     const client = await Client.create(null, {
       env: config.xmtpEnv,
       privateKeyOverride: xmtpKeys,
@@ -140,7 +150,7 @@ export default class Bot {
         )
       }
 
-      this.logger.info(
+      this.logger.debug(
         `conversation state: ${JSON.stringify(
           ctx.conversationState,
         )}\nbot state: ${JSON.stringify(ctx.botState)}`,
@@ -178,27 +188,29 @@ export default class Bot {
 
   private async initialize() {
     const convos = await this.client.conversations.list()
-    await Promise.all(
-      convos.map(async (convo) => {
-        const startTime = await this.mostRecentMessage(convo.topic)
-        const messages = await convo.messages({
-          // Start 10 seconds before the most recent message in the db to ensure we don't miss any
-          startTime: startTime ? new Date(+startTime - 10 * 1000) : undefined,
-        })
-        if (messages.length > 2) {
-          this.logger.warn(
-            `Adding multiple messages (${messages.length}) from a single conversation to the DB`,
-          )
-        }
-
-        for (const message of messages) {
-          if (message.senderAddress === this.client.address) {
-            continue
+    if (!this.config.skipMessageRefresh) {
+      await Promise.all(
+        convos.map(async (convo) => {
+          const startTime = await this.mostRecentMessage(convo.topic)
+          const messages = await convo.messages({
+            // Start 10 seconds before the most recent message in the db to ensure we don't miss any
+            startTime: startTime ? new Date(+startTime - 10 * 1000) : undefined,
+          })
+          if (messages.length > 2) {
+            this.logger.warn(
+              `Adding multiple messages (${messages.length}) from a single conversation to the DB`,
+            )
           }
-          await this.saveMessage(message)
-        }
-      }),
-    )
+
+          for (const message of messages) {
+            if (message.senderAddress === this.client.address) {
+              continue
+            }
+            await this.saveMessage(message)
+          }
+        }),
+      )
+    }
 
     await this.processMessages()
   }
@@ -207,8 +219,15 @@ export default class Bot {
     this.logger.info(
       `Starting bot ${this.name} with address ${this.client.address}`,
     )
+    this.running = true
     this.stream = await this.client.conversations.streamAllMessages()
     await this.initialize()
+
+    this.retryProcessingLoop().then(
+      () => this.logger.debug("retry loop ended"),
+      () => this.logger.warn("retry loop failed"),
+    )
+
     for await (const message of this.stream) {
       if (message.senderAddress === this.client.address) {
         continue
@@ -216,8 +235,19 @@ export default class Bot {
       await this.saveMessage(message)
       this.processMessages().then(
         () => this.logger.debug(`processed message: ${message.id}`),
-        (err) => console.error(err),
+        (err) => this.logger.error(err),
       )
+    }
+  }
+
+  private async retryProcessingLoop() {
+    while (this.running) {
+      try {
+        await this.processMessages()
+      } catch (e) {
+        this.logger.error(`Error processing messages`, e)
+      }
+      await sleep(1000 * 10) // Wait 10 seconds between retries
     }
   }
 

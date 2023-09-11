@@ -22,3 +22,7 @@ export async function randomKeys() {
   const bundle = await PrivateKeyBundleV1.generate(wallet)
   return bundle.encode()
 }
+
+export async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
