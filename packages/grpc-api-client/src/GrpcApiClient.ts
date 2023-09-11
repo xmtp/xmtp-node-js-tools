@@ -18,6 +18,7 @@ import {
   SubscribeParams,
   SubscriptionManager,
 } from "@xmtp/xmtp-js"
+import pino from "pino"
 
 import { MessageApiClient } from "./gen/message_api/v1/message_api.client.js"
 import {
@@ -47,11 +48,13 @@ export default class GrpcApiClient implements ApiClient {
   grpcClient: MessageApiClient
   private authCache?: AuthCache
   private appVersion?: string
+  private logger: pino.Logger
   apiUrl: string
 
   constructor(apiUrl: string, isSecure: boolean, appVersion?: string) {
     this.apiUrl = apiUrl
     this.appVersion = appVersion
+    this.logger = pino({ name: "GrpcApiClient" })
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
         host: apiUrl,
@@ -220,8 +223,8 @@ export default class GrpcApiClient implements ApiClient {
       while (true) {
         const startTime = new Date()
         try {
+          this.logger.debug("starting stream")
           stream = this.grpcClient.subscribe2({
-            timeout: 1000 * 60 * 60 * 24,
             abort: abortController.signal,
           })
           await stream.requests.send(req)
@@ -229,13 +232,14 @@ export default class GrpcApiClient implements ApiClient {
           await stream
         } catch (e) {
           if (isAbortError(e as RpcError)) {
+            this.logger.info({ error: e }, "stream aborted")
             return
           }
           if (new Date().getTime() - startTime.getTime() < 1000) {
             await sleep(1000)
           }
           onConnectionLost?.()
-          console.error("stream error", e)
+          this.logger.error({ error: e }, "stream error")
         }
       }
     }
@@ -249,7 +253,7 @@ export default class GrpcApiClient implements ApiClient {
       },
       updateContentTopics: async (topics: string[]) => {
         if (topics.length && !abortController.signal.aborted && stream) {
-          console.log("updating content topics", topics)
+          this.logger.debug("updating content topics")
           await stream.requests.send({ contentTopics: topics })
         }
       },
@@ -321,6 +325,10 @@ export default class GrpcApiClient implements ApiClient {
     cacheExpirySeconds?: number,
   ): void {
     this.authCache = new AuthCache(authenticator, cacheExpirySeconds)
+  }
+
+  setLogger(logger: pino.Logger): void {
+    this.logger = logger.child({ module: "GrpcApiClient" })
   }
 
   private getToken(): Promise<string> {

@@ -64,6 +64,9 @@ export default class Bot {
         walletAddress: this.client.address,
       },
     )
+    if (this.client.apiClient instanceof GrpcApiClient) {
+      this.client.apiClient.setLogger(this.logger)
+    }
   }
 
   static async create(
