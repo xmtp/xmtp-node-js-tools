@@ -41,6 +41,6 @@
   },
   "packageManager": "yarn@3.6.3",
   "devDependencies": {
-    "@xmtp/xmtp-js": "11.0.0-beta.8"
+    "@xmtp/xmtp-js": "11.0.0-beta.9"
   }
 }
