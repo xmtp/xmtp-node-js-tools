@@ -252,6 +252,7 @@ export default class GrpcApiClient implements ApiClient {
         await stream.requests.complete()
       },
       updateContentTopics: async (topics: string[]) => {
+        this.logger.info("updateContentTopics called")
         if (topics.length && !abortController.signal.aborted && stream) {
           this.logger.debug("updating content topics")
           await stream.requests.send({ contentTopics: topics })
