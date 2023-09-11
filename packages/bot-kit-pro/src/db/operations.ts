@@ -1,5 +1,5 @@
 import { DecodedMessage } from "@xmtp/xmtp-js"
-import { and, asc, eq, lt } from "drizzle-orm"
+import { and, asc, desc, eq, lt } from "drizzle-orm"
 
 import { Json } from "../types.js"
 import { bots, conversations, keyValue, messages } from "./schema.js"
@@ -162,7 +162,7 @@ export async function findMostRecentMessage(
     .from(messages)
     .innerJoin(conversations, eq(messages.conversationId, conversations.id))
     .where(eq(conversations.topic, topic))
-    .orderBy(asc(messages.timestamp))
+    .orderBy(desc(messages.timestamp))
     .limit(1)
   if (results.length === 0) {
     return null

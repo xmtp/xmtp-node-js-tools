@@ -131,6 +131,7 @@ export default class Bot {
   async processMessage(parentTx: DB, message: DBMessage) {
     const logger = this.logger.child({ messageId: message.id })
     await parentTx.transaction(async (tx) => {
+      logger.info(`Processing message: ${message.contentsText}`)
       const bot = await getAndLockBot(tx, message.botId)
 
       const dbConvo = await getAndLockConversation(tx, message.conversationId)
@@ -171,7 +172,10 @@ export default class Bot {
           reply.content,
           reply.options,
         )
-        logger.info({ replyId: sentMessage.id }, "Sent reply")
+        logger.info(
+          { replyId: sentMessage.id, contents: sentMessage.content },
+          "Sent reply",
+        )
         await insertMessage(
           tx,
           sentMessage,
@@ -197,6 +201,11 @@ export default class Bot {
 
   private async initialize() {
     const convos = await this.client.conversations.list()
+    this.logger.info(
+      `Found ${convos.length} conversations. ${convos
+        .map((c) => c.peerAddress)
+        .join(", ")}`,
+    )
     if (!this.config.skipMessageRefresh) {
       await Promise.all(
         convos.map(async (convo) => {
@@ -251,7 +260,7 @@ export default class Bot {
       await this.saveMessage(message)
       this.processMessages().then(
         () => this.logger.debug(`processed message: ${message.id}`),
-        (err) => this.logger.error(err),
+        (err) => this.logger.error({ error: err }, "processing messages"),
       )
     }
     this.logger.info("stream listening ended")
