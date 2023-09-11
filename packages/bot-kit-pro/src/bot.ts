@@ -126,6 +126,7 @@ export default class Bot {
   }
 
   async processMessage(parentTx: DB, message: DBMessage) {
+    const logger = this.logger.child({ messageId: message.id })
     await parentTx.transaction(async (tx) => {
       const bot = await getAndLockBot(tx, message.botId)
 
@@ -135,7 +136,9 @@ export default class Bot {
         message.contents,
         this.client,
       )
+
       if (this.isExpired(xmtpMessage)) {
+        logger.info("message has expired")
         return await setMessageStatus(tx, message.id, "expired")
       }
 
@@ -151,7 +154,7 @@ export default class Bot {
         )
       }
 
-      this.logger.debug(
+      logger.debug(
         `conversation state: ${JSON.stringify(
           ctx.conversationState,
         )}\nbot state: ${JSON.stringify(ctx.botState)}`,
@@ -165,6 +168,7 @@ export default class Bot {
           reply.content,
           reply.options,
         )
+        logger.info({ replyId: sentMessage.id }, "Sent reply")
         await insertMessage(
           tx,
           sentMessage,
@@ -174,6 +178,7 @@ export default class Bot {
           message.id,
         )
       }
+      logger.info("successfully processed message")
       await setMessageStatus(tx, message.id, "processed")
     })
   }
@@ -228,7 +233,13 @@ export default class Bot {
       () => this.logger.debug("retry loop ended"),
       () => this.logger.warn("retry loop failed"),
     )
-    this.logger.info("Starting stream loop")
+  }
+
+  private async listen() {
+    if (!this.stream) {
+      throw new Error("stream not initialized")
+    }
+    this.logger.info("stream listening started")
     for await (const message of this.stream) {
       if (message.senderAddress === this.client.address) {
         continue
@@ -239,6 +250,7 @@ export default class Bot {
         (err) => this.logger.error(err),
       )
     }
+    this.logger.info("stream listening ended")
   }
 
   private async retryProcessingLoop() {
