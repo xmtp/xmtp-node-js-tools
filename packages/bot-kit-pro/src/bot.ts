@@ -91,6 +91,7 @@ export default class Bot {
   }
 
   async saveMessage(message: DecodedMessage) {
+    this.logger.info({ messageId: message.id }, "Saving message")
     const dbConvo = await findOrCreateConversation(
       this.db,
       message.conversation.peerAddress,
