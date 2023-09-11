@@ -228,7 +228,7 @@ export default class Bot {
       () => this.logger.debug("retry loop ended"),
       () => this.logger.warn("retry loop failed"),
     )
-
+    this.logger.info("Starting stream loop")
     for await (const message of this.stream) {
       if (message.senderAddress === this.client.address) {
         continue
