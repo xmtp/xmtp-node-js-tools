@@ -236,6 +236,7 @@ export default class Bot {
       () => this.logger.debug("retry loop ended"),
       () => this.logger.warn("retry loop failed"),
     )
+    await this.listen()
   }
 
   private async listen() {
