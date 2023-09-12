@@ -223,13 +223,14 @@ export default class GrpcApiClient implements ApiClient {
       while (true) {
         const startTime = new Date()
         try {
-          this.logger.debug("starting stream")
+          this.logger.info("starting stream")
           stream = this.grpcClient.subscribe2({
             abort: abortController.signal,
           })
           await stream.requests.send(req)
           stream.responses.onMessage((msg) => callback(toHttpEnvelope(msg)))
           await stream
+          this.logger.info("stream returned")
         } catch (e) {
           if (isAbortError(e as RpcError)) {
             this.logger.info({ error: e }, "stream aborted")
