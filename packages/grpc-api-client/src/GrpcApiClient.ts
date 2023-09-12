@@ -225,6 +225,7 @@ export default class GrpcApiClient implements ApiClient {
         try {
           this.logger.info("starting stream")
           stream = this.grpcClient.subscribe2({
+            timeout: 1000 * 60 * 60, // 1 hour timeout
             abort: abortController.signal,
           })
 
