@@ -227,8 +227,11 @@ export default class GrpcApiClient implements ApiClient {
           stream = this.grpcClient.subscribe2({
             abort: abortController.signal,
           })
+
           await stream.requests.send(req)
           stream.responses.onMessage((msg) => callback(toHttpEnvelope(msg)))
+          stream.responses.onError((err) => this.logger.error(err))
+          stream.responses.onComplete(() => this.logger.info("stream complete"))
           await stream
           this.logger.info("stream returned")
         } catch (e) {
