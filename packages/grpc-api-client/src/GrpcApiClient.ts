@@ -232,7 +232,6 @@ export default class GrpcApiClient implements ApiClient {
           await stream
         } catch (e) {
           if (isAbortError(e as RpcError)) {
-            console.log("Is abort error", e)
             return
           }
           if (new Date().getTime() - startTime.getTime() < 1000) {

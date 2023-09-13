@@ -127,6 +127,7 @@ dist
 .pnp.*
 
 dist
+.turbo
 
 # MacOS
 .DS_Store
