@@ -254,6 +254,7 @@ export default class Bot {
       throw new Error("stream not initialized")
     }
     for await (const message of this.stream) {
+      this.logger.info("Received message")
       if (!message?.content) {
         continue
       }
@@ -273,7 +274,7 @@ export default class Bot {
     while (this.running) {
       try {
         const numProcessed = await this.processMessages()
-        this.logger.info({ numProcessed }, "completed retry loop")
+        this.logger.debug({ numProcessed }, "completed retry loop")
       } catch (e) {
         this.logger.error(`Error processing messages`, e)
       }
