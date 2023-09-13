@@ -120,13 +120,16 @@ export default class Bot {
   }
 
   async processMessages() {
+    let numProcessed = 0
     await this.db.transaction(async (tx) => {
       const messages = await findUnprocessedMessages(tx, this.name, 3)
-
       for (const message of messages) {
         await this.processMessage(tx, message)
       }
+      numProcessed = messages.length
     })
+
+    return numProcessed
   }
 
   async processMessage(parentTx: DB, message: DBMessage) {
@@ -269,7 +272,8 @@ export default class Bot {
   private async retryProcessingLoop() {
     while (this.running) {
       try {
-        await this.processMessages()
+        const numProcessed = await this.processMessages()
+        this.logger.info({ numProcessed }, "completed retry loop")
       } catch (e) {
         this.logger.error(`Error processing messages`, e)
       }
