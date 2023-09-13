@@ -276,7 +276,7 @@ export default class Bot {
         const numProcessed = await this.processMessages()
         this.logger.debug({ numProcessed }, "completed retry loop")
       } catch (e) {
-        this.logger.error(`Error processing messages`, e)
+        this.logger.error({ error: e }, `error processing messages`)
       }
       await sleep(1000 * 10) // Wait 10 seconds between retries
     }

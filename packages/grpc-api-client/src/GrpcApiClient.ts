@@ -217,6 +217,7 @@ export default class GrpcApiClient implements ApiClient {
     const req = {
       contentTopics,
     }
+    this.logger.info({ contentTopics }, "subscribing")
     const abortController = new AbortController()
     let stream: DuplexStreamingCall<SubscribeRequest, Envelope>
     const doSubscribe = async () => {
@@ -232,6 +233,7 @@ export default class GrpcApiClient implements ApiClient {
           await stream
         } catch (e) {
           if (isAbortError(e as RpcError)) {
+            this.logger.info({ contentTopics }, "aborting stream")
             return
           }
           if (new Date().getTime() - startTime.getTime() < 1000) {
@@ -247,6 +249,7 @@ export default class GrpcApiClient implements ApiClient {
 
     return {
       unsubscribe: async () => {
+        this.logger.info("unsubscribing")
         abortController.abort()
         await stream.requests.complete()
       },
