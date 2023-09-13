@@ -6,15 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "build": "yarn build:grpc && yarn build:botkit && yarn build:examples",
-    "build:grpc": "yarn workspace @xmtp/grpc-api-client build",
-    "build:botkit": "yarn workspace @xmtp/bot-kit-pro build",
-    "build:examples": "yarn workspace @xmtp/bot-examples build",
+    "build": "turbo run build",
     "publish": "yarn build && changeset publish",
-    "test:grpc": "yarn workspace @xmtp/grpc-api-client test",
-    "test:botkit": "yarn workspace @xmtp/bot-kit-pro test",
-    "test:examples": "yarn workspace @xmtp/bot-examples test",
-    "test": "yarn test:grpc && yarn test:botkit && yarn test:examples"
+    "test": "turbo run test"
   },
   "repository": {
     "type": "git",
@@ -59,8 +53,13 @@
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
+    "turbo": "^1.10.13",
     "typescript": "~5.2.2",
     "vitest": "^0.34.3"
   },
-  "packageManager": "yarn@3.6.3"
+  "packageManager": "yarn@3.6.3",
+  "dependencies": {
+    "concurrently": "^8.2.1",
+    "dev": "^0.1.3"
+  }
 }
