@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/fs-persistence",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Persistence engine for xmtp-js using the filesystem",
   "main": "dist/src/index.js",
   "type": "module",
