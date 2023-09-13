@@ -1,32 +1,29 @@
 {
-  "name": "@xmtp/redis-persistence",
+  "name": "@xmtp/fs-persistence",
   "version": "0.0.1",
-  "description": "A Redis-backed persistence layer for XMTP",
-  "type": "module",
+  "description": "Persistence engine for xmtp-js using the filesystem",
   "main": "dist/src/index.js",
-  "scripts": {
-    "start-redis": "docker-compose up -d",
-    "build": "tsc",
-    "test": "yarn start-redis && vitest run ."
-  },
-  "dependencies": {
-    "@redis/client": "^1.5.9"
-  },
+  "type": "module",
   "engines": {
     "node": ">=18"
   },
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run ./src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xmtp/bot-kit-pro.git"
   },
   "keywords": [
-    "xmtp",
-    "bots",
-    "messaging",
-    "web3"
+    "xmtp"
   ],
   "author": "XMTP Labs <eng@xmtp.com>",
   "license": "MIT",
@@ -34,12 +31,8 @@
     "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "packageManager": "yarn@3.6.3",
   "devDependencies": {
-    "@xmtp/xmtp-js": "11.0.0-beta.9"
+    "vitest": "^0.34.4"
   }
 }

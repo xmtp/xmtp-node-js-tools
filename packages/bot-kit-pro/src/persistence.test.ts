@@ -1,9 +1,9 @@
 import { randomBytes } from "crypto"
-import { beforeAll, beforeEach, describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 
 import { newAppConfig } from "./config"
 import { buildDrizzle, doMigrations } from "./db/database"
-import { FsPersistence, PostgresPersistence } from "./persistence"
+import { PostgresPersistence } from "./persistence"
 import { randomKeys } from "./utils"
 
 describe("persistence", () => {
@@ -55,30 +55,5 @@ describe("persistence", () => {
       throw new Error("could not retrieve from persistence")
     }
     expect([...returnedValue]).toEqual([...keys])
-  })
-})
-
-describe("fs persistence", () => {
-  let persistence: FsPersistence
-
-  beforeEach(async () => {
-    const folder = `/tmp/${randomBytes(32).toString("hex")}`
-    persistence = new FsPersistence(folder)
-  })
-
-  it("allows setting and retrieving values", async () => {
-    const key = "foo"
-    const value = new TextEncoder().encode("bar")
-
-    await persistence.setItem(key, value)
-    const returnedValue = await persistence.getItem(key)
-    if (!returnedValue) {
-      throw new Error("no returned value")
-    }
-    expect(returnedValue).toEqual(value)
-  })
-
-  it("returns null for missing values", async () => {
-    expect(await persistence.getItem("foo")).toBeNull()
   })
 })
