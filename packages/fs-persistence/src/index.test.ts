@@ -48,6 +48,12 @@ describe("fs persistence", () => {
     expect(returned2).toEqual(value2)
     expect(returned3).toEqual(value3)
   })
+
+  it("handles trailing slashes", async () => {
+    const folder = `/tmp/${randomBytes(32).toString("hex")}/`
+    const newPersistence = new FsPersistence(folder)
+    await newPersistence.setItem("foo/", toBytes("bar"))
+  })
 })
 
 function toBytes(str: string): Uint8Array {

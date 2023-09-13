@@ -1,3 +1,20 @@
-## GRPC API Client
+# GRPC API Client
 
-TODO
+An API Client that satisfies the `xmtp-js` `ApiClient` interface, to be used in Node.js applications.
+
+## Features
+
+- Uses GRPC/Protobuf instead of HTTP/JSON for better performance
+- Uses the XMTP `Subscribe2` endpoint to allow updating subscriptions without closing the connection
+- Configurable logger using `pino`
+
+## Usage
+
+```ts
+import { GrpcApiClient } from "@xmtp/grpc-api-client"
+import { Client } from "@xmtp/xmtp-js"
+
+const client = await Client.create(someWallet, {
+  apiClientFactory: GrpcApiClient.fromOptions,
+})
+```

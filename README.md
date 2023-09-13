@@ -28,6 +28,7 @@ This repo contains the following packages
 
 - [Bot Kit Pro](./packages/bot-kit-pro/README.md)
 - [GRPC API CLient](./packages/grpc-api-client/README.md)
+- [Redis Persistence](./packages/redis-persistence/README.md)
 - [Bot Examples](./packages/bot-examples/)
 
 ## Usage
