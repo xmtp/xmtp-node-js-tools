@@ -6,3 +6,7 @@
 ---
 
 Break out fs-persistence and add documentation
+
+- Makes `FsPersistence` its own package
+- Adds README to all packages
+- Passes XMTP configuration through to bots
