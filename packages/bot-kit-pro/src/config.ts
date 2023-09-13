@@ -1,3 +1,5 @@
+import type { ClientOptions } from "@xmtp/xmtp-js"
+
 import type { BotHandler } from "./bot.js"
 import { getEnvOrDefault } from "./utils.js"
 
@@ -11,6 +13,7 @@ export type BotConfig = {
   handler: BotHandler
   messageExpiryMs?: number
   skipMessageRefresh?: boolean
+  clientOptions?: Partial<ClientOptions>
 }
 
 export type BotCreateConfig = Required<Omit<BotConfig, "xmtpKeys">> & {
@@ -38,6 +41,10 @@ export function applyBotDefaults(config: BotConfig): BotCreateConfig {
     messageExpiryMs: DEFAULT_MESSAGE_EXPIRY_MS,
     skipMessageRefresh: false,
     ...config,
+    clientOptions: {
+      appVersion: `bot-kit-pro-${config.name}/0.0.0`,
+      ...(config.clientOptions || {}),
+    },
   }
 }
 

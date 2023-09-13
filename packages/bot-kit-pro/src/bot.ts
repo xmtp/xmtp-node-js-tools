@@ -84,6 +84,7 @@ export default class Bot {
       basePersistence,
       disablePersistenceEncryption: true,
       apiClientFactory: GrpcApiClient.fromOptions,
+      ...config.clientOptions,
     })
     await findOrCreateBot(datasource, config.name)
 
@@ -131,20 +132,15 @@ export default class Bot {
   async processMessage(parentTx: DB, message: DBMessage) {
     const logger = this.logger.child({ messageId: message.id })
     await parentTx.transaction(async (tx) => {
-      logger.info(`Processing message: ${message.contentsText}`)
+      logger.info({ contentsText: message.contentsText }, `processing message`)
+      // Lock the bot and convo so we can mutate state
       const bot = await getAndLockBot(tx, message.botId)
-
       const dbConvo = await getAndLockConversation(tx, message.conversationId)
 
       const xmtpMessage = await DecodedMessage.fromBytes(
         message.contents,
         this.client,
       )
-
-      if (this.isExpired(xmtpMessage)) {
-        logger.info("message has expired")
-        return await setMessageStatus(tx, message.id, "expired")
-      }
 
       const ctx = new HandlerContext(xmtpMessage, dbConvo.state, bot.state)
       try {
@@ -166,6 +162,13 @@ export default class Bot {
 
       await setConversationState(tx, dbConvo.id, ctx.conversationState)
       await setBotState(tx, bot.id, ctx.botState)
+
+      // Don't send replies if the message is expired
+      // State updates will still be applied
+      if (this.isExpired(xmtpMessage)) {
+        logger.info("message has expired")
+        return await setMessageStatus(tx, message.id, "expired")
+      }
 
       for (const reply of ctx.preparedReplies) {
         const sentMessage = await xmtpMessage.conversation.send(
@@ -201,11 +204,6 @@ export default class Bot {
 
   private async initialize() {
     const convos = await this.client.conversations.list()
-    this.logger.info(
-      `Found ${convos.length} conversations. ${convos
-        .map((c) => c.peerAddress)
-        .join(", ")}`,
-    )
     if (!this.config.skipMessageRefresh) {
       await Promise.all(
         convos.map(async (convo) => {
@@ -252,8 +250,11 @@ export default class Bot {
     if (!this.stream) {
       throw new Error("stream not initialized")
     }
-    this.logger.info("stream listening started")
     for await (const message of this.stream) {
+      if (!message?.content) {
+        continue
+      }
+
       if (message.senderAddress === this.client.address) {
         continue
       }
@@ -263,7 +264,6 @@ export default class Bot {
         (err) => this.logger.error({ error: err }, "processing messages"),
       )
     }
-    this.logger.info("stream listening ended")
   }
 
   private async retryProcessingLoop() {
@@ -278,7 +278,6 @@ export default class Bot {
   }
 
   async stop() {
-    this.logger.info("Shutting down bot")
     if (this.stream) {
       await this.stream.return(undefined)
       this.stream = undefined

@@ -223,23 +223,16 @@ export default class GrpcApiClient implements ApiClient {
       while (true) {
         const startTime = new Date()
         try {
-          this.logger.info("starting stream")
           stream = this.grpcClient.subscribe2({
-            timeout: 1000 * 60 * 60, // 1 hour timeout
             abort: abortController.signal,
           })
 
           await stream.requests.send(req)
           stream.responses.onMessage((msg) => callback(toHttpEnvelope(msg)))
-          stream.responses.onError((err) =>
-            this.logger.error({ err }, "stream error"),
-          )
-          stream.responses.onComplete(() => this.logger.info("stream complete"))
-          await stream.status
-          this.logger.info("stream returned")
+          await stream
         } catch (e) {
           if (isAbortError(e as RpcError)) {
-            this.logger.info({ error: e }, "stream aborted")
+            console.log("Is abort error", e)
             return
           }
           if (new Date().getTime() - startTime.getTime() < 1000) {
@@ -259,7 +252,6 @@ export default class GrpcApiClient implements ApiClient {
         await stream.requests.complete()
       },
       updateContentTopics: async (topics: string[]) => {
-        this.logger.info("updateContentTopics called")
         if (topics.length && !abortController.signal.aborted && stream) {
           this.logger.debug("updating content topics")
           await stream.requests.send({ contentTopics: topics })

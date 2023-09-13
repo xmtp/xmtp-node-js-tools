@@ -2472,7 +2472,7 @@ __metadata:
     "@protobuf-ts/runtime": ^2.9.1
     "@protobuf-ts/runtime-rpc": ^2.9.1
     "@xmtp/proto": ^3.28.0-beta.1
-    "@xmtp/xmtp-js": 11.0.0-beta.9
+    "@xmtp/xmtp-js": ^11.0.0-beta.9
     pino: ^8.15.1
   languageName: unknown
   linkType: soft
