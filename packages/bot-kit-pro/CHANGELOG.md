@@ -1,5 +1,22 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.0
+
+### Minor Changes
+
+- [#17](https://github.com/xmtp/bot-kit-pro/pull/17) [`5096262`](https://github.com/xmtp/bot-kit-pro/commit/50962626053662300063465075368fd351aa1efe) Thanks [@neekolas](https://github.com/neekolas)! - Improve logging for GRPC API Client
+
+### Patch Changes
+
+- [#19](https://github.com/xmtp/bot-kit-pro/pull/19) [`a938b54`](https://github.com/xmtp/bot-kit-pro/commit/a938b54e0b5c95076bfc8bdb7b53a15b54d3926e) Thanks [@neekolas](https://github.com/neekolas)! - Break out fs-persistence and add documentation
+
+  - Makes `FsPersistence` its own package
+  - Adds README to all packages
+  - Passes XMTP configuration through to bots
+
+- Updated dependencies [[`5096262`](https://github.com/xmtp/bot-kit-pro/commit/50962626053662300063465075368fd351aa1efe), [`a938b54`](https://github.com/xmtp/bot-kit-pro/commit/a938b54e0b5c95076bfc8bdb7b53a15b54d3926e)]:
+  - @xmtp/grpc-api-client@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
