@@ -83,7 +83,7 @@ export default class Bot {
       privateKeyOverride: xmtpKeys,
       basePersistence,
       disablePersistenceEncryption: true,
-      apiClientFactory: GrpcApiClient.fromOptions,
+      // apiClientFactory: GrpcApiClient.fromOptions,
       ...config.clientOptions,
     })
     await findOrCreateBot(datasource, config.name)
