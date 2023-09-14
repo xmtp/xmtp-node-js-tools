@@ -1,6 +1,10 @@
 import { credentials } from "@grpc/grpc-js"
 import { GrpcTransport } from "@protobuf-ts/grpc-transport"
-import { DuplexStreamingCall, RpcError } from "@protobuf-ts/runtime-rpc"
+import {
+  DuplexStreamingCall,
+  RpcError,
+  ServerStreamingCall,
+} from "@protobuf-ts/runtime-rpc"
 import { messageApi } from "@xmtp/proto"
 import {
   ApiClient,
@@ -209,6 +213,52 @@ export default class GrpcApiClient implements ApiClient {
   }
 
   subscribe(
+    params: SubscribeParams,
+    callback: SubscribeCallback,
+    onConnectionLost: OnConnectionLostCallback,
+  ): SubscriptionManager {
+    const { contentTopics } = params
+    const req = {
+      contentTopics,
+    }
+    this.logger.info({ contentTopics }, "subscribing")
+    const abortController = new AbortController()
+    let stream: ServerStreamingCall<SubscribeRequest, Envelope>
+    const doSubscribe = async () => {
+      while (true) {
+        const startTime = new Date()
+        try {
+          stream = this.grpcClient.subscribe(req, {
+            abort: abortController.signal,
+          })
+
+          stream.responses.onMessage((msg) => callback(toHttpEnvelope(msg)))
+          await stream
+        } catch (e) {
+          if (isAbortError(e as RpcError)) {
+            this.logger.info({ contentTopics }, "aborting stream")
+            return
+          }
+          if (new Date().getTime() - startTime.getTime() < 1000) {
+            await sleep(1000)
+          }
+          onConnectionLost?.()
+          this.logger.error({ error: e }, "stream error")
+        }
+      }
+    }
+
+    doSubscribe()
+
+    return {
+      unsubscribe: async () => {
+        this.logger.info("unsubscribing")
+        abortController.abort()
+      },
+    }
+  }
+
+  subscribe2(
     params: SubscribeParams,
     callback: SubscribeCallback,
     onConnectionLost: OnConnectionLostCallback,
