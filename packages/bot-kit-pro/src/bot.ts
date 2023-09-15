@@ -254,7 +254,7 @@ export default class Bot {
       throw new Error("stream not initialized")
     }
     for await (const message of this.stream) {
-      this.logger.info("Received message")
+      this.logger.info({ messageId: message.id }, "Received message")
       if (!message?.content) {
         continue
       }
@@ -264,7 +264,7 @@ export default class Bot {
       }
       await this.saveMessage(message)
       this.processMessages().then(
-        () => this.logger.debug(`processed message: ${message.id}`),
+        () => this.logger.info(`processed message: ${message.id}`),
         (err) => this.logger.error({ error: err }, "processing messages"),
       )
     }
