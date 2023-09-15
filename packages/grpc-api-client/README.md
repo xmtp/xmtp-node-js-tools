@@ -1,6 +1,10 @@
 # GRPC API Client
 
+![Status](https://img.shields.io/badge/Project_status-Alpha-orange)
+
 An API Client that satisfies the `xmtp-js` `ApiClient` interface, to be used in Node.js applications.
+
+The GRPC API Client is _not yet ready to be used in production applications_
 
 ## Features
 
