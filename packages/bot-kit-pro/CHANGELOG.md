@@ -1,5 +1,14 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.1
+
+### Patch Changes
+
+- [#21](https://github.com/xmtp/bot-kit-pro/pull/21) [`9b4b5f4`](https://github.com/xmtp/bot-kit-pro/commit/9b4b5f4abfa2765267467fa8a30339bd9297a39a) Thanks [@neekolas](https://github.com/neekolas)! - Additional logging
+
+- Updated dependencies [[`9b4b5f4`](https://github.com/xmtp/bot-kit-pro/commit/9b4b5f4abfa2765267467fa8a30339bd9297a39a)]:
+  - @xmtp/grpc-api-client@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
