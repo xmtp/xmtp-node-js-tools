@@ -8,6 +8,7 @@
     "lint:fix": "eslint --fix .",
     "build": "turbo run build",
     "publish": "yarn build && changeset publish",
+    "release": "yarn workspaces foreach --no-private --all npm publish --access public && changeset tag",
     "test": "turbo run test"
   },
   "repository": {
@@ -57,5 +58,5 @@
     "typescript": "~5.2.2",
     "vitest": "^0.34.3"
   },
-  "packageManager": "yarn@3.6.3"
+  "packageManager": "yarn@4.0.0-rc.51"
 }
