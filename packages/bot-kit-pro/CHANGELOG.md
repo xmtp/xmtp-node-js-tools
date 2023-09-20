@@ -1,5 +1,11 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.3
+
+### Patch Changes
+
+- [#32](https://github.com/xmtp/bot-kit-pro/pull/32) [`7038316`](https://github.com/xmtp/bot-kit-pro/commit/7038316dac575a264f5c752bf2b4160a37878cb4) Thanks [@neekolas](https://github.com/neekolas)! - New release with hopefully correct package.json
+
 ## 0.2.2
 
 ### Patch Changes
