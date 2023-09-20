@@ -58,6 +58,10 @@ export default class GrpcApiClient implements ApiClient {
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
         host: apiUrl,
+        clientOptions: {
+          "grpc.keepalive_time_ms": 1000 * 60 * 5, // 5 minutes
+          "grpc.enable_retries": 1,
+        },
         channelCredentials: isSecure
           ? credentials.createSsl()
           : credentials.createInsecure(),
@@ -217,7 +221,6 @@ export default class GrpcApiClient implements ApiClient {
     const req = {
       contentTopics,
     }
-    this.logger.info({ contentTopics }, "subscribing")
     const abortController = new AbortController()
     let stream: DuplexStreamingCall<SubscribeRequest, Envelope>
     const doSubscribe = async () => {
