@@ -1,5 +1,11 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.4
+
+### Patch Changes
+
+- [#34](https://github.com/xmtp/bot-kit-pro/pull/34) [`b8baf75`](https://github.com/xmtp/bot-kit-pro/commit/b8baf75faaf6a09237297e17fcc52e15bc508a39) Thanks [@neekolas](https://github.com/neekolas)! - Use npm publish command
+
 ## 0.2.3
 
 ### Patch Changes
