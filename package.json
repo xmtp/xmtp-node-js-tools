@@ -8,7 +8,7 @@
     "lint:fix": "eslint --fix .",
     "build": "turbo run build",
     "publish": "yarn build && changeset publish",
-    "release": "yarn workspaces foreach --no-private --all npm publish --access public && changeset tag",
+    "release": "yarn workspaces foreach --no-private --all npm publish --access public --tolerate-republish && changeset tag",
     "test": "turbo run test"
   },
   "repository": {
