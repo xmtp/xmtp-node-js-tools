@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Build packages
+        run: yarn build
+
       - name: Set auth token
         run: |
           echo npmAuthToken: "${{ secrets.NPM_TOKEN }}" >> ./.yarnrc.yml
