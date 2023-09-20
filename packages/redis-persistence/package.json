@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/redis-persistence",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Redis-backed persistence layer for XMTP",
   "type": "module",
   "main": "dist/src/index.js",
