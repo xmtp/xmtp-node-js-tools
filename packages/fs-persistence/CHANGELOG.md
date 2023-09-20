@@ -1,5 +1,11 @@
 # @xmtp/fs-persistence
 
+## 0.0.4
+
+### Patch Changes
+
+- [#36](https://github.com/xmtp/bot-kit-pro/pull/36) [`45684a5`](https://github.com/xmtp/bot-kit-pro/commit/45684a513d306d4eff3503451a6a3fcd3c42dfb2) Thanks [@neekolas](https://github.com/neekolas)! - Fix package publishing
+
 ## 0.0.3
 
 ### Patch Changes
