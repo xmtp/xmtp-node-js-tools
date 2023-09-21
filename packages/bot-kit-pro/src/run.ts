@@ -18,6 +18,7 @@ export default async function (
   }
 
   return {
+    bots,
     stop: async () => {
       for (const bot of bots) {
         await bot.stop()
