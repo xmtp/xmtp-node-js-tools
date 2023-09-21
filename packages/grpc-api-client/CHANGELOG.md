@@ -1,5 +1,11 @@
 # @xmtp/grpc-api-client
 
+## 0.2.4
+
+### Patch Changes
+
+- [#38](https://github.com/xmtp/bot-kit-pro/pull/38) [`29e1897`](https://github.com/xmtp/bot-kit-pro/commit/29e1897e96a039786ab69a86555aa433b65d5814) Thanks [@neekolas](https://github.com/neekolas)! - Move logging down a level
+
 ## 0.2.3
 
 ### Patch Changes
