@@ -1,5 +1,11 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.7
+
+### Patch Changes
+
+- [#40](https://github.com/xmtp/bot-kit-pro/pull/40) [`ff8d124`](https://github.com/xmtp/bot-kit-pro/commit/ff8d1241fe895c23b24127e47c6b083ca3086021) Thanks [@neekolas](https://github.com/neekolas)! - Expose the client address of the bot to the callers
+
 ## 0.2.6
 
 ### Patch Changes
