@@ -15,7 +15,7 @@
     "provenance": true
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.9.2",
+    "@grpc/grpc-js": "^1.9.3",
     "@protobuf-ts/grpc-transport": "^2.9.1",
     "@protobuf-ts/runtime": "^2.9.1",
     "@protobuf-ts/runtime-rpc": "^2.9.1",
