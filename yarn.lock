@@ -1894,14 +1894,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redis/client@npm:^1.5.9":
-  version: 1.5.9
-  resolution: "@redis/client@npm:1.5.9"
+"@redis/client@npm:^1.5.11":
+  version: 1.5.11
+  resolution: "@redis/client@npm:1.5.11"
   dependencies:
     cluster-key-slot: "npm:1.1.2"
     generic-pool: "npm:3.9.0"
     yallist: "npm:4.0.0"
-  checksum: e40d6e6faadb54e299ee220b81ec1a88414e05323ac195aad97bf4a088f39b3494656677eeacb9a3bd5bf88ecaa141b90d55f7272631a865630c2c3e4a5ff355
+  checksum: 956fc0bfe2fa670de57addc4395c4f591b0ca31ba2b7a43453d53b7bb043b43f6032ec292f3182832bc509b3cc2ffce11f5d8d7cced139bddbdda2893616ee93
   languageName: node
   linkType: hard
 
@@ -2511,7 +2511,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/redis-persistence@workspace:packages/redis-persistence"
   dependencies:
-    "@redis/client": "npm:^1.5.9"
+    "@redis/client": "npm:^1.5.11"
     "@xmtp/xmtp-js": "npm:11.0.0-beta.9"
   languageName: unknown
   linkType: soft
