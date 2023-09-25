@@ -10,7 +10,7 @@
     "test": "yarn start-redis && vitest run ."
   },
   "dependencies": {
-    "@redis/client": "^1.5.9"
+    "@redis/client": "^1.5.11"
   },
   "engines": {
     "node": ">=18"
