@@ -33,6 +33,6 @@
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
   "packageManager": "yarn@4.0.0-rc.51",
   "devDependencies": {
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.6"
   }
 }
