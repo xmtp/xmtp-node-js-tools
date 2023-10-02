@@ -2458,7 +2458,7 @@ __metadata:
     eslint-config-standard: "npm:^17.1.0"
     eslint-plugin-import: "npm:^2.28.1"
     eslint-plugin-jest: "npm:^27.4.0"
-    eslint-plugin-n: "npm:^16.0.2"
+    eslint-plugin-n: "npm:^16.1.0"
     eslint-plugin-prettier: "npm:^5.0.0"
     eslint-plugin-promise: "npm:^6.1.1"
     eslint-plugin-simple-import-sort: "npm:^10.0.0"
@@ -4339,13 +4339,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^16.0.2":
-  version: 16.0.2
-  resolution: "eslint-plugin-n@npm:16.0.2"
+"eslint-plugin-n@npm:^16.1.0":
+  version: 16.1.0
+  resolution: "eslint-plugin-n@npm:16.1.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.0"
     builtins: "npm:^5.0.1"
     eslint-plugin-es-x: "npm:^7.1.0"
+    get-tsconfig: "npm:^4.7.0"
     ignore: "npm:^5.2.4"
     is-core-module: "npm:^2.12.1"
     minimatch: "npm:^3.1.2"
@@ -4353,7 +4354,7 @@ __metadata:
     semver: "npm:^7.5.3"
   peerDependencies:
     eslint: ">=7.0.0"
-  checksum: e05c04e308c93fa0c5b6a21c072d482a7e06569209f66aed00f02b670d2a44784965765fbc130f860f0fd4398c25ca7bdc9c7ba41ef1e000d6e11aeb79f2becd
+  checksum: b18df35865ca34cae488dae08c5fef80bae2fde05f9192d72a5c4e6d147131a38a2f97fb7768a8351d01c9fc1e82a57a85ea6f22c1477d7fb10561f942a16527
   languageName: node
   linkType: hard
 
@@ -5093,6 +5094,15 @@ __metadata:
   dependencies:
     resolve-pkg-maps: "npm:^1.0.0"
   checksum: acfa48078ab41728281adee0a2dde1d4f437998291af8f189f7c171a766f45ac5ca1cbc335baf8db118a54acf2eb01e7e075c22d3804990048bbf4b94563681a
+  languageName: node
+  linkType: hard
+
+"get-tsconfig@npm:^4.7.0":
+  version: 4.7.2
+  resolution: "get-tsconfig@npm:4.7.2"
+  dependencies:
+    resolve-pkg-maps: "npm:^1.0.0"
+  checksum: f21135848fb5d16012269b7b34b186af7a41824830f8616aba17a15eb4d9e54fdc876833f1e21768395215a826c8145582f5acd594ae2b4de3284d10b38d20f8
   languageName: node
   linkType: hard
 
