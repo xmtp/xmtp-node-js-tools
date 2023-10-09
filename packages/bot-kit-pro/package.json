@@ -20,7 +20,7 @@
     "ethers": "^6.7.1",
     "long": "^5.2.3",
     "pino": "^8.15.7",
-    "pino-pretty": "^10.2.0",
+    "pino-pretty": "^10.2.3",
     "postgres": "^3.3.5"
   },
   "publishConfig": {

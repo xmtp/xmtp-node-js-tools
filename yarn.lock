@@ -2653,7 +2653,7 @@ __metadata:
     ethers: "npm:^6.7.1"
     long: "npm:^5.2.3"
     pino: "npm:^8.15.7"
-    pino-pretty: "npm:^10.2.0"
+    pino-pretty: "npm:^10.2.3"
     postgres: "npm:^3.3.5"
     vitest: "npm:^0.34.6"
   languageName: unknown
@@ -7907,9 +7907,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "pino-pretty@npm:10.2.0"
+"pino-pretty@npm:^10.2.3":
+  version: 10.2.3
+  resolution: "pino-pretty@npm:10.2.3"
   dependencies:
     colorette: "npm:^2.0.7"
     dateformat: "npm:^4.6.3"
@@ -7927,7 +7927,7 @@ __metadata:
     strip-json-comments: "npm:^3.1.1"
   bin:
     pino-pretty: bin.js
-  checksum: cc450aaaaead4e2f7dabf562fbf6cad02067c69fade2bf77410bf8f32b5861d4ad87816dab490ca8ec6c67586fbc9ed636e614a4c82d9e9bdc5c28a560bf6731
+  checksum: 05f79bd8e6261f8d91010fb169dd36b075ce2dfc53b5e4f6382b65c38f6ad487c9f737b44a97df4b69933a8ba1adb98135833373f5dcf8ff1f02de0415f6e56b
   languageName: node
   linkType: hard
 
