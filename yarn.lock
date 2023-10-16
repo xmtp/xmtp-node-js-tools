@@ -12,10 +12,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@adraffy/ens-normalize@npm:1.9.2":
-  version: 1.9.2
-  resolution: "@adraffy/ens-normalize@npm:1.9.2"
-  checksum: 5f33f6570d6e4017b9afdf0dd8ff64af05f7e1cc09c9b30a17460451b9ec2655a979e272148470fabdd8cbad9fb4b750a216387b4f87ae2389023b7e3f9d8ad7
+"@adraffy/ens-normalize@npm:1.10.0":
+  version: 1.10.0
+  resolution: "@adraffy/ens-normalize@npm:1.10.0"
+  checksum: 5cdb5d2a9c9f8c0a71a7bb830967da0069cae1f1235cd41ae11147e4000f368f6958386e622cd4d52bf45c1ed3f8275056b387cba28902b83354e40ff323ecde
   languageName: node
   linkType: hard
 
@@ -1876,14 +1876,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/hashes@npm:1.1.2":
-  version: 1.1.2
-  resolution: "@noble/hashes@npm:1.1.2"
-  checksum: 2826c94ea30b8d2447fda549f4ffa97a637a480eeef5c96702a2f932c305038465f7436caf5b2bad41eb43c08c270b921e101488b18165feebe3854091b56d91
+"@noble/curves@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@noble/curves@npm:1.2.0"
+  dependencies:
+    "@noble/hashes": "npm:1.3.2"
+  checksum: 94e02e9571a9fd42a3263362451849d2f54405cb3ce9fa7c45bc6b9b36dcd7d1d20e2e1e14cfded24937a13d82f1e60eefc4d7a14982ce0bc219a9fc0f51d1f9
   languageName: node
   linkType: hard
 
-"@noble/secp256k1@npm:1.7.1, @noble/secp256k1@npm:^1.5.2":
+"@noble/hashes@npm:1.3.2":
+  version: 1.3.2
+  resolution: "@noble/hashes@npm:1.3.2"
+  checksum: 685f59d2d44d88e738114b71011d343a9f7dce9dfb0a121f1489132f9247baa60bc985e5ec6f3213d114fbd1e1168e7294644e46cbd0ce2eba37994f28eeb51b
+  languageName: node
+  linkType: hard
+
+"@noble/secp256k1@npm:^1.5.2":
   version: 1.7.1
   resolution: "@noble/secp256k1@npm:1.7.1"
   checksum: 214d4756c20ed20809d948d0cc161e95664198cb127266faf747fd7deffe5444901f05fe9f833787738f2c6e60b09e544c2f737f42f73b3699e3999ba15b1b63
@@ -2650,7 +2659,7 @@ __metadata:
     "@xmtp/xmtp-js": "npm:^11.0.0-beta.9"
     drizzle-kit: "npm:^0.19.13"
     drizzle-orm: "npm:^0.28.6"
-    ethers: "npm:^6.7.1"
+    ethers: "npm:^6.8.0"
     long: "npm:^5.2.3"
     pino: "npm:^8.15.7"
     pino-pretty: "npm:^10.2.3"
@@ -4878,18 +4887,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^6.7.1":
-  version: 6.7.1
-  resolution: "ethers@npm:6.7.1"
+"ethers@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "ethers@npm:6.8.0"
   dependencies:
-    "@adraffy/ens-normalize": "npm:1.9.2"
-    "@noble/hashes": "npm:1.1.2"
-    "@noble/secp256k1": "npm:1.7.1"
+    "@adraffy/ens-normalize": "npm:1.10.0"
+    "@noble/curves": "npm:1.2.0"
+    "@noble/hashes": "npm:1.3.2"
     "@types/node": "npm:18.15.13"
     aes-js: "npm:4.0.0-beta.5"
     tslib: "npm:2.4.0"
     ws: "npm:8.5.0"
-  checksum: 22aaead7e3df97e642eea7318d89c17833b18ab9c6d605545f4e546f1129bfb91ed55868362d11f294b4733c23b901862ea696a08a48302d047777eda2ca430e
+  checksum: aef6402a541eae7d2540b88d18a5b170657219b6d5ca083856af5a9900bb279c1ff4afcf227f75a19533274022f0ae5f3d0098de43e0d4e35145948895cf4540
   languageName: node
   linkType: hard
 
