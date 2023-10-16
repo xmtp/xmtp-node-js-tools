@@ -2506,7 +2506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:6.7.5":
+"@typescript-eslint/utils@npm:6.7.5, @typescript-eslint/utils@npm:^6.6.0":
   version: 6.7.5
   resolution: "@typescript-eslint/utils@npm:6.7.5"
   dependencies:
@@ -2538,23 +2538,6 @@ __metadata:
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   checksum: 15ef13e43998a082b15f85db979f8d3ceb1f9ce4467b8016c267b1738d5e7cdb12aa90faf4b4e6dd6486c236cf9d33c463200465cf25ff997dbc0f12358550a1
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/utils@npm:^6.5.0":
-  version: 6.6.0
-  resolution: "@typescript-eslint/utils@npm:6.6.0"
-  dependencies:
-    "@eslint-community/eslint-utils": "npm:^4.4.0"
-    "@types/json-schema": "npm:^7.0.12"
-    "@types/semver": "npm:^7.5.0"
-    "@typescript-eslint/scope-manager": "npm:6.6.0"
-    "@typescript-eslint/types": "npm:6.6.0"
-    "@typescript-eslint/typescript-estree": "npm:6.6.0"
-    semver: "npm:^7.5.4"
-  peerDependencies:
-    eslint: ^7.0.0 || ^8.0.0
-  checksum: 71dc5100e8a89f5359525f5b17ec9a9aeb7d973bf32dc1c54c8b8f7035bbc66eec156374d82663c1839459fcef41892eb59da498cc63f91a81ff5bbacd530d3d
   languageName: node
   linkType: hard
 
@@ -2687,7 +2670,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.0.0"
     eslint-plugin-promise: "npm:^6.1.1"
     eslint-plugin-simple-import-sort: "npm:^10.0.0"
-    eslint-plugin-vitest: "npm:^0.3.1"
+    eslint-plugin-vitest: "npm:^0.3.2"
     jest: "npm:^29.7.0"
     prettier: "npm:^3.0.3"
     ts-jest: "npm:^29.1.1"
@@ -4699,19 +4682,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vitest@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "eslint-plugin-vitest@npm:0.3.1"
+"eslint-plugin-vitest@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "eslint-plugin-vitest@npm:0.3.2"
   dependencies:
-    "@typescript-eslint/utils": "npm:^6.5.0"
-    typescript: "npm:^5.2.2"
+    "@typescript-eslint/utils": "npm:^6.6.0"
   peerDependencies:
     eslint: ">=8.0.0"
     vitest: "*"
   peerDependenciesMeta:
     "@typescript-eslint/eslint-plugin":
       optional: true
-  checksum: 6f55ecc46aa13d1a30a0914d08714a74ebf72894541396885faaf25d475b0a78d43c87cfb18c0e8a3ea596ddf4604ac6fec445d51eb8343975f6de4d20b56379
+  checksum: 301827d33c2be53c8aceb3e821991db8bac4dae4d2df4b944485c0427549a2a7069c58ab9ceba75eeb08484788c6e673db50c46596076c06c4b039ac36215c7f
   languageName: node
   linkType: hard
 
@@ -9466,7 +9448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2, typescript@npm:~5.2.2":
+"typescript@npm:~5.2.2":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
   bin:
@@ -9476,7 +9458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.2.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A~5.2.2#optional!builtin<compat/typescript>":
   version: 5.2.2
   resolution: "typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"
   bin:
