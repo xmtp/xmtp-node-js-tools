@@ -1476,13 +1476,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grpc/grpc-js@npm:^1.9.5":
-  version: 1.9.5
-  resolution: "@grpc/grpc-js@npm:1.9.5"
+"@grpc/grpc-js@npm:^1.9.7":
+  version: 1.9.7
+  resolution: "@grpc/grpc-js@npm:1.9.7"
   dependencies:
     "@grpc/proto-loader": "npm:^0.7.8"
     "@types/node": "npm:>=12.12.47"
-  checksum: 5499d964d29601ad1850e45aaeccbfaa980dfffbe6bd4fdd587ef3cf4cc62d69dadf2ee8eb1d6220c468607cef70ae55d24eccfc57a51f453e965a82a3fd1f77
+  checksum: f3104888bf04c0b09b27ba3e3dfa5b6ce228411d66f53c0ac7a5c2ec4405f46a855fd3321a0834d6e9129f75245827ae461b2ddff6e5953d22ff2a01f3985a63
   languageName: node
   linkType: hard
 
@@ -2695,7 +2695,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/grpc-api-client@workspace:packages/grpc-api-client"
   dependencies:
-    "@grpc/grpc-js": "npm:^1.9.5"
+    "@grpc/grpc-js": "npm:^1.9.7"
     "@protobuf-ts/grpc-transport": "npm:^2.9.1"
     "@protobuf-ts/runtime": "npm:^2.9.1"
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
