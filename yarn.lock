@@ -2646,7 +2646,7 @@ __metadata:
     drizzle-orm: "npm:^0.28.6"
     ethers: "npm:^6.8.0"
     long: "npm:^5.2.3"
-    pino: "npm:^8.16.0"
+    pino: "npm:^8.16.1"
     pino-pretty: "npm:^10.2.3"
     postgres: "npm:^3.3.5"
     vitest: "npm:^0.34.6"
@@ -2701,7 +2701,7 @@ __metadata:
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
     "@xmtp/proto": "npm:^3.28.0-beta.1"
     "@xmtp/xmtp-js": "npm:^11.0.0-beta.9"
-    pino: "npm:^8.16.0"
+    pino: "npm:^8.16.1"
   languageName: unknown
   linkType: soft
 
@@ -7931,9 +7931,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:^8.16.0":
-  version: 8.16.0
-  resolution: "pino@npm:8.16.0"
+"pino@npm:^8.16.1":
+  version: 8.16.1
+  resolution: "pino@npm:8.16.1"
   dependencies:
     atomic-sleep: "npm:^1.0.0"
     fast-redact: "npm:^3.1.1"
@@ -7948,7 +7948,7 @@ __metadata:
     thread-stream: "npm:^2.0.0"
   bin:
     pino: bin.js
-  checksum: f6bde350c476ca9edb5ccc50376fc02ba5c1ba7c2c67b1f76e9c24101bc6f1e799e010f3b02044952a08c617dbdfb091743754bf313197785426976ff23a66ab
+  checksum: 8f7b9bd8a2cd605b20654f15c240769e17835be93c67fd422d4ed8ab1a6b7b3806c8be9f91e94d013660fac2ca3c1dd2b625a8bc0f3ce426b465f708670124f9
   languageName: node
   linkType: hard
 
