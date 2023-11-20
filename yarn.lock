@@ -2717,7 +2717,7 @@ __metadata:
     long: "npm:^5.2.3"
     pino: "npm:^8.16.1"
     pino-pretty: "npm:^10.2.3"
-    postgres: "npm:^3.3.5"
+    postgres: "npm:^3.4.3"
     vitest: "npm:^0.34.6"
   languageName: unknown
   linkType: soft
@@ -8100,10 +8100,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postgres@npm:^3.3.5":
-  version: 3.3.5
-  resolution: "postgres@npm:3.3.5"
-  checksum: 0f7288527c6f0ae9871950f5aafc600134ed35b17cc647ab5696f5125cd45136b6d254c7f02b77a446edbc54a9dea335f3a69cc044c0fb0ef6de887bfcb3b65f
+"postgres@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "postgres@npm:3.4.3"
+  checksum: 13603374a0f3fcc228f69fb7db64f9faaf42ad9eb6df8a76632162b0bbbe78e30a22b4b7c8b4dcc80275502b42c9b053bf9defbe5898358c84909ff8ad620225
   languageName: node
   linkType: hard
 
