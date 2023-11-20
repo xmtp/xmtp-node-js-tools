@@ -21,12 +21,13 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
           cache: "yarn"
+        env:
+          SKIP_YARN_COREPACK_CHECK: "1"
 
       - name: Install Yarn v3
         run: |
