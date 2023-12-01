@@ -19,8 +19,10 @@
     "@protobuf-ts/grpc-transport": "^2.9.1",
     "@protobuf-ts/runtime": "^2.9.1",
     "@protobuf-ts/runtime-rpc": "^2.9.1",
-    "@xmtp/proto": "^3.28.0-beta.1",
-    "@xmtp/xmtp-js": "^11.0.0-beta.9",
+    "@xmtp/grpc-api-client": "^0.2.4",
+    "@xmtp/proto": "^3.34.0",
+    "@xmtp/xmtp-js": "^11.2.2",
+    "ethers": "^5.7.0",
     "pino": "^8.15.7"
   },
   "scripts": {
@@ -35,5 +37,5 @@
     "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
-  "packageManager": "yarn@4.0.0-rc.51"
+  "packageManager": "yarn@4.0.0"
 }
