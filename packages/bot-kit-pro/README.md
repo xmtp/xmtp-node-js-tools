@@ -2,14 +2,6 @@
 
 Bot Kit Pro is a database-backed bot framework for running high reliability XMTP bots. It provides a simple way to create, configure, and run bots with a focus on reliability and state management.
 
-### Installation
-
-To install Bot Kit Pro, you can use the yarn package manager:
-
-```bash
-yarn add @xmtp/bot-kit-pro
-```
-
 ### Requirements
 
 - A Postgres database (tested with version 13 and above)
