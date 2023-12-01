@@ -3,18 +3,21 @@ import { Wallet } from "ethers"
 import { GrpcApiClient } from "@xmtp/grpc-api-client"
 
 const main = async () => {
-  console.log("je")
   try {
-    const client = await Client.create(Wallet.createRandom())
-    console.log(client.address)
+    const client = await Client.create(Wallet.createRandom(), {
+      env: "production",
+    })
+    console.log("Non grpc:", client.address)
     const clientA = await Client.create(Wallet.createRandom(), {
+      env: "production",
       apiClientFactory: GrpcApiClient.fromOptions,
     })
-    console.log(clientA.address)
+    console.log("Grpc1:", clientA.address)
     const clientB = await Client.create(Wallet.createRandom(), {
+      env: "production",
       apiClientFactory: GrpcApiClient.fromOptions,
     })
-    console.log(clientB.address)
+    console.log("Grpc2:", clientB.address)
   } catch (e) {
     console.log(e)
   }
