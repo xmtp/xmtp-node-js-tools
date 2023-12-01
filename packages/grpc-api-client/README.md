@@ -12,6 +12,14 @@ The GRPC API Client is _not yet ready to be used in production applications_
 - Uses the XMTP `Subscribe2` endpoint to allow updating subscriptions without closing the connection
 - Configurable logger using `pino`
 
+## Running tests
+
+Use npm for running test through vitest
+
+```
+npm test
+```
+
 ## Usage
 
 ```ts

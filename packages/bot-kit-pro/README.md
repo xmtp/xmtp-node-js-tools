@@ -1,17 +1,29 @@
 # Bot Kit Pro
 
-## Requirements
+Bot Kit Pro is a database-backed bot framework for running high reliability XMTP bots. It provides a simple way to create, configure, and run bots with a focus on reliability and state management.
+
+### Installation
+
+To install Bot Kit Pro, you can use the yarn package manager:
+
+```bash
+yarn add @xmtp/bot-kit-pro
+```
+
+### Requirements
 
 - A Postgres database (tested with version 13 and above)
+- Docker running
 - `yarn` package manager version 2.x or 3.x
 
-## Running tests
+### Running tests
 
 1. `yarn`
-2. `./dev/up`
-3. `yarn test`
+2. Open docker
+3. `./dev/up`
+4. `yarn test`
 
-## Usage
+### Usage
 
 Here is a minimal example of using bot-kit-pro in your application:
 
@@ -49,8 +61,8 @@ If no application config is specified, default values are provided that correspo
 
 ## Bot State Management
 
-TODO
+Bot state management is handled by the framework. The state of each bot and conversation is stored in the database, allowing for reliable recovery in case of failures. The state can be accessed and modified in the bot handler function.
 
 ## Viewing Bot State
 
-TODO
+The state of the bots and conversations can be viewed directly in the Postgres database. The [bots](package.json#4%2C85-4%2C85), [conversations](src/bot.test.ts#12%2C10-12%2C10), and [messages](src/bot.test.ts#12%2C25-12%2C25) tables contain the relevant information.
