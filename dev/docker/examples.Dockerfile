@@ -1,6 +1,6 @@
 FROM node:18
 
-RUN corepack enable && corepack prepare yarn@4.0.0 --activate
+RUN corepack enable && corepack prepare yarn@4.0.0-rc.51 --activate
 
 COPY . /app/
 WORKDIR /app
