@@ -10,7 +10,7 @@
     "copyMigrations": "cp -Rf ./src/migrations ./dist/src/migrations",
     "up": "./dev/up",
     "prepublishOnly": "yarn build",
-    "test": "vitest run ./src"
+    "test": "./dev/up && vitest run ./src"
   },
   "dependencies": {
     "@xmtp/grpc-api-client": "workspace:*",
