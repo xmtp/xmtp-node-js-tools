@@ -3091,7 +3091,7 @@ __metadata:
   resolution: "@xmtp/bot-examples@workspace:packages/bot-examples"
   dependencies:
     "@xmtp/bot-kit-pro": "workspace:*"
-    openai: "npm:^4.11.0"
+    openai: "npm:^4.20.1"
   languageName: unknown
   linkType: soft
 
@@ -8491,9 +8491,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openai@npm:^4.11.0":
-  version: 4.11.0
-  resolution: "openai@npm:4.11.0"
+"openai@npm:^4.20.1":
+  version: 4.20.1
+  resolution: "openai@npm:4.20.1"
   dependencies:
     "@types/node": "npm:^18.11.18"
     "@types/node-fetch": "npm:^2.6.4"
@@ -8503,9 +8503,10 @@ __metadata:
     form-data-encoder: "npm:1.7.2"
     formdata-node: "npm:^4.3.2"
     node-fetch: "npm:^2.6.7"
+    web-streams-polyfill: "npm:^3.2.1"
   bin:
     openai: bin/cli
-  checksum: e35dff01ae0d18c857541c9ff6bf44100497ff8abe39073f6681e75fb1384ce878b20bcca160dbae0160dc9de2d7c08778b6071b076e25cc1b3a9363525da183
+  checksum: c80c08c9cc39e64114e8bd41f8580223638476aa9fe5e11a5b505128350fcceb1fe6886004c9b37431b4520bec91815e897f545335b24f8f15bdd69c7185af45
   languageName: node
   linkType: hard
 
@@ -10728,6 +10729,13 @@ __metadata:
   version: 4.0.0-beta.3
   resolution: "web-streams-polyfill@npm:4.0.0-beta.3"
   checksum: dcdef67de57d83008f9dc330662b65ba4497315555dd0e4e7bcacb132ffdf8a830eaab8f74ad40a4a44f542461f51223f406e2a446ece1cc29927859b1405853
+  languageName: node
+  linkType: hard
+
+"web-streams-polyfill@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "web-streams-polyfill@npm:3.2.1"
+  checksum: 08fcf97b7883c1511dd3da794f50e9bde75a660884783baaddb2163643c21a94086f394dc4bd20dff0f55c98d98d60c4bea05a5809ef5005bdf835b63ada8900
   languageName: node
   linkType: hard
 
