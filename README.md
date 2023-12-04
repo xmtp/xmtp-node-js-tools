@@ -22,6 +22,14 @@ A common complaint from developers using XMTP to build bots is the high cost of 
 
 No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
+### 🧑🏻‍💻 CLI Starter
+
+Starter project for building an XMTP CLI. It provides a basic setup and examples to get started with building a command-line interface for XMTP.
+
+### Bot Starter
+
+This repo makes it easier to create a bot on the XMTP network. It provides a basic setup and examples to get started with bot creation
+
 ## Packages
 
 This repo contains the following packages
@@ -30,6 +38,8 @@ This repo contains the following packages
 - [GRPC API CLient](./packages/grpc-api-client/README.md)
 - [Redis Persistence](./packages/redis-persistence/README.md)
 - [Bot Examples](./packages/bot-examples/)
+- [Bot Starter](./packages/bot-starter/)
+- [CLI Starter](./packages/cli-starter/)
 
 ## Usage
 
