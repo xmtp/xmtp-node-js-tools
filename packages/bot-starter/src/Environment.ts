@@ -1,10 +1,4 @@
-export type ProcessEnv = {
-  KEY: string | undefined
-  XMTP_ENV: "dev" | "production"
-}
-
-declare module "process" {
-  interface Process {
-    env: ProcessEnv
-  }
+export type ProcessEnv = NodeJS.ProcessEnv & {
+  KEY?: string
+  XMTP_ENV?: "dev" | "production"
 }

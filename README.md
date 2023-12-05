@@ -22,6 +22,14 @@ A common complaint from developers using XMTP to build bots is the high cost of 
 
 No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
+### 🧑🏻‍💻 CLI Starter
+
+Starter project for building an XMTP CLI. It provides a basic setup and examples to get started with building a command-line interface for XMTP.
+
+### Bot Starter
+
+This repo makes it easier to create a bot on the XMTP network. It provides a basic setup and examples to get started with bot creation
+
 ## Packages
 
 This repo contains the following packages
@@ -30,45 +38,5 @@ This repo contains the following packages
 - [GRPC API CLient](./packages/grpc-api-client/README.md)
 - [Redis Persistence](./packages/redis-persistence/README.md)
 - [Bot Examples](./packages/bot-examples/)
-
-## Usage
-
-Let's create a simple bot that uses both the `botState` and `conversationState` to keep track of a waitlist for an event.
-
-```ts
-import { HandlerContext, newBotConfig, run } from "@xmtp/bot-kit-pro"
-
-type BotState = {
-  waitListLength?: number
-}
-
-type ConvoState = {
-  isOnWaitlist?: boolean
-}
-/**
- * A simple bot that adds each user to a waitlist and keeps track of how many members are ahead of them
- */
-function waitlist(ctx: HandlerContext<ConvoState, BotState>) {
-  // Check the conversation state to see if the user has already been added
-  if (ctx.conversationState.isOnWaitlist) {
-    return ctx.reply("You're already on the waitlist!")
-  }
-  // Increment the waitListLength variable for the new member
-  ctx.botState.waitListLength = (ctx.botState.waitListLength || 0) + 1
-
-  ctx.conversationState.isOnWaitlist = true
-  //   Send a reply
-  ctx.reply(
-    `You are on the waitlist in position ${ctx.botState.waitListLength}`,
-  )
-}
-
-const config = newBotConfig(
-  "waitlist",
-  {
-    xmtpKeys: process.env.XMTP_KEYS,
-    xmtpEnv: "dev",
-  },
-  waitlist,
-)
-```
+- [Bot Starter](./packages/bot-starter/)
+- [CLI Starter](./packages/cli-starter/)

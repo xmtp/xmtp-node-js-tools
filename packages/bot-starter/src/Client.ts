@@ -17,7 +17,8 @@ export default async function createClient(): Promise<Client> {
   }
 
   const client = await Client.create(wallet, {
-    env: process.env.XMTP_ENV || "production",
+    env:
+      (process.env.XMTP_ENV as "dev" | "production" | "local") || "production",
   })
 
   await client.publishUserContact()
