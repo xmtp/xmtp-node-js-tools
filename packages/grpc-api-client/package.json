@@ -27,8 +27,8 @@
     "clean": "rm -rf dist",
     "build": "yarn clean && tsc",
     "prepublishOnly": "yarn build",
-    "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1",
-    "test": "vitest run ./src"
+    "test": "vitest run ./src",
+    "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1"
   },
   "author": "XMTP Labs <eng@xmtp.com>",
   "license": "MIT",

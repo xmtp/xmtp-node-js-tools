@@ -15,7 +15,9 @@
     "provenance": true
   },
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && tsc",
+    "prepublishOnly": "yarn build",
     "test": "vitest run ./src"
   },
   "repository": {

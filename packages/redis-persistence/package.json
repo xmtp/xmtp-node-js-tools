@@ -6,7 +6,9 @@
   "main": "dist/src/index.js",
   "scripts": {
     "start-redis": "docker-compose up -d",
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && tsc",
+    "prepublishOnly": "yarn build",
     "test": "yarn start-redis && vitest run ."
   },
   "dependencies": {
