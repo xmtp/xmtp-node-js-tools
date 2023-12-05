@@ -2610,6 +2610,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jest@npm:^29.5.0":
+  version: 29.5.10
+  resolution: "@types/jest@npm:29.5.10"
+  dependencies:
+    expect: "npm:^29.0.0"
+    pretty-format: "npm:^29.0.0"
+  checksum: f31cdc9cf840a3bc2230148bb5cba1e0369e3180ae75d85804038905300dd8cfa1d989a4dbbd909633c04568d0c1a9251b2ee5c4197309ec033403dd2a08ea42
+  languageName: node
+  linkType: hard
+
 "@types/jest@npm:^29.5.7":
   version: 29.5.7
   resolution: "@types/jest@npm:29.5.7"
@@ -2685,6 +2695,15 @@ __metadata:
   version: 18.17.11
   resolution: "@types/node@npm:18.17.11"
   checksum: 5a10610fcb1fc3c30cfc2eea68a87ac4febd714963f6fabe8fdeea69e577107470829411e3af94d86d6ede26c9a3aa869a584035004c5becdb826d2d0146e22c
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.15.3":
+  version: 18.19.2
+  resolution: "@types/node@npm:18.19.2"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 122958ac4be81ea2b53da53de29441f8d98d572cc5c704c6bba788343281a47185a405cf0c650a702b7549e09584a7a39a51f27658088a8d8192163bcac079a0
   languageName: node
   linkType: hard
 
@@ -3113,6 +3132,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@xmtp/bot-starter@workspace:packages/bot-starter":
+  version: 0.0.0-use.local
+  resolution: "@xmtp/bot-starter@workspace:packages/bot-starter"
+  dependencies:
+    "@types/jest": "npm:^29.5.0"
+    "@types/node": "npm:^18.15.3"
+    "@xmtp/xmtp-js": "npm:^10.0.0"
+    dotenv: "npm:^16.3.1"
+    jest: "npm:^29.5.0"
+    prettier: "npm:^2.8.5"
+    ts-jest: "npm:^29.0.5"
+    typescript: "npm:^5.1.3"
+  languageName: unknown
+  linkType: soft
+
 "@xmtp/bot-tools@workspace:.":
   version: 0.0.0-use.local
   resolution: "@xmtp/bot-tools@workspace:."
@@ -3165,6 +3199,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@xmtp/proto@npm:^3.24.0, @xmtp/proto@npm:^3.34.0":
+  version: 3.34.0
+  resolution: "@xmtp/proto@npm:3.34.0"
+  dependencies:
+    long: "npm:^5.2.0"
+    protobufjs: "npm:^7.0.0"
+    rxjs: "npm:^7.8.0"
+    undici: "npm:^5.8.1"
+  checksum: 9aeda8805f6dd73394722dc5b30ca512c01c7b5bc3553bd3528474b3c8ff212958f4c86fd6f1227aba73f1a816a644941c0d1c8f4ca74d3a65c6d5c7c1581c7a
+  languageName: node
+  linkType: hard
+
 "@xmtp/proto@npm:^3.28.0-beta.1":
   version: 3.28.0-beta.1
   resolution: "@xmtp/proto@npm:3.28.0-beta.1"
@@ -3174,18 +3220,6 @@ __metadata:
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
   checksum: 466bd4ec5bbee982865feaa62ab4bb0cf3ba5766ffecca5b8130690a4537f6eb4f6f115a15f7f3028a9d923e0402496769252f3e927979f91569f23b137f7140
-  languageName: node
-  linkType: hard
-
-"@xmtp/proto@npm:^3.34.0":
-  version: 3.34.0
-  resolution: "@xmtp/proto@npm:3.34.0"
-  dependencies:
-    long: "npm:^5.2.0"
-    protobufjs: "npm:^7.0.0"
-    rxjs: "npm:^7.8.0"
-    undici: "npm:^5.8.1"
-  checksum: 9aeda8805f6dd73394722dc5b30ca512c01c7b5bc3553bd3528474b3c8ff212958f4c86fd6f1227aba73f1a816a644941c0d1c8f4ca74d3a65c6d5c7c1581c7a
   languageName: node
   linkType: hard
 
@@ -3209,6 +3243,20 @@ __metadata:
     ethers: "npm:^5.5.3"
     long: "npm:^5.2.0"
   checksum: bb927d00b99bcdface95dbd22ecc772c66430ebf81f4606fb7e988a362bce792fbc5b9b0e8f4cf9c88f0c2b7cb481582204b6b4e62b5673047c1cbeb78d1d2b0
+  languageName: node
+  linkType: hard
+
+"@xmtp/xmtp-js@npm:^10.0.0":
+  version: 10.2.1
+  resolution: "@xmtp/xmtp-js@npm:10.2.1"
+  dependencies:
+    "@noble/secp256k1": "npm:^1.5.2"
+    "@xmtp/proto": "npm:^3.24.0"
+    async-mutex: "npm:^0.4.0"
+    elliptic: "npm:^6.5.4"
+    ethers: "npm:^5.5.3"
+    long: "npm:^5.2.0"
+  checksum: 07cd5920b5bb866f911db25d1e97893d3b02fb9efc103a9f66f58bb8e27033f170de8bf7139576e0c40705a502c3960cc1f498b88326b7278058713843fc9360
   languageName: node
   linkType: hard
 
@@ -4565,6 +4613,13 @@ __metadata:
   dependencies:
     esutils: "npm:^2.0.2"
   checksum: b4b28f1df5c563f7d876e7461254a4597b8cabe915abe94d7c5d1633fed263fcf9a85e8d3836591fc2d040108e822b0d32758e5ec1fe31c590dc7e08086e3e48
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.3.1":
+  version: 16.3.1
+  resolution: "dotenv@npm:16.3.1"
+  checksum: dbb778237ef8750e9e3cd1473d3c8eaa9cc3600e33a75c0e36415d0fa0848197f56c3800f77924c70e7828f0b03896818cd52f785b07b9ad4d88dba73fbba83f
   languageName: node
   linkType: hard
 
@@ -7457,7 +7512,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.7.0":
+"jest@npm:^29.5.0, jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest@npm:29.7.0"
   dependencies:
@@ -8885,7 +8940,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
+"prettier@npm:^2.7.1, prettier@npm:^2.8.5":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
@@ -10081,7 +10136,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^29.1.1":
+"ts-jest@npm:^29.0.5, ts-jest@npm:^29.1.1":
   version: 29.1.1
   resolution: "ts-jest@npm:29.1.1"
   dependencies:
@@ -10396,6 +10451,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.1.3":
+  version: 5.3.2
+  resolution: "typescript@npm:5.3.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 415e5fb6611f5713e460bad48039f00bcfdbde53a2f911727862d5aa9c5d5edd250059a419df382d8f031709e15a169c41eb62b6a401da5eec7ac0f4e359d6ac
+  languageName: node
+  linkType: hard
+
 "typescript@npm:~5.2.2":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
@@ -10403,6 +10468,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: d65e50eb849bd21ff8677e5b9447f9c6e74777e346afd67754934264dcbf4bd59e7d2473f6062d9a015d66bd573311166357e3eb07fea0b52859cf9bb2b58555
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
+  version: 5.3.2
+  resolution: "typescript@patch:typescript@npm%3A5.3.2#optional!builtin<compat/typescript>::version=5.3.2&hash=f3b441"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 43c3346528a1b410b9ee7f218d709ce8d1336eb8e47b0f8bb43954f98ed43fd11e35de398c9a5f4a085b6889c89782362789b00db7aac862bd09d083058a01a2
   languageName: node
   linkType: hard
 

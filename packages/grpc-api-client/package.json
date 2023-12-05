@@ -24,7 +24,8 @@
     "pino": "^8.16.2"
   },
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && tsc",
     "prepublishOnly": "yarn build",
     "gen:proto": "buf generate buf.build/xmtp/proto --path message_api/v1",
     "test": "vitest run ./src"
