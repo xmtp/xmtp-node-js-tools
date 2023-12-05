@@ -32,7 +32,7 @@ This repo makes it easier to create a bot on the XMTP network. It provides a bas
 
 ## Packages
 
-This repo contains the following packages
+This repo contains the following packages:
 
 - [Bot Kit Pro](./packages/bot-kit-pro/README.md)
 - [GRPC API CLient](./packages/grpc-api-client/README.md)
