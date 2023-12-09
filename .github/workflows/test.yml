@@ -23,4 +23,10 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: yarn workspace @xmtp/bot-kit-pro run up
-      - run: yarn test
+      - run: yarn test --scope=@xmtp/bot-kit-pro
+      - run: yarn test --scope=@xmtp/redis-persistence
+      - run: yarn test --scope=@xmtp/bot-starter
+      - run: yarn test --scope=@xmtp/bot-examples
+      - run: yarn test --scope=@xmtp/fs-persistence
+      - run: yarn test --scope=@xmtp/cli-starter
+      - run: yarn test --scope=@xmtp/grpc-api-client
