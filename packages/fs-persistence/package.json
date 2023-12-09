@@ -34,7 +34,7 @@
     "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
-  "packageManager": "yarn@4.0.0-rc.51",
+  "packageManager": "yarn@4.0.0",
   "devDependencies": {
     "vitest": "^0.34.6"
   }
