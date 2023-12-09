@@ -1,7 +1,5 @@
 # XMTP Persistence with Redis
 
-## Introduction
-
 This tutorial demonstrates how to use the `RedisPersistence` class from the `@xmtp/redis-persistence` package, part of the `bot-kit-pro` monorepo, to enable XMTP client data persistence in a Redis database.
 
 ## Usage

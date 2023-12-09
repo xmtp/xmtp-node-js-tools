@@ -4,6 +4,7 @@ import OpenAI from "openai"
 type ChatMessage = {
   role: "user" | "assistant" | "system" | "function"
   content: string
+  name: string
 }
 
 type ConversationState = {
@@ -28,6 +29,7 @@ export default async function chatGptBot(
   ).concat({
     role: "user",
     content: message,
+    name: "user",
   })
 
   const response = await openai.chat.completions.create({
@@ -40,6 +42,9 @@ export default async function chatGptBot(
     // Send the reply to the user
     ctx.reply(response.choices[0].message.content)
     // Add the latest bot reply to the conversation history
-    ctx.conversationState.messages.push(reply as ChatMessage)
+    ctx.conversationState.messages.push({
+      ...(reply as ChatMessage),
+      name: "assistant", // Add this line
+    })
   }
 }

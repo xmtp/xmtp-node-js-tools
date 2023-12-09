@@ -5,6 +5,9 @@
   "type": "module",
   "main": "dist/src/index.js",
   "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "run": "node ./dist/index.js",
+    "prerun": "npm run build",
     "start-redis": "docker-compose up -d",
     "build": "tsc",
     "test": "yarn start-redis && vitest run ."

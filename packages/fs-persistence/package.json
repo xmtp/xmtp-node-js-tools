@@ -16,6 +16,9 @@
   },
   "scripts": {
     "build": "tsc",
+    "prebuild": "rm -rf ./dist",
+    "run": "node ./dist/index.js",
+    "prerun": "npm run build",
     "test": "vitest run ./src"
   },
   "repository": {

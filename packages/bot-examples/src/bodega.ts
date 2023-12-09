@@ -1,11 +1,19 @@
 import { HandlerContext } from "@xmtp/bot-kit-pro"
 import OpenAI from "openai"
 
-type ChatMessage = {
-  role: "user" | "assistant" | "system" | "function"
+type FunctionMessage = {
+  role: "function"
+  name: string
+  args: Record<string, unknown>
   content: string | null
-  name?: string
 }
+
+type ChatMessage =
+  | {
+      role: "user" | "assistant" | "system"
+      content: string | null
+    }
+  | FunctionMessage
 
 type Order = {
   order: string[]
@@ -134,7 +142,7 @@ export default async function chatGptBot(
 
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
-    messages: ctx.conversationState.messages,
+    messages: ctx.conversationState.messages as ChatMessage[],
     functions: FUNCTIONS,
     function_call: "auto",
   })
@@ -162,14 +170,22 @@ export default async function chatGptBot(
     }
     const functionName = reply.function_call.name
     if (functionName in availableFunctions) {
-      const fuctionToCall = availableFunctions[functionName]
+      const functionToCall = availableFunctions[functionName]
       const functionArgs = JSON.parse(reply.function_call.arguments)
-      const functionResponse = fuctionToCall(functionArgs)
+      const functionResponse = functionToCall(functionArgs)
 
-      ctx.conversationState.messages.push(reply)
+      const functionMessage: FunctionMessage = {
+        role: "function",
+        name: functionName,
+        args: functionArgs,
+        content: JSON.stringify(functionResponse),
+      }
+      ctx.conversationState.messages.push(functionMessage)
+
       ctx.conversationState.messages.push({
         role: "function",
         name: functionName,
+        args: functionArgs,
         content: JSON.stringify(functionResponse),
       })
       const newContent = await openai.chat.completions.create({
