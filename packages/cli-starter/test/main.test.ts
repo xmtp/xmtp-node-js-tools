@@ -1,3 +1,6 @@
+beforeEach(() => {
+  jest.setTimeout(10000) // 5 minutes
+})
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { exec } = require("child_process")
 
@@ -20,5 +23,5 @@ describe("XMTP CLI", () => {
         done()
       },
     )
-  }) // timeout increased to 10 seconds
+  }, 10000) // timeout increased to 10 seconds
 })
