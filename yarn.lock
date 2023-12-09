@@ -2552,7 +2552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.5.0, @types/jest@npm:^29.5.7":
+"@types/jest@npm:^29.5.7":
   version: 29.5.11
   resolution: "@types/jest@npm:29.5.11"
   dependencies:
@@ -2625,7 +2625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18, @types/node@npm:^18.11.7, @types/node@npm:^18.15.3":
+"@types/node@npm:^18.11.18, @types/node@npm:^18.11.7":
   version: 18.19.3
   resolution: "@types/node@npm:18.19.3"
   dependencies:
@@ -3028,21 +3028,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/bot-starter@workspace:packages/bot-starter":
-  version: 0.0.0-use.local
-  resolution: "@xmtp/bot-starter@workspace:packages/bot-starter"
-  dependencies:
-    "@types/jest": "npm:^29.5.0"
-    "@types/node": "npm:^18.15.3"
-    "@xmtp/xmtp-js": "npm:^10.0.0"
-    dotenv: "npm:^16.3.1"
-    jest: "npm:^29.5.0"
-    prettier: "npm:^2.8.5"
-    ts-jest: "npm:^29.0.5"
-    typescript: "npm:^5.1.3"
-  languageName: unknown
-  linkType: soft
-
 "@xmtp/bot-tools@workspace:.":
   version: 0.0.0-use.local
   resolution: "@xmtp/bot-tools@workspace:."
@@ -3125,7 +3110,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/proto@npm:^3.24.0, @xmtp/proto@npm:^3.28.0-beta.1, @xmtp/proto@npm:^3.29.0, @xmtp/proto@npm:^3.34.0":
+"@xmtp/proto@npm:^3.28.0-beta.1, @xmtp/proto@npm:^3.29.0, @xmtp/proto@npm:^3.34.0":
   version: 3.34.0
   resolution: "@xmtp/proto@npm:3.34.0"
   dependencies:
@@ -3158,20 +3143,6 @@ __metadata:
     ethers: "npm:^5.5.3"
     long: "npm:^5.2.0"
   checksum: bb927d00b99bcdface95dbd22ecc772c66430ebf81f4606fb7e988a362bce792fbc5b9b0e8f4cf9c88f0c2b7cb481582204b6b4e62b5673047c1cbeb78d1d2b0
-  languageName: node
-  linkType: hard
-
-"@xmtp/xmtp-js@npm:^10.0.0":
-  version: 10.2.1
-  resolution: "@xmtp/xmtp-js@npm:10.2.1"
-  dependencies:
-    "@noble/secp256k1": "npm:^1.5.2"
-    "@xmtp/proto": "npm:^3.24.0"
-    async-mutex: "npm:^0.4.0"
-    elliptic: "npm:^6.5.4"
-    ethers: "npm:^5.5.3"
-    long: "npm:^5.2.0"
-  checksum: 07cd5920b5bb866f911db25d1e97893d3b02fb9efc103a9f66f58bb8e27033f170de8bf7139576e0c40705a502c3960cc1f498b88326b7278058713843fc9360
   languageName: node
   linkType: hard
 
@@ -4556,13 +4527,6 @@ __metadata:
   dependencies:
     esutils: "npm:^2.0.2"
   checksum: b4b28f1df5c563f7d876e7461254a4597b8cabe915abe94d7c5d1633fed263fcf9a85e8d3836591fc2d040108e822b0d32758e5ec1fe31c590dc7e08086e3e48
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^16.3.1":
-  version: 16.3.1
-  resolution: "dotenv@npm:16.3.1"
-  checksum: dbb778237ef8750e9e3cd1473d3c8eaa9cc3600e33a75c0e36415d0fa0848197f56c3800f77924c70e7828f0b03896818cd52f785b07b9ad4d88dba73fbba83f
   languageName: node
   linkType: hard
 
@@ -7445,7 +7409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.5.0, jest@npm:^29.7.0":
+"jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest@npm:29.7.0"
   dependencies:
@@ -8878,7 +8842,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.0, prettier@npm:^2.7.1, prettier@npm:^2.8.5":
+"prettier@npm:^2.4.0, prettier@npm:^2.7.1":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
@@ -10194,7 +10158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^29.0.5, ts-jest@npm:^29.1.1":
+"ts-jest@npm:^29.1.1":
   version: 29.1.1
   resolution: "ts-jest@npm:29.1.1"
   dependencies:
@@ -10526,16 +10490,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.3":
-  version: 5.3.3
-  resolution: "typescript@npm:5.3.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 6e4e6a14a50c222b3d14d4ea2f729e79f972fa536ac1522b91202a9a65af3605c2928c4a790a4a50aa13694d461c479ba92cedaeb1e7b190aadaa4e4b96b8e18
-  languageName: node
-  linkType: hard
-
 "typescript@npm:~5.2.2":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
@@ -10553,16 +10507,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 5659316360b5cc2d6f5931b346401fa534107b68b60179cf14970e27978f0936c1d5c46f4b5b8175f8cba0430f522b3ce355b4b724c0ea36ce6c0347fab25afd
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
-  version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=f3b441"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 57bf073a0b88f9bf76e5a24be3df864a8f9d0e70f8316969f4992ae26e30cb8d078708922da2ade1f2c8d1faee13b28bcb69876ebb1e37910e31c54aa9126aa2
   languageName: node
   linkType: hard
 
