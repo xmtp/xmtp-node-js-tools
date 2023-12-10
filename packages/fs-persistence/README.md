@@ -22,14 +22,3 @@ const xmtpClient = createXmtpClient({
   basePersistence: new FsPersistence("/tmp/xmtp"),
 })
 ```
-
-### Development
-
-If you want to contribute to this package, here are the steps to set up the project for development:
-
-Install the necessary packages and build the project:
-
-```bash
-yarn install
-yarn build
-```

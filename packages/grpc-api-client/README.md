@@ -2,9 +2,9 @@
 
 ![Status](https://img.shields.io/badge/Project_status-Alpha-orange)
 
-An API Client that satisfies the `xmtp-js` `ApiClient` interface, to be used in Node.js applications.
-
 The GRPC API Client is _not yet ready to be used in production applications_
+
+An API Client that satisfies the `xmtp-js` `ApiClient` interface, to be used in Node.js applications.
 
 ## Features
 
@@ -13,6 +13,12 @@ The GRPC API Client is _not yet ready to be used in production applications_
 - Configurable logger using `pino`
 
 ## Usage
+
+First, install the package in your project:
+
+```bash
+yarn add @xmtp/grpc-api-client
+```
 
 ```ts
 import { GrpcApiClient } from "@xmtp/grpc-api-client"

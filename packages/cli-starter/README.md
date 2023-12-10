@@ -10,11 +10,9 @@ Starter project for building an XMTP CLI
 
 ### Installation
 
-1. `npm install`
-2. `npm build`
-2. Run `npm run watch` in your terminal, and leave it running as you complete this exercise
-3. Ensure that installation succeeded by running `./xmtp --help` in another terminal window
-4. Initialize with a random wallet by running `./xmtp init`
+1. `yarn install`
+2. `yarn build`
+3. Run `./xmtp --help` in another terminal window
 
 ### Tools we will be using
 
@@ -30,7 +28,7 @@ Initialize with a random wallet by running:
 ./xmtp init
 ```
 
-### Intialize random wallet 
+### Intialize random wallet
 
 ### Send a message to an address
 
@@ -125,7 +123,7 @@ You can then render them prettily with the supplied renderer component
 
 ```ts
 const title = `Messages between ${truncateEthAddress(
-  client.address
+  client.address,
 )} and ${truncateEthAddress(convo.peerAddress)}`
 render(<MessageList title={title} messages={messages} />)
 ```

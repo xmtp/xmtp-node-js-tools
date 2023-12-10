@@ -39,7 +39,7 @@ console.log("Set your environment variable: KEY=" + key)
 
 By default, the bot connects to the `dev` network. If you want to connect to production, specify `XMTP_ENV=production`.
 
-### Development
+#### Development
 
 If you want to contribute to this package, here are the steps to set up the project for development:
 
@@ -49,8 +49,6 @@ Install the necessary packages and build the project:
 yarn install
 yarn build
 ```
-
-### Usage
 
 Run the file echo under examples
 
