@@ -8,19 +8,19 @@ Starter project for building an XMTP CLI
 
 - Node.js version >16.7
 
-### Installation
+#### Installation
 
 1. `yarn install`
 2. `yarn build`
 3. Run `./xmtp --help` in another terminal window
 
-### Tools we will be using
+#### Tools we will be using
 
 - [xmtp-js](https://github.com/xmtp/xmtp-js) for interacting with the XMTP network
 - [yargs](https://www.npmjs.com/package/yargs) for command line parsing
 - [ink](https://www.npmjs.com/package/ink) for rendering the CLI using React components
 
-## Challenges
+### Intialize random wallet
 
 Initialize with a random wallet by running:
 
@@ -28,24 +28,28 @@ Initialize with a random wallet by running:
 ./xmtp init
 ```
 
-### Intialize random wallet
-
 ### Send a message to an address
 
 In `src/index.ts` you will see a command already defined:
 
 ```ts
-  .command(
-    'send <address> <message>',
-    'Send a message to a blockchain address',
-    {
-      address: { type: 'string', demand: true },
-      message: { type: 'string', demand: true }
-    },
-    async (argv: any) => {
-      throw new Error('BUILD ME: yarn build')
-    }
-  )
+.command(
+  "send <address> <message>",
+  "Send a message to a blockchain address",
+  {
+    address: { type: "string", demand: true },
+    message: { type: "string", demand: true },
+  },
+  async (argv) => {
+    const { env, message, address } = argv
+    const client = await Client.create(loadWallet(), {
+      env: env as "dev" | "production" | "local",
+    })
+    const conversation = await client.conversations.newConversation(address)
+    const sent = await conversation.send(message)
+    render(<Message msg={sent} />)
+  },
+)
 ```
 
 We want the user to be able to send the contents of the `message` argument to the specified `address`.
@@ -67,22 +71,22 @@ const sent = await conversation.send(message)
 So, putting it all together the command will look like:
 
 ```ts
-  .command(
-    'send <address> <message>',
-    'Send a message to a blockchain address',
-    {
-      address: { type: 'string', demand: true },
-      message: { type: 'string', demand: true },
-    },
-    async (argv: any) => {
-      const { env, message, address } = argv
-      const client = await Client.create(loadWallet(), { env })
-      const conversation = await client.conversations.newConversation(address)
-      const sent = await conversation.send(message)
-      // Use the Ink renderer provided in the example
-      render(<Message {...sent} />)
-    }
-  )
+.command(
+  'send <address> <message>',
+  'Send a message to a blockchain address',
+  {
+    address: { type: 'string', demand: true },
+    message: { type: 'string', demand: true },
+  },
+  async (argv: any) => {
+    const { env, message, address } = argv
+    const client = await Client.create(loadWallet(), { env })
+    const conversation = await client.conversations.newConversation(address)
+    const sent = await conversation.send(message)
+    // Use the Ink renderer provided in the example
+    render(<Message {...sent} />)
+  }
+)
 ```
 
 #### Verify it works
@@ -97,13 +101,23 @@ The next command we are going to implement is `list-messages`. The starter looks
 
 ```ts
 .command(
-    'list-messages <address>',
-    'List all messages from an address',
-    { address: { type: 'string', demand: true } },
-    async (argv) => {
-      throw new Error('BUILD ME: yarn build!')
-    }
-  )
+  "list-messages <address>",
+  "List all messages from an address",
+  { address: { type: "string", demand: true } },
+  async (argv) => {
+    const { env, address } = argv
+    const client = await Client.create(loadWallet(), {
+      env: env as "dev" | "production" | "local",
+    })
+    const conversation = await client.conversations.newConversation(address)
+    const messages = await conversation.messages()
+    const title = `Messages between ${truncateEthAddress(
+      client.address,
+    )} and ${truncateEthAddress(conversation.peerAddress)}`
+
+    render(<MessageList title={title} messages={messages} />)
+  },
+)
 ```
 
 Load the Client the same as before, and then load the conversation with the supplied address
@@ -162,14 +176,19 @@ To stream messages from an address, we'll want to use a stateful React component
 The starter command in `index.tsx` should look like
 
 ```ts
-  .command(
-    'stream-all',
-    'Stream messages from any address',
-    {},
-    async (argv: any) => {
-      throw new Error('BUILD ME: yarn build')
-    }
-  )
+.command(
+  "stream-all",
+  "Stream messages coming from any address",
+  {},
+  async (argv) => {
+    const { env } = argv
+    const client = await Client.create(loadWallet(), {
+      env: env as "dev" | "production" | "local",
+    })
+    const stream = await client.conversations.streamAllMessages()
+    render(<MessageStream stream={stream} title={`Streaming all messages`} />)
+  },
+)
 ```
 
 There is also a starter React component that looks like this:
@@ -244,14 +263,22 @@ useEffect(() => {
 The starter for this command should look like:
 
 ```ts
-  .command(
-    'stream <address>',
-    'Stream messages from an address',
-    { address: { type: 'string', demand: true } },
-    async (argv: any) => {
-      throw new Error('BUILD ME: yarn build')
-    }
-  )
+.command(
+  "stream <address>",
+  "Stream messages from an address",
+  { address: { type: "string", demand: true } },
+  async (argv) => {
+    const { env, address } = argv // or message
+    const client = await Client.create(loadWallet(), {
+      env: env as "dev" | "production" | "local",
+    })
+    const conversation = await client.conversations.newConversation(address)
+    const stream = await conversation.streamMessages()
+    render(
+      <MessageStream stream={stream} title={`Streaming conv messages`} />,
+    )
+  },
+)
 ```
 
 You can implement this challenge by combining what you learned from listing all messages in a conversation and rendering a message stream.
