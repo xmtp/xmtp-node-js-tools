@@ -1,15 +1,24 @@
 # Node FS Persistence
 
-A simple implementation of XMTP Persistence interface using the file system
+This tutorial will guide you through using the `FsPersistence` class from the `@xmtp/fs-persistence` package to enable XMTP client data persistence using the Node.js file system. This approach is useful for applications where local storage is preferred or required.
 
 ## Usage
 
-```ts
+First, install the package in your project:
+
+```bash
+yarn add @xmtp/fs-persistence
+```
+
+In your Node.js application, integrate `FsPersistence` with your XMTP client:
+
+```javascript
 import { FsPersistence } from "@xmtp/fs-persistence"
 import { Client } from "@xmtp/xmtp-js"
 
-const client = await Client.create(someWallet, {
-  // Specify the base folder to store your files
+// XMTP client setup
+const xmtpClient = createXmtpClient({
+  // Your XMTP client configuration
   basePersistence: new FsPersistence("/tmp/xmtp"),
 })
 ```

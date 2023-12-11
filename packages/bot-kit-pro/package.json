@@ -10,7 +10,7 @@
     "copyMigrations": "cp -Rf ./src/migrations ./dist/src/migrations",
     "up": "./dev/up",
     "prepublishOnly": "yarn build",
-    "test": "vitest run ./src"
+    "test": "./dev/up && vitest run ./src"
   },
   "dependencies": {
     "@xmtp/grpc-api-client": "workspace:*",
@@ -50,7 +50,7 @@
     "url": "https://github.com/xmtp/bot-kit-pro/issues"
   },
   "homepage": "https://github.com/xmtp/bot-kit-pro#readme",
-  "packageManager": "yarn@4.0.0-rc.51",
+  "packageManager": "yarn@4.0.0",
   "devDependencies": {
     "drizzle-kit": "^0.20.6",
     "vitest": "^0.34.6"

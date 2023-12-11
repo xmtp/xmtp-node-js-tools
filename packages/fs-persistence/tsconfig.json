@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "jsx": "react" /* Specify what JSX code is generated. */,
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */
   },
-  "includes": ["src"]
+  "include": ["src/**/*"]
 }
