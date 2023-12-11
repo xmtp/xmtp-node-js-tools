@@ -129,5 +129,10 @@ dist
 dist
 .turbo
 
+
 # MacOS
 .DS_Store
+**/.DS_Store
+
+#cli 
+packages/cli-starter/xmtp_wallet
