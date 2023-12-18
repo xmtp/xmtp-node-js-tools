@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/xmtp/cli-starter#readme",
   "devDependencies": {
-    "@types/node": "^18.11.7",
+    "@types/node": "^20.10.5",
     "@types/react": "^18.0.24",
     "@types/yargs": "^17.0.13",
     "eslint": "^8.0.1",
