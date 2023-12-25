@@ -3019,7 +3019,7 @@ __metadata:
     "@xmtp/xmtp-js": "npm:^11.0.0-beta.9"
     drizzle-kit: "npm:^0.20.6"
     drizzle-orm: "npm:^0.28.6"
-    ethers: "npm:^6.8.0"
+    ethers: "npm:^6.9.1"
     long: "npm:^5.2.3"
     pino: "npm:^8.16.2"
     pino-pretty: "npm:^10.2.3"
@@ -3089,7 +3089,7 @@ __metadata:
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^4.0.0"
     eslint-plugin-promise: "npm:^6.0.1"
-    ethers: "npm:^5.7.2"
+    ethers: "npm:^6.9.1"
     ink: "npm:^3.2.0"
     jest: "npm:^29.7.0"
     prettier: "npm:^2.4.0"
@@ -5582,7 +5582,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^5.5.3, ethers@npm:^5.7.2":
+"ethers@npm:^5.5.3":
   version: 5.7.2
   resolution: "ethers@npm:5.7.2"
   dependencies:
@@ -5620,9 +5620,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^6.8.0":
-  version: 6.9.0
-  resolution: "ethers@npm:6.9.0"
+"ethers@npm:^6.9.1":
+  version: 6.9.1
+  resolution: "ethers@npm:6.9.1"
   dependencies:
     "@adraffy/ens-normalize": "npm:1.10.0"
     "@noble/curves": "npm:1.2.0"
@@ -5631,7 +5631,7 @@ __metadata:
     aes-js: "npm:4.0.0-beta.5"
     tslib: "npm:2.4.0"
     ws: "npm:8.5.0"
-  checksum: a48f268aa934900d90e34fd6b607db3d774ce58c73d249697f68398afa673b483fda19c6fa91eb91784fdfbaa07eb4c753b245c2123c5d2072f8dc1897cd556d
+  checksum: 668c49b13e767ad77a867c7a03f6c64fab867bacef862210ea8ef854fb9a7ab59479da59faea7a9f2d6459f7df0e170357451cdf85b2bd4066931819321743ce
   languageName: node
   linkType: hard
 
