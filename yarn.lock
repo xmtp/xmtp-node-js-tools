@@ -2602,7 +2602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^20.9.0":
+"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0":
   version: 20.10.4
   resolution: "@types/node@npm:20.10.4"
   dependencies:
@@ -2625,12 +2625,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18, @types/node@npm:^18.11.7, @types/node@npm:^18.15.3":
+"@types/node@npm:^18.11.18":
   version: 18.19.3
   resolution: "@types/node@npm:18.19.3"
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: b95d0c0be342275e27d882bb6ca73c0b757d1672a121cae1fc3249eda4f86a8abeb5745e5c5c1150914bcfda323a3fc51526cd34e2097f8355bf7cbf12fa6bcb
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.10.6":
+  version: 20.10.6
+  resolution: "@types/node@npm:20.10.6"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 08471220d3cbbb6669835c4b78541edf5eface8f2c2e36c550cfa4ff73da73071c90e200a06359fac25d6564127597c23e178128058fb676824ec23d5178a017
   languageName: node
   linkType: hard
 
@@ -3033,7 +3042,7 @@ __metadata:
   resolution: "@xmtp/bot-starter@workspace:packages/bot-starter"
   dependencies:
     "@types/jest": "npm:^29.5.0"
-    "@types/node": "npm:^18.15.3"
+    "@types/node": "npm:^20.10.6"
     "@xmtp/xmtp-js": "npm:^10.0.0"
     dotenv: "npm:^16.3.1"
     jest: "npm:^29.5.0"
@@ -3050,7 +3059,7 @@ __metadata:
     "@changesets/changelog-github": "npm:^0.4.8"
     "@changesets/cli": "npm:^2.26.2"
     "@types/jest": "npm:^29.5.7"
-    "@types/node": "npm:^20.9.0"
+    "@types/node": "npm:^20.10.6"
     "@typescript-eslint/eslint-plugin": "npm:^6.10.0"
     "@typescript-eslint/parser": "npm:^6.11.0"
     eslint: "npm:^8.54.0"
@@ -3077,7 +3086,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/cli-starter@workspace:packages/cli-starter"
   dependencies:
-    "@types/node": "npm:^18.11.7"
+    "@types/node": "npm:^20.10.6"
     "@types/react": "npm:^18.0.24"
     "@types/yargs": "npm:^17.0.13"
     "@xmtp/xmtp-js": "npm:^11.2.1"
