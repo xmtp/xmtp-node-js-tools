@@ -3079,7 +3079,7 @@ __metadata:
     drizzle-orm: "npm:^0.28.6"
     ethers: "npm:^6.8.0"
     long: "npm:^5.2.3"
-    pino: "npm:^8.16.2"
+    pino: "npm:^8.17.2"
     pino-pretty: "npm:^10.2.3"
     postgres: "npm:^3.4.3"
     vitest: "npm:^0.34.6"
@@ -3178,7 +3178,7 @@ __metadata:
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
     "@xmtp/proto": "npm:^3.34.0"
     "@xmtp/xmtp-js": "npm:^11.3.5"
-    pino: "npm:^8.16.2"
+    pino: "npm:^8.17.2"
     vitest: "npm:^1.0.1"
   languageName: unknown
   linkType: soft
@@ -8696,16 +8696,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:^8.16.2":
-  version: 8.16.2
-  resolution: "pino@npm:8.16.2"
+"pino@npm:^8.17.2":
+  version: 8.17.2
+  resolution: "pino@npm:8.17.2"
   dependencies:
     atomic-sleep: "npm:^1.0.0"
     fast-redact: "npm:^3.1.1"
     on-exit-leak-free: "npm:^2.1.0"
     pino-abstract-transport: "npm:v1.1.0"
     pino-std-serializers: "npm:^6.0.0"
-    process-warning: "npm:^2.0.0"
+    process-warning: "npm:^3.0.0"
     quick-format-unescaped: "npm:^4.0.3"
     real-require: "npm:^0.2.0"
     safe-stable-stringify: "npm:^2.3.1"
@@ -8713,7 +8713,7 @@ __metadata:
     thread-stream: "npm:^2.0.0"
   bin:
     pino: bin.js
-  checksum: d2860167dd5ce3322d5c007b6e88c4ef672316b193677dc637ba11d6af6ad57475380d2abdbc940a7a9f57c4fa1e5776ee7e43cb1b2c2ffcf9fa42e3af41da0f
+  checksum: 90b74e4db3b3f8664b13def3eb4e39585a842396fd7a000ef00f2329076c889126f91bdaff0f653b9b5dd5a612dddde6ff87599ad046b47a264e8f7bfabb0ea8
   languageName: node
   linkType: hard
 
@@ -8833,10 +8833,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"process-warning@npm:^2.0.0":
-  version: 2.3.2
-  resolution: "process-warning@npm:2.3.2"
-  checksum: 64cea6878a60e5d1d3648c1736c127b46d5830092bc189ff65b90abbbf746d69ca91eaeec3284f95b0a58965bb016813da787004b556f764ba439addf2eabdb0
+"process-warning@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "process-warning@npm:3.0.0"
+  checksum: 2d82fa641e50a5789eaf0f2b33453760996e373d4591aac576a22d696186ab7e240a0592db86c264d4f28a46c2abbe9b94689752017db7dadc90f169f12b0924
   languageName: node
   linkType: hard
 
