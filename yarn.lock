@@ -1902,6 +1902,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/hashes@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "@noble/hashes@npm:1.3.3"
+  checksum: 1025ddde4d24630e95c0818e63d2d54ee131b980fe113312d17ed7468bc18f54486ac86c907685759f8a7e13c2f9b9e83ec7b67d1cc20836f36b5e4a65bb102d
+  languageName: node
+  linkType: hard
+
 "@noble/secp256k1@npm:^1.5.2":
   version: 1.7.1
   resolution: "@noble/secp256k1@npm:1.7.1"
@@ -2944,7 +2951,7 @@ __metadata:
     ts-jest: "npm:^29.1.1"
     ts-node: "npm:^10.9.1"
     turbo: "npm:^1.10.16"
-    typescript: "npm:~5.2.2"
+    typescript: "npm:^5.3.3"
     vitest: "npm:^0.34.6"
   languageName: unknown
   linkType: soft
@@ -2978,14 +2985,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/frames-client@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@xmtp/frames-client@npm:0.1.2"
+"@xmtp/frames-client@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@xmtp/frames-client@npm:0.2.0"
   dependencies:
-    "@xmtp/proto": "npm:3.41.0-beta.2"
+    "@noble/hashes": "npm:^1.3.3"
+    "@xmtp/proto": "npm:3.41.0-beta.5"
+    long: "npm:^5.2.3"
   peerDependencies:
     "@xmtp/xmtp-js": ">9.3.1"
-  checksum: eb887dba90ccab0b7cd69010ed647f7bbb8f31dc953afe6223afb64f2d711bddffb936ab92fef54e46ba7f1eade35fa834a3ead7da75a5d45b9c438b165f59eb
+  checksum: d9ddc2a616b813b222ac282952701a6773abdc3fd360c2fc065d85d38ebdd3d43894c1f2904fb97803cbdc9490dc56f407c2a08732aaeffd7309edc9401ef819
   languageName: node
   linkType: hard
 
@@ -2993,10 +3002,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/frames-validator@workspace:packages/frames-validator"
   dependencies:
-    "@xmtp/frames-client": "npm:^0.1.2"
-    "@xmtp/proto": "npm:3.41.0-beta.2"
+    "@xmtp/frames-client": "npm:^0.2.0"
+    "@xmtp/proto": "npm:3.41.0-beta.5"
     "@xmtp/xmtp-js": "npm:^11.3.5"
     ethers: "npm:^6.10.0"
+    typescript: "npm:^5.3.3"
     vitest: "npm:^1.0.1"
   languageName: unknown
   linkType: soft
@@ -3024,15 +3034,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/proto@npm:3.41.0-beta.2":
-  version: 3.41.0-beta.2
-  resolution: "@xmtp/proto@npm:3.41.0-beta.2"
+"@xmtp/proto@npm:3.41.0-beta.5":
+  version: 3.41.0-beta.5
+  resolution: "@xmtp/proto@npm:3.41.0-beta.5"
   dependencies:
     long: "npm:^5.2.0"
     protobufjs: "npm:^7.0.0"
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
-  checksum: 494d99f3346bc56e7b80133f7131d86a620c24aff81107288d9eae848f43a0b87071f805ac494ff48c32beb81559a078dabd99e21a2a9a54c2c83fab8d10523b
+  checksum: 03e9a5d127c5f2af34d80c0b5406fcb862c04dd203142f1d225b11964f9952e811ab97e313a60d8d47c9048b29a7d2196a0c2e8c21d787425543a9e6a9b04e9f
   languageName: node
   linkType: hard
 
@@ -9964,23 +9974,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.3":
+"typescript@npm:^5.1.3, typescript@npm:^5.3.3":
   version: 5.3.3
   resolution: "typescript@npm:5.3.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 6e4e6a14a50c222b3d14d4ea2f729e79f972fa536ac1522b91202a9a65af3605c2928c4a790a4a50aa13694d461c479ba92cedaeb1e7b190aadaa4e4b96b8e18
-  languageName: node
-  linkType: hard
-
-"typescript@npm:~5.2.2":
-  version: 5.2.2
-  resolution: "typescript@npm:5.2.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: d65e50eb849bd21ff8677e5b9447f9c6e74777e346afd67754934264dcbf4bd59e7d2473f6062d9a015d66bd573311166357e3eb07fea0b52859cf9bb2b58555
   languageName: node
   linkType: hard
 
@@ -9994,23 +9994,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
   resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c93786fcc9a70718ba1e3819bab56064ead5817004d1b8186f8ca66165f3a2d0100fee91fa64c840dcd45f994ca5d615d8e1f566d39a7470fc1e014dbb4cf15d
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A~5.2.2#optional!builtin<compat/typescript>":
-  version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: f79cc2ba802c94c2b78dbb00d767a10adb67368ae764709737dc277273ec148aa4558033a03ce901406b35fddf4eac46dabc94a1e1d12d2587e2b9cfe5707b4a
   languageName: node
   linkType: hard
 
