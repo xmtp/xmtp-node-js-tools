@@ -1965,6 +1965,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@open-frames/types@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@open-frames/types@npm:0.0.5"
+  checksum: 256a7e6bea4450616257d7b2207a05bb1cb1124679adc598dac6647f8276dbb273eed73d024e9e51d1302c4dda4f89b1fa8267b21fd4ef17392c4cf4406c7e46
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -3118,16 +3125,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xmtp/frames-client@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@xmtp/frames-client@npm:0.2.0"
+"@xmtp/frames-client@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@xmtp/frames-client@npm:0.2.2"
   dependencies:
     "@noble/hashes": "npm:^1.3.3"
     "@xmtp/proto": "npm:3.41.0-beta.5"
     long: "npm:^5.2.3"
   peerDependencies:
     "@xmtp/xmtp-js": ">9.3.1"
-  checksum: d9ddc2a616b813b222ac282952701a6773abdc3fd360c2fc065d85d38ebdd3d43894c1f2904fb97803cbdc9490dc56f407c2a08732aaeffd7309edc9401ef819
+  checksum: c3c2568e36ccd9cc9b0200b74d3058d9a9803f4dcc5981fcf7fa79b1bbc73bd22b6c16074d55e34e50cd7893c01f72da04ce5797f21b42543aceb9245bae1027
   languageName: node
   linkType: hard
 
@@ -3135,9 +3142,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/frames-validator@workspace:packages/frames-validator"
   dependencies:
+    "@open-frames/types": "npm:^0.0.5"
     "@rollup/plugin-typescript": "npm:^11.1.6"
-    "@xmtp/frames-client": "npm:^0.2.0"
-    "@xmtp/proto": "npm:3.41.0-beta.5"
+    "@xmtp/frames-client": "npm:^0.2.2"
+    "@xmtp/proto": "npm:3.41.0-beta.6"
     "@xmtp/xmtp-js": "npm:^11.3.5"
     ethers: "npm:^6.10.0"
     rollup: "npm:^4.9.6"
@@ -3179,6 +3187,18 @@ __metadata:
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
   checksum: 03e9a5d127c5f2af34d80c0b5406fcb862c04dd203142f1d225b11964f9952e811ab97e313a60d8d47c9048b29a7d2196a0c2e8c21d787425543a9e6a9b04e9f
+  languageName: node
+  linkType: hard
+
+"@xmtp/proto@npm:3.41.0-beta.6":
+  version: 3.41.0-beta.6
+  resolution: "@xmtp/proto@npm:3.41.0-beta.6"
+  dependencies:
+    long: "npm:^5.2.0"
+    protobufjs: "npm:^7.0.0"
+    rxjs: "npm:^7.8.0"
+    undici: "npm:^5.8.1"
+  checksum: e72099f4f61a46890e102a4fb3daf00d1f4a4002eb34f49bba474a74623f6735eee5cb4a75084eefb9d126504339675db75f294f5772099d6e1af29eb59205e1
   languageName: node
   linkType: hard
 
@@ -10218,11 +10238,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c93786fcc9a70718ba1e3819bab56064ead5817004d1b8186f8ca66165f3a2d0100fee91fa64c840dcd45f994ca5d615d8e1f566d39a7470fc1e014dbb4cf15d
+  checksum: 57bf073a0b88f9bf76e5a24be3df864a8f9d0e70f8316969f4992ae26e30cb8d078708922da2ade1f2c8d1faee13b28bcb69876ebb1e37910e31c54aa9126aa2
   languageName: node
   linkType: hard
 
