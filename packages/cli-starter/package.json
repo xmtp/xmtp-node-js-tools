@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@xmtp/xmtp-js": "^11.3.5",
-    "ethers": "^5.7.2",
+    "ethers": "^6.11.0",
     "ink": "^3.2.0",
     "react": "^17.0.2",
     "yargs": "^17.6.0"
