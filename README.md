@@ -5,15 +5,14 @@
 This repo provides a collection of tools for running high-quality XMTP bots in Node.js. It contains the following packages:
 
 - [Bot Kit Pro](./packages/bot-kit-pro/README.md)
-- [GRPC API CLient](./packages/grpc-api-client/README.md)
+- [GRPC API Client](./packages/grpc-api-client/README.md)
 - [Redis Persistence](./packages/redis-persistence/README.md)
-- [Bot Examples](./packages/bot-examples/)
 - [Bot Starter](./packages/bot-starter/)
 - [CLI Starter](./packages/cli-starter/)
 
-## Bot Kit Pro
+## 🤖 Bot Kit Pro
 
-Bot Kit Pro is a framework for running bots on the XMTP network designed for complex workflows that require high reliability.
+Bot Kit Pro is a framework for running bots on the XMTP network designed for complex workflows that require high reliability. See [Bot Examples](./packages/bot-examples/).
 
 ### 📒 State Storage
 
@@ -31,10 +30,10 @@ A common complaint from developers using XMTP to build bots is the high cost of 
 
 No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
-## 🧑🏻‍💻 CLI Starter
+### 🧑🏻‍💻 CLI Starter
 
 This package provides a starter project for building an XMTP CLI. It includes a basic setup and examples to get started with building a command-line interface for XMTP.
 
-## Bot Starter
+### 🤖 Bot Starter
 
 This package makes it easier to create a bot on the XMTP network. It provides a basic setup and examples to get started with bot creation.
