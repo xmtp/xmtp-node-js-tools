@@ -1895,6 +1895,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/curves@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@noble/curves@npm:1.3.0"
+  dependencies:
+    "@noble/hashes": "npm:1.3.3"
+  checksum: f3cbdd1af00179e30146eac5539e6df290228fb857a7a8ba36d1a772cbe59288a2ca83d06f175d3446ef00db3a80d7fd8b8347f7de9c2d4d5bf3865d8bb78252
+  languageName: node
+  linkType: hard
+
 "@noble/hashes@npm:1.3.2":
   version: 1.3.2
   resolution: "@noble/hashes@npm:1.3.2"
@@ -1902,7 +1911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/hashes@npm:^1.3.3, @noble/hashes@npm:~1.3.0, @noble/hashes@npm:~1.3.2":
+"@noble/hashes@npm:1.3.3, @noble/hashes@npm:^1.3.3, @noble/hashes@npm:~1.3.0, @noble/hashes@npm:~1.3.2":
   version: 1.3.3
   resolution: "@noble/hashes@npm:1.3.3"
   checksum: 1025ddde4d24630e95c0818e63d2d54ee131b980fe113312d17ed7468bc18f54486ac86c907685759f8a7e13c2f9b9e83ec7b67d1cc20836f36b5e4a65bb102d
@@ -1913,13 +1922,6 @@ __metadata:
   version: 1.7.1
   resolution: "@noble/secp256k1@npm:1.7.1"
   checksum: 214d4756c20ed20809d948d0cc161e95664198cb127266faf747fd7deffe5444901f05fe9f833787738f2c6e60b09e544c2f737f42f73b3699e3999ba15b1b63
-  languageName: node
-  linkType: hard
-
-"@noble/secp256k1@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@noble/secp256k1@npm:2.0.0"
-  checksum: 64677b25988c1fa0a97af718332f88d49ec46a9d030c1d119861a665863cbabddefb1fd1e037608e130ee2aedb4c5edfc430b9bf4c96b43797855343b96318de
   languageName: node
   linkType: hard
 
@@ -3177,8 +3179,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/frames-validator@workspace:packages/frames-validator"
   dependencies:
+    "@noble/curves": "npm:^1.3.0"
     "@noble/hashes": "npm:^1.3.3"
-    "@noble/secp256k1": "npm:^2.0.0"
     "@open-frames/types": "npm:^0.0.6"
     "@rollup/plugin-typescript": "npm:^11.1.6"
     "@xmtp/frames-client": "npm:^0.2.2"
