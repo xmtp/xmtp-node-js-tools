@@ -20,7 +20,7 @@
     "@protobuf-ts/runtime": "^2.9.1",
     "@protobuf-ts/runtime-rpc": "^2.9.1",
     "@xmtp/proto": "^3.34.0",
-    "@xmtp/xmtp-js": "^11.3.5",
+    "@xmtp/xmtp-js": "^11.3.12",
     "pino": "^8.18.0"
   },
   "scripts": {

@@ -43,7 +43,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@xmtp/xmtp-js": "^11.3.5",
+    "@xmtp/xmtp-js": "^11.3.12",
     "ethers": "^5.7.2",
     "ink": "^3.2.0",
     "react": "^17.0.2",
