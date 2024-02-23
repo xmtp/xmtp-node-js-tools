@@ -3184,7 +3184,7 @@ __metadata:
     "@open-frames/types": "npm:^0.0.6"
     "@rollup/plugin-typescript": "npm:^11.1.6"
     "@xmtp/frames-client": "npm:^0.2.2"
-    "@xmtp/proto": "npm:3.41.0-beta.6"
+    "@xmtp/proto": "npm:3.44.0"
     "@xmtp/xmtp-js": "npm:^11.3.5"
     ethers: "npm:^6.10.0"
     rollup: "npm:^4.9.6"
@@ -3230,15 +3230,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/proto@npm:3.41.0-beta.6":
-  version: 3.41.0-beta.6
-  resolution: "@xmtp/proto@npm:3.41.0-beta.6"
+"@xmtp/proto@npm:3.44.0":
+  version: 3.44.0
+  resolution: "@xmtp/proto@npm:3.44.0"
   dependencies:
     long: "npm:^5.2.0"
     protobufjs: "npm:^7.0.0"
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
-  checksum: e72099f4f61a46890e102a4fb3daf00d1f4a4002eb34f49bba474a74623f6735eee5cb4a75084eefb9d126504339675db75f294f5772099d6e1af29eb59205e1
+  checksum: 7124a7be531a501216621033f731bf4777e6ca62df8219dc46db93b2af7d879d402670e8045c274dc61ddafa298f3664d81a9a803e3fcd7fc89f14747e952b38
   languageName: node
   linkType: hard
 
