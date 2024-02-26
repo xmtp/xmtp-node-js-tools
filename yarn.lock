@@ -3191,7 +3191,7 @@ __metadata:
     rollup: "npm:^4.12.0"
     rollup-plugin-dts: "npm:^6.1.0"
     typescript: "npm:^5.3.3"
-    viem: "npm:^2.7.8"
+    viem: "npm:^2.7.14"
     vitest: "npm:^1.0.1"
   languageName: unknown
   linkType: soft
@@ -10399,9 +10399,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:^2.7.8":
-  version: 2.7.8
-  resolution: "viem@npm:2.7.8"
+"viem@npm:^2.7.14":
+  version: 2.7.14
+  resolution: "viem@npm:2.7.14"
   dependencies:
     "@adraffy/ens-normalize": "npm:1.10.0"
     "@noble/curves": "npm:1.2.0"
@@ -10416,7 +10416,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 8d94abf242fbe4d5791562d433fa5ce688d3a11e0614399c2558218f4eccfe1e6a5a86774ef01095f065c7319bbc3dd143a13a586e2ddb4049a36e3a16cea302
+  checksum: fda804cdbf0bace0368d0ae6342749f19639675631d8c41f0810692de1af3c61a8ea2548aceebeef7bada9c547ff58b2e45a0225b77a4bfbf0e1ef371dbd3acf
   languageName: node
   linkType: hard
 
