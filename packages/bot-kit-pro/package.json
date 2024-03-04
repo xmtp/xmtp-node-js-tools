@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@xmtp/grpc-api-client": "workspace:*",
-    "@xmtp/proto": "^3.44.0",
+    "@xmtp/proto": "^3.45.0",
     "@xmtp/xmtp-js": "^11.3.12",
     "drizzle-orm": "^0.28.6",
     "ethers": "^6.8.0",
