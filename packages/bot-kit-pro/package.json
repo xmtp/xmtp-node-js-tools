@@ -16,7 +16,7 @@
     "@xmtp/grpc-api-client": "workspace:*",
     "@xmtp/proto": "^3.45.0",
     "@xmtp/xmtp-js": "^11.3.12",
-    "drizzle-orm": "^0.28.6",
+    "drizzle-orm": "^0.30.1",
     "ethers": "^6.8.0",
     "long": "^5.2.3",
     "pino": "^8.18.0",
