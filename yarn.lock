@@ -2021,7 +2021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@protobuf-ts/runtime-rpc@npm:^2.9.1, @protobuf-ts/runtime-rpc@npm:^2.9.3":
+"@protobuf-ts/runtime-rpc@npm:^2.9.3":
   version: 2.9.3
   resolution: "@protobuf-ts/runtime-rpc@npm:2.9.3"
   dependencies:
@@ -2030,10 +2030,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@protobuf-ts/runtime-rpc@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@protobuf-ts/runtime-rpc@npm:2.9.4"
+  dependencies:
+    "@protobuf-ts/runtime": "npm:^2.9.4"
+  checksum: c5344324885f0221743695fe153e513cea6b36f3564edbf9521b9dde63e68a174f2805f844a2518a2f12a44699e8d29570b8531b58f9db30321bb5d949e18ec9
+  languageName: node
+  linkType: hard
+
 "@protobuf-ts/runtime@npm:^2.9.1, @protobuf-ts/runtime@npm:^2.9.3":
   version: 2.9.3
   resolution: "@protobuf-ts/runtime@npm:2.9.3"
   checksum: 312fd283683340a3b4d87d94ab74ce28d9e5b3f4fc594f7847da249d49f8b05682f298f7f7217320e90526a28da7c5fe4fd463115a45b1b3ffe3be9b34ba814a
+  languageName: node
+  linkType: hard
+
+"@protobuf-ts/runtime@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@protobuf-ts/runtime@npm:2.9.4"
+  checksum: 95f82bd7090320b6a1b68047171bd6db782b85d22e9cb1207f4dbebf196d4f0087ea779070a8f7ed9d8fd9c1503bed3648d4df64da6361975b5742c2222a456a
   languageName: node
   linkType: hard
 
@@ -3225,7 +3241,7 @@ __metadata:
     "@grpc/grpc-js": "npm:^1.10.3"
     "@protobuf-ts/grpc-transport": "npm:^2.9.1"
     "@protobuf-ts/runtime": "npm:^2.9.1"
-    "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
+    "@protobuf-ts/runtime-rpc": "npm:^2.9.4"
     "@xmtp/proto": "npm:^3.45.0"
     "@xmtp/xmtp-js": "npm:^11.3.12"
     pino: "npm:^8.18.0"
