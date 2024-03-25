@@ -2009,19 +2009,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@protobuf-ts/grpc-transport@npm:^2.9.1":
-  version: 2.9.3
-  resolution: "@protobuf-ts/grpc-transport@npm:2.9.3"
+"@protobuf-ts/grpc-transport@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@protobuf-ts/grpc-transport@npm:2.9.4"
   dependencies:
-    "@protobuf-ts/runtime": "npm:^2.9.3"
-    "@protobuf-ts/runtime-rpc": "npm:^2.9.3"
+    "@protobuf-ts/runtime": "npm:^2.9.4"
+    "@protobuf-ts/runtime-rpc": "npm:^2.9.4"
   peerDependencies:
     "@grpc/grpc-js": ^1.6.0
-  checksum: ce818dd9662ef3679245d86a417fc2647c65546d3f53bb46cf72c66abcd2008aaaf91bf093d420749445ae384ccf939237fbd22c85dbbb7c7c113710f4bdf087
+  checksum: 724f2d1520a7af8d86cf4975490ab68d0bd80c873401f3e8625cbb245bab83cac5029a401b54814eea1203053b65b990355786a790b561928675102f1e04a20e
   languageName: node
   linkType: hard
 
-"@protobuf-ts/runtime-rpc@npm:^2.9.1, @protobuf-ts/runtime-rpc@npm:^2.9.3":
+"@protobuf-ts/runtime-rpc@npm:^2.9.1":
   version: 2.9.3
   resolution: "@protobuf-ts/runtime-rpc@npm:2.9.3"
   dependencies:
@@ -2030,10 +2030,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@protobuf-ts/runtime-rpc@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@protobuf-ts/runtime-rpc@npm:2.9.4"
+  dependencies:
+    "@protobuf-ts/runtime": "npm:^2.9.4"
+  checksum: c5344324885f0221743695fe153e513cea6b36f3564edbf9521b9dde63e68a174f2805f844a2518a2f12a44699e8d29570b8531b58f9db30321bb5d949e18ec9
+  languageName: node
+  linkType: hard
+
 "@protobuf-ts/runtime@npm:^2.9.1, @protobuf-ts/runtime@npm:^2.9.3":
   version: 2.9.3
   resolution: "@protobuf-ts/runtime@npm:2.9.3"
   checksum: 312fd283683340a3b4d87d94ab74ce28d9e5b3f4fc594f7847da249d49f8b05682f298f7f7217320e90526a28da7c5fe4fd463115a45b1b3ffe3be9b34ba814a
+  languageName: node
+  linkType: hard
+
+"@protobuf-ts/runtime@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "@protobuf-ts/runtime@npm:2.9.4"
+  checksum: 95f82bd7090320b6a1b68047171bd6db782b85d22e9cb1207f4dbebf196d4f0087ea779070a8f7ed9d8fd9c1503bed3648d4df64da6361975b5742c2222a456a
   languageName: node
   linkType: hard
 
@@ -3223,7 +3239,7 @@ __metadata:
   resolution: "@xmtp/grpc-api-client@workspace:packages/grpc-api-client"
   dependencies:
     "@grpc/grpc-js": "npm:^1.10.3"
-    "@protobuf-ts/grpc-transport": "npm:^2.9.1"
+    "@protobuf-ts/grpc-transport": "npm:^2.9.4"
     "@protobuf-ts/runtime": "npm:^2.9.1"
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
     "@xmtp/proto": "npm:^3.45.0"
