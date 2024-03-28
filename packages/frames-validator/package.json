@@ -47,7 +47,7 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@xmtp/frames-client": "^0.4.3",
     "@xmtp/xmtp-js": "^11.3.12",
-    "ethers": "^6.10.0",
+    "ethers": "^6.11.1",
     "rollup": "^4.13.0",
     "rollup-plugin-dts": "^6.1.0",
     "typescript": "^5.3.3",
