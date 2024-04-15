@@ -2608,12 +2608,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.11.19":
-  version: 20.11.19
-  resolution: "@types/node@npm:20.11.19"
+"@types/node@npm:^20.12.7":
+  version: 20.12.7
+  resolution: "@types/node@npm:20.12.7"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: c7f4705d6c84aa21679ad180c33c13ca9567f650e66e14bcee77c7c43d14619c7cd3b4d7b2458947143030b7b1930180efa6d12d999b45366abff9fed7a17472
+  checksum: b4a28a3b593a9bdca5650880b6a9acef46911d58cf7cfa57268f048e9a7157a7c3196421b96cea576850ddb732e3b54bc982c8eb5e1e5ef0635d4424c2fce801
   languageName: node
   linkType: hard
 
@@ -3126,7 +3126,7 @@ __metadata:
   resolution: "@xmtp/bot-starter@workspace:packages/bot-starter"
   dependencies:
     "@types/jest": "npm:^29.5.0"
-    "@types/node": "npm:^20.11.19"
+    "@types/node": "npm:^20.12.7"
     "@xmtp/xmtp-js": "npm:^11.3.12"
     dotenv: "npm:^16.3.1"
     jest: "npm:^29.5.0"
@@ -3143,7 +3143,7 @@ __metadata:
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.26.2"
     "@types/jest": "npm:^29.5.7"
-    "@types/node": "npm:^20.11.19"
+    "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "npm:^7.1.0"
     "@typescript-eslint/parser": "npm:^7.1.1"
     eslint: "npm:^8.57.0"
@@ -3170,7 +3170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@xmtp/cli-starter@workspace:packages/cli-starter"
   dependencies:
-    "@types/node": "npm:^20.11.19"
+    "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.0.24"
     "@types/yargs": "npm:^17.0.13"
     "@xmtp/xmtp-js": "npm:^11.3.12"
