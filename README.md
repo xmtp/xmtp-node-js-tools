@@ -7,12 +7,11 @@ This repo provides a collection of tools for running high-quality XMTP bots in N
 - [Bot Kit Pro](./packages/bot-kit-pro/README.md)
 - [GRPC API Client](./packages/grpc-api-client/README.md)
 - [Redis Persistence](./packages/redis-persistence/README.md)
-- [Bot Starter](./packages/bot-starter/)
 - [CLI Starter](./packages/cli-starter/)
 
-## 🤖 Bot Kit Pro
+### 🤖 Bot Kit
 
-Bot Kit Pro is a framework for running bots on the XMTP network designed for complex workflows that require high reliability. See [Bot Examples](./packages/bot-examples/).
+To learn more about building bots go to [BotKit](https://github.com/xmtp/botkit) repo. `Bot Kit Pro` is a framework for running bots on the XMTP network designed for complex workflows that require high reliability.
 
 ### 📒 State Storage
 
@@ -33,7 +32,3 @@ No more poring over server logs. Because every incoming and outgoing message is 
 ### 🧑🏻‍💻 CLI Starter
 
 This package provides a starter project for building an XMTP CLI. It includes a basic setup and examples to get started with building a command-line interface for XMTP.
-
-### 🤖 Bot Starter
-
-This package makes it easier to create a bot on the XMTP network. It provides a basic setup and examples to get started with bot creation.
