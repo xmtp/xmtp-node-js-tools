@@ -1,5 +1,7 @@
 # Bot Kit Pro
 
+> To get started building Bots with XMTP head first [BotKit](https://github.com/xmtp/botkit).
+
 Bot Kit Pro is a database-backed bot framework for running high reliability XMTP bots. It provides a simple way to create, configure, and run bots with a focus on reliability and state management.
 
 ### Requirements
