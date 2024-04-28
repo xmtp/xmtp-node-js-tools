@@ -1,6 +1,6 @@
 # XMTP Bot Starter
 
-Hey you wanna make a bot on the XMTP network? Heck yeah. This repo makes that easier.
+> ⚠️ Bot Starter has been deprecated. To get started building Bots with XMTP head to [BotKit](https://github.com/xmtp/botkit).
 
 ## Usage
 

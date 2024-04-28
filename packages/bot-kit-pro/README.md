@@ -1,6 +1,24 @@
 # Bot Kit Pro
 
-Bot Kit Pro is a database-backed bot framework for running high reliability XMTP bots. It provides a simple way to create, configure, and run bots with a focus on reliability and state management.
+> To get started building Bots with XMTP head first [BotKit](https://github.com/xmtp/botkit).
+
+Bot Kit Pro is an advanced framework designed for complex workflows that require high reliability.
+
+### 📒 State Storage
+
+Every bot and conversation has a JSON state object you can write to from inside your bot handler. Keep track of values between messages to build complex conversation workflows.
+
+### 💪 High reliability
+
+Bot Kit Pro connects to the XMTP network via GRPC for reliable, high-performance message streaming. Every message is stored in a database to ensure that messages are processed only once. If your bot is offline for some time, it will fill in missing messages to ensure every message gets processed. You can also run multiple instances of your bot in parallel to allow for zero-downtime deploys.
+
+### 🛢️ High-performance conversation store
+
+A common complaint from developers using XMTP to build bots is the high cost of running `client.conversations.list()` after restarting their apps. We added a database-backed cache so that apps need to decrypt a conversation only once.
+
+### 🔎 Designed For auditability
+
+No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
 ### Requirements
 
