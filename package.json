@@ -10,7 +10,7 @@
     "publish": "yarn build && changeset publish",
     "release": "yarn workspaces foreach --no-private --all npm publish --access public --tolerate-republish && changeset tag",
     "test": "turbo run test",
-    "fresh": "find . -name 'node_modules' -type d -exec rm -rf {} + && find . -name 'dist' -type d -exec rm -rf {} + && yarn cache clean && yarn install && yarn build && yarn test --scope=@xmtp/bot-kit-pro && yarn test --scope=@xmtp/redis-persistence && yarn test --scope=@xmtp/bot-starter && yarn test --scope=@xmtp/bot-examples && yarn test --scope=@xmtp/grpc-api-client && yarn test --scope=@xmtp/fs-persistence && yarn test --scope=@xmtp/cli-starter ",
+    "fresh": "find . -name 'node_modules' -type d -exec rm -rf {} + && find . -name 'dist' -type d -exec rm -rf {} + && yarn cache clean && yarn install && yarn build && yarn test --scope=@xmtp/bot-kit-pro && yarn test --scope=@xmtp/redis-persistence &&  yarn test --scope=@xmtp/bot-examples && yarn test --scope=@xmtp/grpc-api-client && yarn test --scope=@xmtp/fs-persistence && yarn test --scope=@xmtp/cli-starter ",
     "fresh2": "find . -name 'node_modules' -type d -exec rm -rf {} + && find . -name 'dist' -type d -exec rm -rf {} + && yarn cache clean && yarn install && yarn build --scope=@xmtp/cli-starter && yarn test --scope=@xmtp/cli-starter"
   },
   "repository": {
