@@ -20,32 +20,17 @@ A common complaint from developers using XMTP to build bots is the high cost of 
 
 No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
-### Requirements
+## 👨🏼‍🔧 Bot State Management
 
-- A Postgres database (tested with version 13 and above)
-- Docker running
-- `yarn` package manager version 2.x or 3.x or 4.x
-
-Once you have these requirements, you can install the package using the following command:
-
-```bash
-yarn add @xmtp/bot-kit-pro
-```
-
-This will add the `bot-kit-pro` package to your project's dependencies.
-
-After installing the package, you can start the development environment using the following commands:
-
-```bash
-yarn
-./dev/up
-```
-
-This will start the Docker container with the Postgres database and set up the necessary environment.
+Bot state management is handled by the framework. The state of each bot and conversation is stored in the database, allowing for reliable recovery in case of failures. The state can be accessed and modified in the bot handler function.
 
 ### Usage
 
 Here is a minimal example of using bot-kit-pro in your application:
+
+```yarn
+yarn install @xmtp/bot-kit-pro
+```
 
 ```ts
 import { newBotConfig, run } from "@xmtp/bot-kit-pro"
@@ -67,7 +52,26 @@ async function start() {
 start()
 ```
 
-## Configuration
+### Development
+
+- A Postgres database (tested with version 13 and above)
+- Docker running
+- `yarn` package manager version 2.x or 3.x or 4.x
+
+Once you have these requirements, you can use this mono repo for testing and development
+
+```bash
+# go into the package
+cd packages/bot-kit-pro
+
+# install dependencies
+yarn install
+
+# running the bot
+./dev/up
+```
+
+- This will start the Docker container with the Postgres database and set up the necessary environment.
 
 ### Bot Configuration
 
@@ -79,11 +83,7 @@ You can also optionally provide application-level configuration to specify howt 
 
 If no application config is specified, default values are provided that correspond with the DB in the `docker-compose.yml` file.
 
-## Bot State Management
-
-Bot state management is handled by the framework. The state of each bot and conversation is stored in the database, allowing for reliable recovery in case of failures. The state can be accessed and modified in the bot handler function.
-
-## Viewing Bot State
+### Viewing Bot State
 
 The state of the bots and conversations can be viewed directly in the Postgres database. The [bots](package.json#4%2C85-4%2C85), [conversations](src/bot.test.ts#12%2C10-12%2C10), and [messages](src/bot.test.ts#12%2C25-12%2C25) tables contain the relevant information.
 
