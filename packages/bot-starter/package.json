@@ -43,6 +43,6 @@
   },
   "dependencies": {
     "@xmtp/xmtp-js": "^11.3.12",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.4.5"
   }
 }
