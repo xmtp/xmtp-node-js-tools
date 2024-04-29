@@ -21,7 +21,7 @@
     "long": "^5.2.3",
     "pino": "^8.18.0",
     "pino-pretty": "^11.0.0",
-    "postgres": "^3.4.3"
+    "postgres": "^3.4.4"
   },
   "publishConfig": {
     "access": "public",
