@@ -36,8 +36,8 @@ import {
 } from "./gen/message_api/v1/message_api.js"
 
 const API_URLS: { [k: string]: string } = {
-  dev: "dev.xmtp.network:5556",
-  production: "production.xmtp.network:5556",
+  dev: "grpc.dev.xmtp.network:443",
+  production: "grpc.production.xmtp.network:443",
   local: "localhost:5556",
 }
 
@@ -55,13 +55,16 @@ export default class GrpcApiClient implements ApiClient {
     this.apiUrl = apiUrl
     this.appVersion = appVersion
     this.logger = pino({ name: "GrpcApiClient" })
+    const grpcOptions = {
+      "grpc.keepalive_timeout_ms": 1000 * 10, // 10 seconds
+      "grpc.keepalive_time_ms": 1000 * 15, // 15 seconds
+      "grpc.enable_retries": 1,
+      "grpc.keepalive_permit_without_calls": 1,
+    }
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
         host: apiUrl,
-        clientOptions: {
-          "grpc.keepalive_time_ms": 1000 * 60 * 5, // 5 minutes
-          "grpc.enable_retries": 1,
-        },
+        clientOptions: grpcOptions,
         channelCredentials: isSecure
           ? credentials.createSsl()
           : credentials.createInsecure(),
