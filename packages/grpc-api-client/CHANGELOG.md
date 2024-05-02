@@ -1,5 +1,11 @@
 # @xmtp/grpc-api-client
 
+## 0.2.5
+
+### Patch Changes
+
+- [#204](https://github.com/xmtp/xmtp-node-js-tools/pull/204) [`736760f`](https://github.com/xmtp/xmtp-node-js-tools/commit/736760f67ab512f91d79044a5e082ed105b52a1a) Thanks [@neekolas](https://github.com/neekolas)! - Update GRPC connection options
+
 ## 0.2.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@xmtp/bot-kit-pro",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A database-backed bot framework for running high reliability XMTP bots",
   "main": "dist/src/index.js",
   "type": "module",
