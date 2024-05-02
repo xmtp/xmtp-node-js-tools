@@ -44,6 +44,13 @@ const API_URLS: { [k: string]: string } = {
 const SLEEP_TIME = 1000
 const MAX_RETRIES = 4
 
+const clientOptions = {
+  "grpc.keepalive_timeout_ms": 1000 * 10, // 10 seconds
+  "grpc.keepalive_time_ms": 1000 * 30, // 30 seconds
+  "grpc.enable_retries": 1,
+  "grpc.keepalive_permit_without_calls": 0,
+} as const
+
 export default class GrpcApiClient implements ApiClient {
   grpcClient: MessageApiClient
   private authCache?: AuthCache
@@ -55,16 +62,10 @@ export default class GrpcApiClient implements ApiClient {
     this.apiUrl = apiUrl
     this.appVersion = appVersion
     this.logger = pino({ name: "GrpcApiClient" })
-    const grpcOptions = {
-      "grpc.keepalive_timeout_ms": 1000 * 10, // 10 seconds
-      "grpc.keepalive_time_ms": 1000 * 30, // 30 seconds
-      "grpc.enable_retries": 1,
-      "grpc.keepalive_permit_without_calls": 0,
-    }
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
         host: apiUrl,
-        clientOptions: grpcOptions,
+        clientOptions,
         channelCredentials: isSecure
           ? credentials.createSsl()
           : credentials.createInsecure(),
