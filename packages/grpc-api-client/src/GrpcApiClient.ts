@@ -57,9 +57,9 @@ export default class GrpcApiClient implements ApiClient {
     this.logger = pino({ name: "GrpcApiClient" })
     const grpcOptions = {
       "grpc.keepalive_timeout_ms": 1000 * 10, // 10 seconds
-      "grpc.keepalive_time_ms": 1000 * 15, // 15 seconds
+      "grpc.keepalive_time_ms": 1000 * 30, // 30 seconds
       "grpc.enable_retries": 1,
-      "grpc.keepalive_permit_without_calls": 1,
+      "grpc.keepalive_permit_without_calls": 0,
     }
     this.grpcClient = new MessageApiClient(
       new GrpcTransport({
