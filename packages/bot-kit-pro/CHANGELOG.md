@@ -1,5 +1,12 @@
 # @xmtp/bot-kit-pro
 
+## 0.2.9
+
+### Patch Changes
+
+- Updated dependencies [[`b3ced89`](https://github.com/xmtp/xmtp-node-js-tools/commit/b3ced89c511621d79446e1d0a4ede4381342c80c)]:
+  - @xmtp/grpc-api-client@0.2.6
+
 ## 0.2.8
 
 ### Patch Changes
