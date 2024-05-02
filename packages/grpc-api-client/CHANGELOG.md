@@ -1,5 +1,11 @@
 # @xmtp/grpc-api-client
 
+## 0.2.7
+
+### Patch Changes
+
+- [#214](https://github.com/xmtp/xmtp-node-js-tools/pull/214) [`fb2a9cd`](https://github.com/xmtp/xmtp-node-js-tools/commit/fb2a9cde0921d15d2f85fb9f6031d881ab5c67b7) Thanks [@neekolas](https://github.com/neekolas)! - Adjust GRPC keepalive settings
+
 ## 0.2.6
 
 ### Patch Changes
