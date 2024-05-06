@@ -696,15 +696,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@drizzle-team/studio@npm:^0.0.39":
-  version: 0.0.39
-  resolution: "@drizzle-team/studio@npm:0.0.39"
-  dependencies:
-    superjson: "npm:^2.2.1"
-  checksum: 4e9a4f70fc7dc41ddb4d473f52652c912ce5e06756b27a4f9d0de5c4444c612dd5376602224cdfc1135396284c5a1702b69064b64438b8fea8489e4a7ff6393b
-  languageName: node
-  linkType: hard
-
 "@es-joy/jsdoccomment@npm:~0.42.0":
   version: 0.42.0
   resolution: "@es-joy/jsdoccomment@npm:0.42.0"
@@ -1516,6 +1507,23 @@ __metadata:
   bin:
     proto-loader-gen-types: build/bin/proto-loader-gen-types.js
   checksum: 1fdc0b10480614cecc4bf52578756cbf59ec75f1bea37452947125eff81cd3ceabba04606247ed8361f97bcd00d147ca4118abc22b046cc0541cb749671b97d9
+  languageName: node
+  linkType: hard
+
+"@hono/node-server@npm:^1.9.0":
+  version: 1.11.1
+  resolution: "@hono/node-server@npm:1.11.1"
+  checksum: f331bf70ac094f4b24af12906ef726e395c55ee8ffef14bf5019657c50c3a8bc279eb8f0542941abff910bb79c72c9dc4764f65f711c02d78a496a8639f7b86e
+  languageName: node
+  linkType: hard
+
+"@hono/zod-validator@npm:^0.2.0":
+  version: 0.2.1
+  resolution: "@hono/zod-validator@npm:0.2.1"
+  peerDependencies:
+    hono: ">=3.9.0"
+    zod: ^3.19.1
+  checksum: 3bd8d058124e25ea5c03a1270c5c6d7038f9d407208be01927fb8ebc15f248193dc505c3fd7a0fe093b6382797f09692f62599603857360489d72779d5d67b34
   languageName: node
   linkType: hard
 
@@ -3110,7 +3118,7 @@ __metadata:
     "@xmtp/grpc-api-client": "workspace:*"
     "@xmtp/proto": "npm:^3.52.0"
     "@xmtp/xmtp-js": "npm:^11.3.12"
-    drizzle-kit: "npm:^0.20.14"
+    drizzle-kit: "npm:^0.20.17"
     drizzle-orm: "npm:^0.30.1"
     ethers: "npm:^6.8.0"
     long: "npm:^5.2.3"
@@ -4616,12 +4624,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"drizzle-kit@npm:^0.20.14":
-  version: 0.20.14
-  resolution: "drizzle-kit@npm:0.20.14"
+"drizzle-kit@npm:^0.20.17":
+  version: 0.20.17
+  resolution: "drizzle-kit@npm:0.20.17"
   dependencies:
-    "@drizzle-team/studio": "npm:^0.0.39"
     "@esbuild-kit/esm-loader": "npm:^2.5.5"
+    "@hono/node-server": "npm:^1.9.0"
+    "@hono/zod-validator": "npm:^0.2.0"
     camelcase: "npm:^7.0.1"
     chalk: "npm:^5.2.0"
     commander: "npm:^9.4.1"
@@ -4630,13 +4639,15 @@ __metadata:
     esbuild-register: "npm:^3.5.0"
     glob: "npm:^8.1.0"
     hanji: "npm:^0.0.5"
+    hono: "npm:^4.1.4"
     json-diff: "npm:0.9.0"
     minimatch: "npm:^7.4.3"
     semver: "npm:^7.5.4"
+    superjson: "npm:^2.2.1"
     zod: "npm:^3.20.2"
   bin:
     drizzle-kit: bin.cjs
-  checksum: 75d1a42767628ce5c3909d85af4c4756cc43578dda8000caca49f3cd461b298b5a2379810694e0624843ce849c29213b8017e839124439d412a6bc7f06786334
+  checksum: cd971541405247991a8fb4933d2354fa5d00684c9c6573606789033c3d7d98f8540d9980a124ff226f24cba98578793c19722b68d7fd75075d700b278777db2b
   languageName: node
   linkType: hard
 
@@ -6329,6 +6340,13 @@ __metadata:
     minimalistic-assert: "npm:^1.0.0"
     minimalistic-crypto-utils: "npm:^1.0.1"
   checksum: 0298a1445b8029a69b713d918ecaa84a1d9f614f5857e0c6e1ca517abfa1357216987b2ee08cc6cc73ba82a6c6ddf2ff11b9717a653530ef03be599d4699b836
+  languageName: node
+  linkType: hard
+
+"hono@npm:^4.1.4":
+  version: 4.3.2
+  resolution: "hono@npm:4.3.2"
+  checksum: 2b4a7f829a4ca91620f81bea347649453e77ed4bfc5674cd3bfd1b1ee0df9b4af5811536ef5627fb905c1ec5c5610c3b1359eaba4f2293c9235f20bc66068a7c
   languageName: node
   linkType: hard
 
