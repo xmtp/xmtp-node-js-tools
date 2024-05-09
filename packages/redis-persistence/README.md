@@ -7,7 +7,7 @@ This tutorial demonstrates how to use the `RedisPersistence` class from the `@xm
 First, install the package in your project:
 
 ```bash
-yarn add @xmtp/fs-persistence
+yarn add @xmtp/redis-persistence
 ```
 
 ### Step 1: Create a Redis Client
@@ -15,11 +15,11 @@ yarn add @xmtp/fs-persistence
 Connect to your Redis instance:
 
 ```javascript
-const { createClient } = require("redis")
+const { createClient } = require("@redis/client")
 const redis = createClient({
   url: "redis://localhost:6379",
 })
-client.connect()
+redis.connect()
 ```
 
 ### Step 2: Implement RedisPersistence
