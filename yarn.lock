@@ -3006,7 +3006,7 @@ __metadata:
   resolution: "@xmtp/bot-kit-pro@workspace:packages/bot-kit-pro"
   dependencies:
     "@xmtp/grpc-api-client": "workspace:*"
-    "@xmtp/proto": "npm:^3.56.0"
+    "@xmtp/proto": "npm:^3.61.1"
     "@xmtp/xmtp-js": "npm:^11.3.12"
     drizzle-kit: "npm:^0.20.17"
     drizzle-orm: "npm:^0.30.1"
@@ -3116,7 +3116,7 @@ __metadata:
     "@open-frames/types": "npm:^0.0.7"
     "@rollup/plugin-typescript": "npm:^11.1.6"
     "@xmtp/frames-client": "npm:^0.4.3"
-    "@xmtp/proto": "npm:3.56.0"
+    "@xmtp/proto": "npm:3.61.1"
     "@xmtp/xmtp-js": "npm:^11.3.12"
     ethers: "npm:^6.10.0"
     rollup: "npm:^4.13.0"
@@ -3143,7 +3143,7 @@ __metadata:
     "@protobuf-ts/grpc-transport": "npm:^2.9.1"
     "@protobuf-ts/runtime": "npm:^2.9.1"
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
-    "@xmtp/proto": "npm:^3.56.0"
+    "@xmtp/proto": "npm:^3.61.1"
     "@xmtp/xmtp-js": "npm:^11.3.12"
     pino: "npm:^8.18.0"
     vitest: "npm:^1.0.1"
@@ -3162,15 +3162,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/proto@npm:3.56.0, @xmtp/proto@npm:^3.56.0":
-  version: 3.56.0
-  resolution: "@xmtp/proto@npm:3.56.0"
+"@xmtp/proto@npm:3.61.1, @xmtp/proto@npm:^3.61.1":
+  version: 3.61.1
+  resolution: "@xmtp/proto@npm:3.61.1"
   dependencies:
     long: "npm:^5.2.0"
     protobufjs: "npm:^7.0.0"
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
-  checksum: f752e6858692464319d6f22861fe8f23c46d9bb0eb390fe2220e0b4932a4de84be2e9e1cbafc0200e1bfe2a0ed3a3fb6079941630e57fb80e6325bc2a52bf10d
+  checksum: c5acae46ad301a50652f30384be55a3389b4c11994652fa5386052c7ff4111fcb15c0e9d267898d6173cbcb6559b24bd7bef7470f020388f8610fecd3b8deea9
   languageName: node
   linkType: hard
 
