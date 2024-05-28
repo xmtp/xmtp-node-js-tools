@@ -15,15 +15,41 @@ export class BroadcastClient<ContentTypes = unknown> {
   conversationMapping: Map<string, Conversation> = new Map()
 
   // Callbacks
+  /**
+   * Called when a batch of addresses is about to be sent
+   */
   onBatchStart?: (addresses: string[]) => void
+  /**
+   * Called when a batch of addresses has been sent/failed
+   */
   onBatchComplete?: (addresses: string[]) => void
+  /**
+   * Called when all addresses have been sent/failed
+   */
   onBroadcastComplete?: () => void
+  /**
+   * Called when an address can't be messaged
+   */
   onCantMessageAddress?: (address: string) => void
-  onCanMessageAddreses?: (addresses: string[]) => void
+  /**
+   * Called when a message is about to be sent
+   */
   onMessageSending?: (address: string) => void
+  /**
+   * Called when a message fails to send
+   */
   onMessageFailed?: (address: string) => void
+  /**
+   * Called when a message is successfully sent
+   */
   onMessageSent?: (address: string) => void
+  /**
+   * Called when the list of addresses that can be messaged is updated, this is useful for caching
+   */
   onCanMessageAddressesUpdate?: (addresses: string[]) => void
+  /**
+   * Called when a delay is about to happen
+   */
   onDelay?: (ms: number) => void
 
   constructor({
@@ -36,7 +62,6 @@ export class BroadcastClient<ContentTypes = unknown> {
     onBatchComplete,
     onBroadcastComplete,
     onCantMessageAddress,
-    onCanMessageAddreses,
     onMessageSending,
     onMessageFailed,
     onMessageSent,
@@ -52,7 +77,6 @@ export class BroadcastClient<ContentTypes = unknown> {
     this.onBatchComplete = onBatchComplete
     this.onBroadcastComplete = onBroadcastComplete
     this.onCantMessageAddress = onCantMessageAddress
-    this.onCanMessageAddreses = onCanMessageAddreses
     this.onMessageSending = onMessageSending
     this.onMessageFailed = onMessageFailed
     this.onMessageSent = onMessageSent
@@ -64,15 +88,17 @@ export class BroadcastClient<ContentTypes = unknown> {
     messages: Exclude<ContentTypes, undefined>[],
     options: BroadcastOptions,
   ) => {
-    const conversations = await this.client.conversations.list()
+    const skipInitialDelay = options.skipInitialDelay ?? false
+    const client = this.client
+    const conversations = await client.conversations.list()
     for (const conversation of conversations) {
       this.conversationMapping.set(conversation.peerAddress, conversation)
     }
     if (
-      !options.skipInitialDelay &&
+      !skipInitialDelay &&
       conversations.length / 2 > GENERAL_RATE_LIMIT - this.rateLimitAmount
     ) {
-      await this.delay(this.rateLimitTime)
+      await this.delay()
     }
 
     this.batches = this.getBatches(messages.length)
@@ -82,7 +108,7 @@ export class BroadcastClient<ContentTypes = unknown> {
         messages,
       })
       if (batchIndex !== this.batches.length - 1) {
-        await this.delay(this.rateLimitTime)
+        await this.delay()
       } else {
         await this.sendErrorBatch(messages)
       }
@@ -113,6 +139,7 @@ export class BroadcastClient<ContentTypes = unknown> {
         }
 
         for (const message of messages) {
+          this.onMessageSending?.(address)
           await conversation.send(message)
         }
         this.onMessageSent?.(address)
@@ -120,9 +147,10 @@ export class BroadcastClient<ContentTypes = unknown> {
         this.cachedCanMessageAddresses.delete(address)
         this.conversationMapping.delete(address)
       } catch (err) {
+        console.error(err)
         this.onMessageFailed?.(address)
         this.errorBatch.push(address)
-        await this.delay(this.rateLimitTime)
+        await this.delay()
       }
     }
     this.onBatchComplete?.(addresses)
@@ -145,8 +173,7 @@ export class BroadcastClient<ContentTypes = unknown> {
         this.onMessageSent?.(address)
       } catch (err) {
         this.onMessageFailed?.(address)
-        this.errorBatch.push(address)
-        await this.delay(this.rateLimitTime)
+        await this.delay()
       }
     }
     this.errorBatch = finalErrors
@@ -175,7 +202,8 @@ export class BroadcastClient<ContentTypes = unknown> {
     onCanMessageAddressesUpdate?.(newCanMessageAddresses)
   }
 
-  private delay = async (ms: number) => {
+  private delay = async () => {
+    const ms = this.rateLimitTime
     this.onDelay?.(ms)
     return new Promise<void>((resolve) => setTimeout(resolve, ms))
   }
@@ -220,6 +248,18 @@ export class BroadcastClient<ContentTypes = unknown> {
     return batches
   }
 
+  setAddresses(addresses: string[]) {
+    this.addresses = addresses
+  }
+
+  setRateLimitAmount(amount: number) {
+    this.rateLimitAmount = amount
+  }
+
+  setRateLimitTime(time: number) {
+    this.rateLimitTime = time
+  }
+
   setOnBatchStart(callback: (addresses: string[]) => void) {
     this.onBatchStart = callback
   }
@@ -234,10 +274,6 @@ export class BroadcastClient<ContentTypes = unknown> {
 
   setOnCantMessageAddress(callback: (address: string) => void) {
     this.onCantMessageAddress = callback
-  }
-
-  setOnCanMessageAddreses(callback: (addresses: string[]) => void) {
-    this.onCanMessageAddreses = callback
   }
 
   setOnMessageSending(callback: (address: string) => void) {
