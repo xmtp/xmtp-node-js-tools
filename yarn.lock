@@ -3064,6 +3064,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@xmtp/broadcast-sdk@workspace:packages/broadcast":
+  version: 0.0.0-use.local
+  resolution: "@xmtp/broadcast-sdk@workspace:packages/broadcast"
+  dependencies:
+    "@rollup/plugin-typescript": "npm:^11.1.6"
+    "@xmtp/xmtp-js": "npm:^11.3.12"
+    ethers: "npm:^6.10.0"
+    rollup: "npm:^4.13.0"
+    rollup-plugin-dts: "npm:^6.1.0"
+    typescript: "npm:^5.4.5"
+    vitest: "npm:^1.0.1"
+  languageName: unknown
+  linkType: soft
+
 "@xmtp/cli-starter@workspace:packages/cli-starter":
   version: 0.0.0-use.local
   resolution: "@xmtp/cli-starter@workspace:packages/cli-starter"

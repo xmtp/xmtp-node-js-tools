@@ -10,3 +10,4 @@ This repo provides a collection of tools for running high-quality XMTP bots in N
 - [Fs Persistence](./packages/fs-persistence/README.md): Provides file system-based data persistence for XMTP clients, enabling data storage and retrieval directly from the file system.
 - [Redis Persistence](./packages/redis-persistence/README.md): Implements Redis-based persistence for XMTP clients, supporting efficient data storage and access in a Redis database.
 - [CLI Starter](./packages/cli-starter/README.md): It includes a basic setup and examples to get started with building a command-line interface for XMTP.
+- [Broadcast Client](./packages/broadcast/README.md): It includes a basic setup and examples to get started with building a command-line interface for XMTP.

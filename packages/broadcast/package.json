@@ -1,0 +1,48 @@
+{
+  "name": "@xmtp/broadcast-sdk",
+  "version": "0.1.0",
+  "description": "Helper package for broadcasting XMTP messages to subscribers",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "yarn clean && rollup -c",
+    "prepublishOnly": "yarn build",
+    "test": "vitest run ./src"
+  },
+  "author": "XMTP Labs <eng@xmtp.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xmtp/xmtp-node-js-tools/issues"
+  },
+  "homepage": "https://github.com/xmtp/xmtp-node-js-tools#readme",
+  "packageManager": "yarn@4.0.0",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@xmtp/xmtp-js": "^11.3.12",
+    "ethers": "^6.10.0",
+    "rollup": "^4.13.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.0.1"
+  }
+}
