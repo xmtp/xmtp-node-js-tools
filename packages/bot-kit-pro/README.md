@@ -29,7 +29,7 @@ Bot state management is handled by the framework. The state of each bot and conv
 Here is a minimal example of using bot-kit-pro in your application:
 
 ```yarn
-yarn install @xmtp/bot-kit-pro
+yarn add @xmtp/bot-kit-pro
 ```
 
 ```ts
