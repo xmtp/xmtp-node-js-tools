@@ -42,7 +42,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@xmtp/xmtp-js": "^11.3.12",
+    "@xmtp/xmtp-js": "^11.6.2",
     "dotenv": "^16.4.5"
   }
 }
