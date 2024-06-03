@@ -1,6 +1,6 @@
 # Bot Kit Pro
 
-> To get started building Bots with XMTP head first [BotKit](https://github.com/xmtp/botkit).
+> To get started building Bots with XMTP head first to [BotKit](https://github.com/xmtp/botkit).
 
 Bot Kit Pro is an advanced framework designed for complex workflows that require high reliability.
 
