@@ -163,4 +163,63 @@ describe("BroadcastClient", () => {
 
     expect(onDelay).toHaveBeenCalledTimes(4)
   })
+
+  it("should call onWillConversationCreate and use its return value", async () => {
+    const onWillConversationCreate = vi
+      .fn()
+      .mockResolvedValue(["additionalArg1", "additionalArg2"])
+    broadcastClient.setOnWillConversationCreate(onWillConversationCreate)
+    broadcastClient.setAddresses(["address3"])
+    const messages = ["message1", "message2"]
+    const options = { skipInitialDelay: true }
+
+    await broadcastClient.broadcast(messages, options)
+
+    expect(onWillConversationCreate).toHaveBeenCalledWith("address3")
+    expect(clientMock.conversations.newConversation).toHaveBeenCalledWith(
+      "address3",
+      "additionalArg1",
+      "additionalArg2",
+    )
+  })
+
+  it("should call onWillConversationCreate and work if undefined", async () => {
+    broadcastClient.setAddresses(["address3"])
+    const messages = ["message1", "message2"]
+    const options = { skipInitialDelay: true }
+
+    await broadcastClient.broadcast(messages, options)
+
+    expect(clientMock.conversations.newConversation).toHaveBeenCalledWith(
+      "address3",
+    )
+  })
+
+  it("should call onMessageSending and use the personalized message if provided", async () => {
+    const onMessageSending = vi.fn().mockResolvedValue("personalizedMessage")
+    broadcastClient.setOnMessageSending(onMessageSending)
+
+    const messages = ["message1"]
+    const options = { skipInitialDelay: true }
+
+    await broadcastClient.broadcast(messages, options)
+
+    expect(onMessageSending).toHaveBeenCalledWith("address1")
+    expect(onMessageSending).toHaveBeenCalledWith("address2")
+    expect(conversationMock.send).toHaveBeenCalledWith("personalizedMessage")
+  })
+
+  it("should use the original message if onMessageSending does not return a personalized message", async () => {
+    const onMessageSending = vi.fn().mockResolvedValue(undefined)
+    broadcastClient.setOnMessageSending(onMessageSending)
+
+    const messages = ["message1"]
+    const options = { skipInitialDelay: true }
+
+    await broadcastClient.broadcast(messages, options)
+
+    expect(onMessageSending).toHaveBeenCalledWith("address1")
+    expect(onMessageSending).toHaveBeenCalledWith("address2")
+    expect(conversationMock.send).toHaveBeenCalledWith("message1")
+  })
 })

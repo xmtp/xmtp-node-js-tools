@@ -1,6 +1,19 @@
 import { type Client, type Conversation } from "@xmtp/xmtp-js"
 
-import { BroadcastConstructorParams, BroadcastOptions } from "./types"
+import {
+  BroadcastConstructorParams,
+  BroadcastOptions,
+  OnBatchComplete,
+  OnBatchStart,
+  OnBroadcastComplete,
+  OnCanMessageAddressesUpdate,
+  OnCantMessageAddress,
+  OnDelay,
+  OnMessageFailed,
+  OnMessageSending,
+  OnMessageSent,
+  OnWillConversationCreate,
+} from "./types"
 
 const GENERAL_RATE_LIMIT = 10000
 
@@ -18,39 +31,44 @@ export class BroadcastClient<ContentTypes = unknown> {
   /**
    * Called when a batch of addresses is about to be sent
    */
-  onBatchStart?: (addresses: string[]) => void
+  onBatchStart?: OnBatchStart
   /**
    * Called when a batch of addresses has been sent/failed
    */
-  onBatchComplete?: (addresses: string[]) => void
+  onBatchComplete?: OnBatchComplete
   /**
    * Called when all addresses have been sent/failed
    */
-  onBroadcastComplete?: () => void
+  onBroadcastComplete?: OnBroadcastComplete
   /**
    * Called when an address can't be messaged
    */
-  onCantMessageAddress?: (address: string) => void
+  onCantMessageAddress?: OnCantMessageAddress
   /**
    * Called when a message is about to be sent
    */
-  onMessageSending?: (address: string) => void
+  onMessageSending?: OnMessageSending<ContentTypes>
   /**
    * Called when a message fails to send
    */
-  onMessageFailed?: (address: string) => void
+  onMessageFailed?: OnMessageFailed
   /**
    * Called when a message is successfully sent
    */
-  onMessageSent?: (address: string) => void
+  onMessageSent?: OnMessageSent
   /**
    * Called when the list of addresses that can be messaged is updated, this is useful for caching
    */
-  onCanMessageAddressesUpdate?: (addresses: string[]) => void
+  onCanMessageAddressesUpdate?: OnCanMessageAddressesUpdate
   /**
    * Called when a delay is about to happen
    */
-  onDelay?: (ms: number) => void
+  onDelay?: OnDelay
+  /**
+   * Called when a new conversation is about to be created
+   * This can be used to add additional payload for individual addresses like conversation context and consent proofs
+   */
+  onWillConversationCreate?: OnWillConversationCreate
 
   constructor({
     client,
@@ -67,6 +85,7 @@ export class BroadcastClient<ContentTypes = unknown> {
     onMessageSent,
     onCanMessageAddressesUpdate,
     onDelay,
+    onWillConversationCreate,
   }: BroadcastConstructorParams<ContentTypes>) {
     this.client = client
     this.addresses = addresses
@@ -82,6 +101,7 @@ export class BroadcastClient<ContentTypes = unknown> {
     this.onMessageSent = onMessageSent
     this.onCanMessageAddressesUpdate = onCanMessageAddressesUpdate
     this.onDelay = onDelay
+    this.onWillConversationCreate = onWillConversationCreate
   }
 
   public broadcast = async (
@@ -133,14 +153,18 @@ export class BroadcastClient<ContentTypes = unknown> {
       try {
         let conversation = this.conversationMapping.get(address)
         if (!conversation) {
-          conversation =
-            await this.client.conversations.newConversation(address)
+          const newConversationArgs =
+            await this.onWillConversationCreate?.(address)
+          conversation = await this.client.conversations.newConversation(
+            address,
+            ...(newConversationArgs ?? []),
+          )
           this.conversationMapping.set(address, conversation)
         }
 
         for (const message of messages) {
-          this.onMessageSending?.(address)
-          await conversation.send(message)
+          const personalizedMessage = await this.onMessageSending?.(address)
+          await conversation.send(personalizedMessage || message)
         }
         this.onMessageSent?.(address)
         // Clear up some memory after we are done with the conversation
@@ -165,10 +189,15 @@ export class BroadcastClient<ContentTypes = unknown> {
     const finalErrors: string[] = []
     for (const address of this.errorBatch) {
       try {
-        const conversation =
-          await this.client.conversations.newConversation(address)
+        const newConversationArgs =
+          await this.onWillConversationCreate?.(address)
+        const conversation = await this.client.conversations.newConversation(
+          address,
+          ...(newConversationArgs ?? []),
+        )
         for (const message of messages) {
-          await conversation.send(message)
+          const personalizedMessage = await this.onMessageSending?.(address)
+          await conversation.send(personalizedMessage ?? message)
         }
         this.onMessageSent?.(address)
       } catch (err) {
@@ -260,39 +289,43 @@ export class BroadcastClient<ContentTypes = unknown> {
     this.rateLimitTime = time
   }
 
-  setOnBatchStart(callback: (addresses: string[]) => void) {
+  setOnBatchStart(callback: OnBatchStart) {
     this.onBatchStart = callback
   }
 
-  setOnBatchComplete(callback: (addresses: string[]) => void) {
+  setOnBatchComplete(callback: OnBatchComplete) {
     this.onBatchComplete = callback
   }
 
-  setOnBroadcastComplete(callback: () => void) {
+  setOnBroadcastComplete(callback: OnBroadcastComplete) {
     this.onBroadcastComplete = callback
   }
 
-  setOnCantMessageAddress(callback: (address: string) => void) {
+  setOnCantMessageAddress(callback: OnCantMessageAddress) {
     this.onCantMessageAddress = callback
   }
 
-  setOnMessageSending(callback: (address: string) => void) {
+  setOnMessageSending(callback: OnMessageSending<ContentTypes>) {
     this.onMessageSending = callback
   }
 
-  setOnMessageFailed(callback: (address: string) => void) {
+  setOnMessageFailed(callback: OnMessageFailed) {
     this.onMessageFailed = callback
   }
 
-  setOnMessageSent(callback: (address: string) => void) {
+  setOnMessageSent(callback: OnMessageSent) {
     this.onMessageSent = callback
   }
 
-  setOnCanMessageAddressesUpdate(callback: (addresses: string[]) => void) {
+  setOnCanMessageAddressesUpdate(callback: OnCanMessageAddressesUpdate) {
     this.onCanMessageAddressesUpdate = callback
   }
 
-  setOnDelay(callback: (ms: number) => void) {
+  setOnDelay(callback: OnDelay) {
     this.onDelay = callback
+  }
+
+  setOnWillConversationCreate(callback: OnWillConversationCreate) {
+    this.onWillConversationCreate = callback
   }
 }
