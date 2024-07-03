@@ -43,7 +43,7 @@
   },
   "packageManager": "yarn@4.0.0",
   "devDependencies": {
-    "@xmtp/xmtp-js": "11.3.12",
+    "@xmtp/xmtp-js": "12.0.0",
     "vitest": "^1.0.1"
   }
 }
