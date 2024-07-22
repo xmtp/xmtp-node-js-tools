@@ -53,6 +53,6 @@
   "packageManager": "yarn@4.0.0",
   "devDependencies": {
     "drizzle-kit": "^0.20.17",
-    "vitest": "^0.34.6"
+    "vitest": "^2.0.4"
   }
 }
