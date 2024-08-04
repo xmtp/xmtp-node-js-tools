@@ -16,7 +16,7 @@ Bot Kit Pro connects to the XMTP network via GRPC for reliable, high-performance
 
 A common complaint from developers using XMTP to build bots is the high cost of running `client.conversations.list()` after restarting their apps. We added a database-backed cache so that apps need to decrypt a conversation only once.
 
-### 🔎 Designed For auditability
+### 🔎 Designed for auditability
 
 No more poring over server logs. Because every incoming and outgoing message is stored in a database, you can build admin pages using tools like Retool to view the history of your bot's replies.
 
@@ -75,9 +75,9 @@ yarn install
 
 ### Bot Configuration
 
-Each bot expects a configration, which can be created using `newBotConfig`.
+Each bot expects a configuration, which can be created using `newBotConfig`.
 
-You can also optionally provide application-level configuration to specify howt he database connection is established. The following environment variables are respected for app level configuration, and take precedence over any configuration values provided in code.
+You can also optionally provide application-level configuration to specify how he database connection is established. The following environment variables are respected for app level configuration, and take precedence over any configuration values provided in code.
 
 - `POSTGRES_CONNECTION_STRING`
 
