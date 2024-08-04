@@ -20,7 +20,7 @@ Starter project for building an XMTP CLI
 - [yargs](https://www.npmjs.com/package/yargs) for command line parsing
 - [ink](https://www.npmjs.com/package/ink) for rendering the CLI using React components
 
-### Intialize random wallet
+### Initialize random wallet
 
 Initialize with a random wallet by running:
 
@@ -61,7 +61,7 @@ const { env, message, address } = argv
 const client = await Client.create(loadWallet(), { env })
 ```
 
-To send a message, you'll need to create a conversation instance and then send that message to the conversaiton.
+To send a message, you'll need to create a conversation instance and then send that message to the conversation.
 
 ```ts
 const conversation = await client.conversations.newConversation(address)
