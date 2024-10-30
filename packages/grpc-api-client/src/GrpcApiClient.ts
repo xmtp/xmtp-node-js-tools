@@ -250,7 +250,7 @@ export default class GrpcApiClient implements ApiClient {
           if (new Date().getTime() - startTime.getTime() < 1000) {
             await sleep(1000)
           }
-          onConnectionLost?.()
+          onConnectionLost?.(e)
           this.logger.error({ error: e }, "stream error")
         }
       }
