@@ -3261,7 +3261,7 @@ __metadata:
     "@protobuf-ts/runtime": "npm:^2.9.1"
     "@protobuf-ts/runtime-rpc": "npm:^2.9.1"
     "@xmtp/proto": "npm:^3.61.1"
-    "@xmtp/xmtp-js": "file:/Users/insipx/Projects/xmtp/workspace-xmtp-js/main/sdks/js-sdk"
+    "@xmtp/xmtp-js": "npm:^13.0.2"
     pino: "npm:^8.18.0"
     vitest: "npm:^1.0.1"
   languageName: unknown
@@ -3363,24 +3363,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/xmtp-js@file:/Users/insipx/Projects/xmtp/workspace-xmtp-js/main/sdks/js-sdk::locator=%40xmtp%2Fgrpc-api-client%40workspace%3Apackages%2Fgrpc-api-client":
-  version: 13.0.2
-  resolution: "@xmtp/xmtp-js@file:/Users/insipx/Projects/xmtp/workspace-xmtp-js/main/sdks/js-sdk#/Users/insipx/Projects/xmtp/workspace-xmtp-js/main/sdks/js-sdk::hash=377e7d&locator=%40xmtp%2Fgrpc-api-client%40workspace%3Apackages%2Fgrpc-api-client"
-  dependencies:
-    "@noble/secp256k1": "npm:1.7.1"
-    "@xmtp/consent-proof-signature": "npm:^0.1.3"
-    "@xmtp/content-type-primitives": "npm:^1.0.1"
-    "@xmtp/content-type-text": "npm:^1.0.0"
-    "@xmtp/proto": "npm:^3.68.0"
-    "@xmtp/user-preferences-bindings-wasm": "npm:^0.3.6"
-    async-mutex: "npm:^0.5.0"
-    elliptic: "npm:^6.5.7"
-    long: "npm:^5.2.3"
-    viem: "npm:2.7.15"
-  checksum: 10/a710fa332c2ecc8872e5fff40d85021650872acebbc20f1b27bf645dc95fcddfb8aff67835505dc9b27f1d7d6625f529f914c8ff908ba5d356de7cbbf789fea5
-  languageName: node
-  linkType: hard
-
 "@xmtp/xmtp-js@npm:11.3.12, @xmtp/xmtp-js@npm:^11.3.12":
   version: 11.3.12
   resolution: "@xmtp/xmtp-js@npm:11.3.12"
@@ -3410,6 +3392,24 @@ __metadata:
     long: "npm:^5.2.3"
     viem: "npm:2.7.15"
   checksum: 10/0e211e532dca04a54f52b9b698e7903b65babc2625d5a6c6e1e83be065d148bb40cba27b9fbd7ad420fcca5266d45433fbfbc554ef79e9892a14327f9b4e9f37
+  languageName: node
+  linkType: hard
+
+"@xmtp/xmtp-js@npm:^13.0.2":
+  version: 13.0.2
+  resolution: "@xmtp/xmtp-js@npm:13.0.2"
+  dependencies:
+    "@noble/secp256k1": "npm:1.7.1"
+    "@xmtp/consent-proof-signature": "npm:^0.1.3"
+    "@xmtp/content-type-primitives": "npm:^1.0.1"
+    "@xmtp/content-type-text": "npm:^1.0.0"
+    "@xmtp/proto": "npm:^3.68.0"
+    "@xmtp/user-preferences-bindings-wasm": "npm:^0.3.6"
+    async-mutex: "npm:^0.5.0"
+    elliptic: "npm:^6.5.7"
+    long: "npm:^5.2.3"
+    viem: "npm:2.7.15"
+  checksum: 10/3ef560d55eafcbdff750fb4351593e581f33235eb14bc2aa310deca0d7237169814a0d89b2cd726b4257be813ad6fb95aa1206c786f3e7d5eb030d090a933c07
   languageName: node
   linkType: hard
 
