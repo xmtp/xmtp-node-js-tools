@@ -33,7 +33,7 @@ describe("Bot", () => {
     const wallet = Wallet.createRandom()
     keys = await Client.getKeys(wallet, {
       env: "dev",
-      apiClientFactory: GrpcApiClient.fromOptions,
+      apiClientFactory: GrpcApiClient.fromOptions as any,
     })
   })
 
@@ -61,7 +61,7 @@ describe("Bot", () => {
     const config = getConfig()
     const bot = await Bot.create(config, dataSource)
     const otherClient = await Client.create(Wallet.createRandom(), {
-      apiClientFactory: GrpcApiClient.fromOptions,
+      apiClientFactory: GrpcApiClient.fromOptions as any,
     })
     const convo = await bot.client.conversations.newConversation(
       otherClient.address,
@@ -82,7 +82,7 @@ describe("Bot", () => {
     })
     const bot = await Bot.create(config, dataSource)
     const otherClient = await Client.create(Wallet.createRandom(), {
-      apiClientFactory: GrpcApiClient.fromOptions,
+      apiClientFactory: GrpcApiClient.fromOptions as any,
     })
     await sleep(100)
     const convo = await otherClient.conversations.newConversation(
