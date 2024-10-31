@@ -1,5 +1,11 @@
 # @xmtp/grpc-api-client
 
+## 0.2.8
+
+### Patch Changes
+
+- [#291](https://github.com/xmtp/xmtp-node-js-tools/pull/291) [`edf233f`](https://github.com/xmtp/xmtp-node-js-tools/commit/edf233f7c2a29bf32460550147b2481de80f26c7) Thanks [@insipx](https://github.com/insipx)! - Update to latest `xmtp-js` and call `OnConnectionLost` for all grpc subscribe errors
+
 ## 0.2.7
 
 ### Patch Changes
