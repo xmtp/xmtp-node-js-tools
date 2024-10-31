@@ -8,7 +8,7 @@
     "prebuild": "rm -rf ./dist",
     "run": "node ./dist/index.js",
     "prerun": "npm run build",
-    "start-redis": "docker-compose up -d",
+    "start-redis": "docker compose up -d",
     "build": "tsc",
     "test": "yarn start-redis && vitest run ."
   },
