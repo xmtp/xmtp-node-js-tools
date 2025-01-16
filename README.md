@@ -1,6 +1,15 @@
-![https://github.com/xmtp/bot-kit-pro/actions/workflows/test.yml/badge.svg](https://github.com/xmtp/bot-kit-pro/actions/workflows/test.yml/badge.svg) ![https://github.com/xmtp/bot-kit-pro/actions/workflows/lint.yml/badge.svg](https://github.com/xmtp/bot-kit-pro/actions/workflows/lint.yml/badge.svg) ![Status](https://img.shields.io/badge/Project_status-Alpha-orange)
-
 # XMTP Node.js tools
+
+![Status](https://img.shields.io/badge/Deprecated-brown)
+
+> [!CAUTION]
+> The XMTP Node.js tools are no longer maintained.
+
+For your Frames project, consider using the tools in [xmtp-js packages](https://github.com/xmtp/xmtp-js/tree/main/packages). These updated tools provide enhanced functionality and are designed to provide better support for your development needs.
+
+The content below is provided for historical reference only.
+
+---
 
 This repo provides a collection of tools for running high-quality XMTP bots in Node.js. It contains the following packages:
 
